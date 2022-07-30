@@ -6,61 +6,32 @@
       Pace Calculator
     </div>
     <div class="flex justify-around items-center gap-2">
-      <!-- icon moon -->
-      <button class="btn-icon" id="dark-btn">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          id="icon-moon"
-          class="h-6 w-6 mx-auto"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-          />
-        </svg>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          id="icon-sun"
-          class="h-6 w-6 mx-auto text-amber-500 hidden"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-          />
-        </svg>
-      </button>
-
-      <!-- Icon Sun -->
-      <button class="btn-icon hidden">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
+      <button class="nav-icon" id="dark-btn" @click="toggleDarkMode">
+        <!-- Icon Sun -->
+        <SunIcon
           id="icon-sun"
           class="h-6 w-6 mx-auto text-amber-500"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
           stroke-width="2"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-          />
-        </svg>
+          v-if="darkMode === 'dark'"
+        />
+
+        <!-- icon moon -->
+        <MoonIcon
+          id="icon-moon"
+          class="h-6 w-6 mx-auto"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+          v-else-if="darkMode === 'light'"
+        />
       </button>
 
       <!-- Icon Bookmarks all -->
-      <button class="btn-icon">
+      <button class="nav-icon">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 mx-auto"
@@ -78,7 +49,7 @@
       </button>
 
       <!-- Icon Bookmark -->
-      <button class="btn-icon">
+      <button class="nav-icon">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 mx-auto"
@@ -99,9 +70,61 @@
 </template>
 
 <script>
+import { SunIcon } from "@heroicons/vue/outline";
+import { MoonIcon } from "@heroicons/vue/outline";
 export default {
   name: "MainNav",
+  components: { SunIcon, MoonIcon },
+  data() {
+    return {
+      darkMode: "light",
+    };
+  },
+  methods: {
+    toggleDarkMode: function () {
+      this.darkMode = this.darkMode === "light" ? "dark" : "light";
+      this.setTheme(this.darkMode);
+    },
+    setTheme(mode = "light") {
+      if (!mode || mode === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    },
+  },
+  mounted() {
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      this.setTheme("dark");
+      this.darkMode = "dark";
+    } else {
+      this.setTheme();
+    }
+
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener(
+      "change",
+      function (evt) {
+        if (!evt.matches) {
+          this.setTheme();
+        } else {
+          this.setTheme("dark");
+        }
+      }.bind(this)
+    );
+
+    // Whenever the user explicitly chooses to respect the OS preference
+    // localStorage.removeItem("theme");
+  },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.nav-icon {
+  @apply h-12 w-12 rounded-full text-cyan-500
+    active:text-cyan-500 hover:text-cyan-600 active:bg-cyan-50
+    dark:text-cyan-300 dark:active:text-cyan-300
+    dark:hover:text-cyan-500/70
+    dark:active:bg-cyan-50/20  transition;
+}
+</style>
