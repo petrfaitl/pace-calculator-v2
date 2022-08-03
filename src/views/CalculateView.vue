@@ -61,6 +61,7 @@ import BaseInput from "@/components/form/BaseInput";
 import SelectInput from "@/components/form/SelectInput";
 import ToggleInput from "@/components/form/ToggleInput";
 import BaseRadioGroup from "@/components/form/BaseRadioGroup";
+import { watchEffect } from "vue";
 
 export default {
   name: "CalculateView",
@@ -152,19 +153,18 @@ export default {
       this.State.activity = this.activityData;
       this.$router.push({ name: "ResultsView" });
     },
-    updateData() {
-      this.time = this.State.activity.time;
-      this.distance = this.State.activity.distance;
-      this.units = this.State.activity.convertFactor;
-      this.customDistance = this.State.activity.customDistance;
+    updateData(activity) {
+      this.movingTime = activity.time;
+      this.selectedDistance = activity.distance;
+      this.units = activity.convertFactor;
+      this.customDistance = activity.customDistance;
     },
   },
   created() {
     this.State.distances = this.distanceOptions;
-  },
-  updated() {
-    console.log("Activity: ", this.State.activity);
-    if (this.State.activity.id) this.updateData();
+    watchEffect(() => {
+      if (this.State.activity.id) this.updateData(this.State.activity);
+    });
   },
 };
 </script>

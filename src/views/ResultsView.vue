@@ -29,6 +29,7 @@
 <script>
 import HeaderField from "@/components/results/HeaderField";
 import TableResults from "@/components/results/TableResults";
+import { watchEffect } from "vue";
 export default {
   name: "ResultsView",
   components: { HeaderField, TableResults },
@@ -104,19 +105,20 @@ export default {
     distanceTimeCalc(distance) {
       return this.getHumanTime(this.paceInMilli * distance);
     },
-    updateData() {
-      this.id = this.State.activity.id;
-      this.time = this.State.activity.time;
-      this.distance = this.State.activity.distance;
-      this.distanceUnits = this.State.activity.distanceUnits;
-      this.convertFactor = this.State.activity.convertFactor;
-      this.customDistance = this.State.activity.customDistance;
-      this.bookmarked = this.State.bookmarked;
+    updateData(activity) {
+      this.id = activity.id;
+      this.time = activity.time;
+      this.distance = activity.distance;
+      this.distanceUnits = activity.distanceUnits;
+      this.convertFactor = activity.convertFactor;
+      this.customDistance = activity.customDistance;
     },
   },
-  updated() {},
   mounted() {
-    this.updateData();
+    watchEffect(() => {
+      this.updateData(this.State.activity);
+      this.bookmarked = this.State.bookmarked;
+    });
     !this.State.activity.id ? this.$router.replace("/") : "";
   },
 };
