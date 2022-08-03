@@ -3,7 +3,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  mounted() {
+    document.title = "Pace Calculator";
+    document.description =
+      "Pace calculator and conversion app. Get running pace for common running distances. 400m, 800m, 1500m, 5k, 10k, half marathon, marathon and others.";
+  },
+};
 </script>
 
 <style>

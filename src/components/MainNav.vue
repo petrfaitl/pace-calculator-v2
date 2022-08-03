@@ -1,8 +1,10 @@
 <template>
   <nav
-    class="fixed md:relative w-full z-10 flex justify-between backdrop-blur-md px-4 items-center h-24 border-b border-slate-200 dark:border-slate-50 dark:bg-slate-900/50"
+    class="w-full z-10 flex justify-between backdrop-blur-md px-4 items-center h-24 border-b border-cyan-500 dark:border-cyan-300 dark:bg-slate-900/50"
   >
-    <div class="font-normal text-xl text-cyan-900 dark:text-cyan-50">
+    <div
+      class="font-normal text-xl text-cyan-900 dark:text-cyan-50 select-none"
+    >
       Pace Calculator
     </div>
     <div class="flex justify-around items-center gap-2">
@@ -32,38 +34,26 @@
 
       <!-- Icon Bookmarks all -->
       <button class="nav-icon">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
+        <BookmarkAltIcon
+          id="bookmark-alt-icon"
           class="h-6 w-6 mx-auto"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
           stroke-width="2"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M16 4v12l-4-2-4 2V4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-          />
-        </svg>
+        />
       </button>
 
       <!-- Icon Bookmark -->
       <button class="nav-icon">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
+        <BookmarkIcon
+          id="bookmarks-alt-icon"
           class="h-6 w-6 mx-auto"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
           stroke-width="2"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-          />
-        </svg>
+        />
       </button>
     </div>
   </nav>
@@ -72,9 +62,11 @@
 <script>
 import { SunIcon } from "@heroicons/vue/outline";
 import { MoonIcon } from "@heroicons/vue/outline";
+import { BookmarkAltIcon } from "@heroicons/vue/outline";
+import { BookmarkIcon } from "@heroicons/vue/outline";
 export default {
   name: "MainNav",
-  components: { SunIcon, MoonIcon },
+  components: { SunIcon, MoonIcon, BookmarkAltIcon, BookmarkIcon },
   data() {
     return {
       darkMode: "light",
@@ -88,8 +80,10 @@ export default {
     setTheme(mode = "light") {
       if (!mode || mode === "dark") {
         document.documentElement.classList.add("dark");
+        this.darkMode = "dark";
       } else {
         document.documentElement.classList.remove("dark");
+        this.darkMode = "light";
       }
     },
   },

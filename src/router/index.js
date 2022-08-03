@@ -1,11 +1,25 @@
 import { createRouter, createWebHistory } from "vue-router";
-import CalculateView from "../views/CalculateView.vue";
+import LayoutView from "../views/LayoutView.vue";
+import CalculateView from "@/views/CalculateView";
+import ResultsView from "@/views/ResultsView";
 
 const routes = [
   {
     path: "/",
-    name: "home",
-    component: CalculateView,
+    name: "LayoutView",
+    component: LayoutView,
+    children: [
+      {
+        path: "",
+        name: "CalculateView",
+        component: CalculateView,
+      },
+      {
+        path: "results",
+        name: "ResultsView",
+        component: ResultsView,
+      },
+    ],
   },
   {
     path: "/about",
