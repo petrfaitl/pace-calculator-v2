@@ -26,7 +26,6 @@
         label="Distance"
         type="number"
         step="0.1"
-        required="required"
         placeholder="Enter distance"
         v-model.number="selectedDistance"
         iconClasses="absolute inset-y-0 right-0 flex items-center pr-4 dark:text-slate-200 active:text-cyan-300"
@@ -153,9 +152,19 @@ export default {
       this.State.activity = this.activityData;
       this.$router.push({ name: "ResultsView" });
     },
+    updateData() {
+      this.time = this.State.activity.time;
+      this.distance = this.State.activity.distance;
+      this.units = this.State.activity.convertFactor;
+      this.customDistance = this.State.activity.customDistance;
+    },
   },
   created() {
     this.State.distances = this.distanceOptions;
+  },
+  updated() {
+    console.log("Activity: ", this.State.activity);
+    if (this.State.activity.id) this.updateData();
   },
 };
 </script>

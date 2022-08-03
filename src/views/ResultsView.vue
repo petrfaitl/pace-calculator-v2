@@ -35,15 +35,6 @@ export default {
   inject: ["State"],
   data() {
     return {
-      // id: this.State.activity.id ?? null,
-      // time: this.State.activity.time ?? "",
-      // distance: this.State.activity.distance ?? "",
-      // distanceUnits: this.State.activity.distanceUnits ?? "",
-      // convertFactor: this.State.activity.convertFactor ?? 1,
-      // mile2Km: 1.60934,
-      // customDistance: this.State.activity.customDistance ?? false,
-      // bookmarked: this.State.bookmarked ?? false,
-      // distances: this.State.distances,
       id: null,
       time: "",
       distance: "",
@@ -66,11 +57,9 @@ export default {
       return this.getPace();
     },
     pace() {
-      const paceMillis =
-        this.convertFactor === 1
-          ? this.getPace()
-          : this.getPace() * this.mile2Km;
-      return this.getHumanTime(paceMillis);
+      // const paceMillis =
+      //   this.convertFactor === 1 ? this.getPace() : this.getPace();
+      return this.getHumanTime(this.paceInMilli);
     },
     distanceDisplay() {
       return this.customDistance
@@ -82,7 +71,7 @@ export default {
         return {
           name: dist.name,
           value: dist.value,
-          pace: this.distanceTimeCalc(dist.value),
+          pace: this.distanceTimeCalc(dist.value / this.convertFactor),
         };
         // return this.distanceTimeCalc(dist.value);
       });
