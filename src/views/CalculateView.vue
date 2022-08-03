@@ -25,7 +25,7 @@
         v-show="customDistance"
         label="Distance"
         type="number"
-        step="0.1"
+        step="0.001"
         placeholder="Enter distance"
         v-model.number="selectedDistance"
         iconClasses="absolute inset-y-0 right-0 flex items-center pr-4 dark:text-slate-200 active:text-cyan-300"
@@ -81,7 +81,7 @@ export default {
       customDistance: false,
       unitOptions: [
         { label: "kms", value: 1 },
-        { label: "miles", value: 1.60934 },
+        { label: "miles", value: 1.609 },
       ],
       distances: [
         {
@@ -95,7 +95,7 @@ export default {
           group: "ByPace",
           options: [
             { name: "min/km", value: 1 },
-            { name: "min/mile", value: 1.60934 },
+            { name: "min/mile", value: 1.609 },
           ],
         },
         {
@@ -107,7 +107,7 @@ export default {
             { name: "1200m", value: 1.2 },
             { name: "1500m", value: 1.5 },
             { name: "1600m", value: 1.6 },
-            { name: "1mile", value: 1.60934 },
+            { name: "1mile", value: 1.609 },
             { name: "3k", value: 3 },
             { name: "5k", value: 5 },
             { name: "6k", value: 6 },
