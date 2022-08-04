@@ -7,14 +7,24 @@
       v-if="this.State.activity.id"
       class="grid grid-cols-3 pb-2 border-b border-cyan-500 dark:border-cyan-300 text-slate-700 dark:text-slate-400 select-none"
     >
-      <HeaderField id="distance" label="Distance" :msg="distanceDisplay" />
+      <HeaderField
+        id="distance"
+        label="Distance"
+        :msg="this.distance"
+        :units="`${this.pluralStr(this.distance, this.distanceUnits)}`"
+      />
       <HeaderField
         id="moving-time"
         label="Time"
         :msg="movingTime"
         class="border-l border-r border-cyan-500 dark:border-cyan-300"
       />
-      <HeaderField id="pace" label="Pace" :msg="`${pace} /${distanceUnits}`" />
+      <HeaderField
+        id="pace"
+        label="Pace"
+        :msg="`${pace}`"
+        :units="`/${distanceUnits}`"
+      />
     </div>
     <TableResults
       v-if="this.State.activity.id"
@@ -62,11 +72,6 @@ export default {
       //   this.convertFactor === 1 ? this.getPace() : this.getPace();
       return this.getHumanTime(this.paceInMilli);
     },
-    distanceDisplay() {
-      return this.customDistance
-        ? `${this.distance}${this.distanceUnits}`
-        : this.distance;
-    },
     results() {
       return this.distances.map((dist) => {
         return {
@@ -82,18 +87,28 @@ export default {
     getPace() {
       return Math.round(this.movingTimeMs / this.distance);
     },
+    pluralStr(value, str) {
+      return value > 1 ? `${str}s` : str;
+    },
     getHumanTime(millis) {
       let seconds = Math.floor(millis / 1000);
       let minutes = Math.floor(seconds / 60);
       let hours = Math.floor(minutes / 60);
+      let days = Math.floor(hours / 24);
 
       seconds = seconds % 60;
       minutes = minutes % 60;
+      hours = hours % 24;
 
       // console.log(hours, minutes, seconds);
-      let str = `${String(seconds).padStart(2, "0")}`;
-      str = minutes ? `${String(minutes).padStart(2, "0")}:` + str : str;
-      str = hours ? `${String(hours).padStart(2, "0")}:` + str : str;
+      let str =
+        minutes || hours
+          ? `${String(seconds).padStart(2, "0")}`
+          : `${String(seconds).padStart(2, "0")}s`;
+      str =
+        minutes || hours ? `${String(minutes).padStart(2, "0")}:` + str : str;
+      str = hours || days ? `${String(hours).padStart(2, "0")}:` + str : str;
+      str = days ? `${String(days)}${this.pluralStr(days, "day")} ` + str : str;
 
       return str;
     },
@@ -118,8 +133,8 @@ export default {
     watchEffect(() => {
       this.updateData(this.State.activity);
       this.bookmarked = this.State.bookmarked;
+      !this.State.activity.id ? this.$router.replace("/") : "";
     });
-    !this.State.activity.id ? this.$router.replace("/") : "";
   },
 };
 </script>

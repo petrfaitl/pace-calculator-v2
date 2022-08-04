@@ -2,7 +2,7 @@
   <div class="relative">
     <table class="w-full text-base text-left text-slate-700 dark:text-slate-50">
       <thead
-        class="uppercase text-base text-left text-cyan-900 dark:text-cyan-50 pl-4 mb-3 select-none"
+        class="uppercase text-base text-left text-cyan-900 dark:text-cyan-50 pl-4 mb-3 border-b-2 border-cyan-500 select-none"
       >
         <tr>
           <th scope="col" class="py-3 px-6 font-medium">Distance</th>

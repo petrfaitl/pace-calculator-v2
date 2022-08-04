@@ -5,7 +5,7 @@
     >
       <input
         type="checkbox"
-        :value="modelValue"
+        :checked="modelValue"
         :name="name"
         :id="id"
         @input="$emit('update:modelValue', $event.target.checked)"

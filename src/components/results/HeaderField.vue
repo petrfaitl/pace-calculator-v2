@@ -7,7 +7,7 @@
       <span class="text-base inline-flex dark:text-slate-200 text-slate-700">{{
         $attrs.msg
       }}</span>
-      <span class="text-normal inline-flex"> {{ $attrs.value }}</span>
+      <span class="text-sm inline-flex"> {{ $attrs.units }}</span>
     </div>
   </div>
 </template>

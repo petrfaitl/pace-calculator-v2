@@ -2,10 +2,26 @@
   <nav
     class="w-full z-10 flex justify-between backdrop-blur-md px-4 items-center h-24 border-b border-cyan-500 dark:border-cyan-300 dark:bg-slate-900/50"
   >
-    <div
-      class="font-normal text-xl text-cyan-900 dark:text-cyan-50 select-none"
-    >
-      Pace Calculator
+    <div class="flex items-center">
+      <!--      Back button-->
+      <button
+        class="nav-icon mr-2"
+        @click="this.$router.push({ name: 'CalculateView' })"
+      >
+        <ChevronLeftIcon
+          id="bookmark-alt-icon"
+          class="h-6 w-6 mx-auto"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        />
+      </button>
+      <div
+        class="font-normal text-xl text-cyan-900 dark:text-cyan-50 select-none"
+      >
+        Pace Calculator
+      </div>
     </div>
     <div class="flex justify-around items-center gap-2">
       <button class="nav-icon" id="dark-btn" @click="toggleDarkMode">
@@ -29,6 +45,18 @@
           stroke="currentColor"
           stroke-width="2"
           v-else-if="darkMode === 'light'"
+        />
+      </button>
+
+      <!--      Reset Calculations-->
+      <button class="nav-icon mr-2" @click="reset">
+        <RefreshIcon
+          id="bookmark-alt-icon"
+          class="h-6 w-6 mx-auto"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
         />
       </button>
 
@@ -64,9 +92,19 @@ import { SunIcon } from "@heroicons/vue/outline";
 import { MoonIcon } from "@heroicons/vue/outline";
 import { BookmarkAltIcon } from "@heroicons/vue/outline";
 import { BookmarkIcon } from "@heroicons/vue/outline";
+import { ChevronLeftIcon } from "@heroicons/vue/outline";
+import { RefreshIcon } from "@heroicons/vue/outline";
 export default {
   name: "MainNav",
-  components: { SunIcon, MoonIcon, BookmarkAltIcon, BookmarkIcon },
+  inject: ["State"],
+  components: {
+    SunIcon,
+    MoonIcon,
+    BookmarkAltIcon,
+    BookmarkIcon,
+    ChevronLeftIcon,
+    RefreshIcon,
+  },
   data() {
     return {
       darkMode: "light",
@@ -85,6 +123,9 @@ export default {
         document.documentElement.classList.remove("dark");
         this.darkMode = "light";
       }
+    },
+    reset() {
+      this.State.activity = {};
     },
   },
   mounted() {

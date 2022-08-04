@@ -103,7 +103,7 @@ export default {
           options: [
             { name: "400m", value: 0.4 },
             { name: "800m", value: 0.8 },
-            { name: "1000m", value: 1 },
+            { name: "1km", value: 1 },
             { name: "1200m", value: 1.2 },
             { name: "1500m", value: 1.5 },
             { name: "1600m", value: 1.6 },
@@ -114,7 +114,7 @@ export default {
             { name: "7k", value: 7 },
             { name: "8k", value: 8 },
             { name: "10k", value: 10 },
-            { name: "Half", value: 21.1 },
+            { name: "Half Marathon", value: 21.1 },
             { name: "Marathon", value: 42.2 },
             { name: "50k", value: 50 },
             { name: "100k", value: 100 },
@@ -159,11 +159,21 @@ export default {
       this.units = activity.convertFactor;
       this.customDistance = activity.customDistance;
     },
+    init() {
+      this.movingTime = "00:00:00";
+      this.selectedDistance = "";
+      this.units = 1;
+      this.customDistance = false;
+    },
   },
   created() {
     this.State.distances = this.distanceOptions;
     watchEffect(() => {
-      if (this.State.activity.id) this.updateData(this.State.activity);
+      if (this.State.activity.id) {
+        this.updateData(this.State.activity);
+      } else {
+        this.init();
+      }
     });
   },
 };
