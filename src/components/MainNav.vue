@@ -1,11 +1,11 @@
 <template>
   <nav
-    class="w-full z-10 flex justify-between backdrop-blur-md px-4 items-center h-24 border-b border-cyan-500 dark:border-cyan-300 dark:bg-slate-900/50"
+    class="w-full z-10 flex justify-between backdrop-blur-md md:px-4 items-center h-24 border-b border-cyan-500 dark:border-cyan-300 dark:bg-slate-900/50"
   >
     <div class="flex items-center">
       <!--      Back button-->
       <button
-        class="nav-icon mr-2"
+        class="nav-icon md:mr-2"
         @click="this.$router.push({ name: 'CalculateView' })"
       >
         <ChevronLeftIcon
@@ -23,7 +23,7 @@
         Pace Calculator
       </div>
     </div>
-    <div class="flex justify-around items-center gap-2">
+    <div class="flex justify-around items-center md:gap-2">
       <button class="nav-icon" id="dark-btn" @click="toggleDarkMode">
         <!-- Icon Sun -->
         <SunIcon
@@ -49,7 +49,7 @@
       </button>
 
       <!--      Reset Calculations-->
-      <button class="nav-icon mr-2" @click="reset">
+      <button class="nav-icon" @click="reset">
         <RefreshIcon
           id="bookmark-alt-icon"
           class="h-6 w-6 mx-auto"
