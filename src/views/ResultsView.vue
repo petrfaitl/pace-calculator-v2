@@ -1,5 +1,5 @@
 <template>
-  <section class="mt-4 md:mt-8 p-8 md:w-1/2">
+  <section class="mt-4 md:mt-8 p-0 sm:px-8 sm:py-2 md:w-1/2">
     <!--    <div>{{ this.State.activity }}</div>-->
     <!--    id: {{ id }}-->
 
@@ -26,13 +26,32 @@
         :units="`/${distanceUnits}`"
       />
     </div>
-    <TableResults
+    <div class="">
+      <TableResults
+        v-if="this.State.activity.id"
+        id="results"
+        label="results"
+        :results="results"
+        class="mt-4"
+      />
+    </div>
+    <div
       v-if="this.State.activity.id"
-      id="results"
-      label="results"
-      :results="results"
-      class="mt-4"
-    />
+      class="hidden grid grid-cols-2 mt-4 pb-2 border-b border-cyan-500 dark:border-cyan-300 text-slate-700 dark:text-slate-400 select-none"
+    >
+      <HeaderField
+        id="speed"
+        label="Speed"
+        :msg="this.distance"
+        :units="`${this.pluralStr(this.distance, this.distanceUnits)}`"
+      />
+      <HeaderField
+        id="moving-time"
+        label="Time"
+        :msg="movingTime"
+        class="border-l border-cyan-500 dark:border-cyan-300"
+      />
+    </div>
   </section>
 </template>
 
@@ -40,6 +59,7 @@
 import HeaderField from "@/components/results/HeaderField";
 import TableResults from "@/components/results/TableResults";
 import { watchEffect } from "vue";
+
 export default {
   name: "ResultsView",
   components: { HeaderField, TableResults },

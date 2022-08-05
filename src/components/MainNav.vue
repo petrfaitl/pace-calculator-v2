@@ -61,7 +61,7 @@
       </button>
 
       <!-- Icon Bookmarks all -->
-      <button class="nav-icon">
+      <button class="nav-icon disabled:opacity-25" disabled>
         <BookmarkAltIcon
           id="bookmark-alt-icon"
           class="h-6 w-6 mx-auto"
@@ -73,7 +73,7 @@
       </button>
 
       <!-- Icon Bookmark -->
-      <button class="nav-icon">
+      <button class="nav-icon disabled:opacity-25 hidden" disabled>
         <BookmarkIcon
           id="bookmarks-alt-icon"
           class="h-6 w-6 mx-auto"
