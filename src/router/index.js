@@ -30,6 +30,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
+  {
+    path: "/:catchAll(.*)",
+    redirect: () => {
+      return { name: "CalculateView" };
+    },
+  },
 ];
 
 const router = createRouter({
