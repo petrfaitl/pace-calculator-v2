@@ -111,10 +111,10 @@ export default {
       return value > 1 ? `${str}s` : str;
     },
     getHumanTime(millis) {
-      let seconds = Math.floor(millis / 1000);
-      let minutes = Math.floor(seconds / 60);
-      let hours = Math.floor(minutes / 60);
-      let days = Math.floor(hours / 24);
+      let seconds = Math.round(millis / 1000);
+      let minutes = Math.trunc(seconds / 60);
+      let hours = Math.trunc(minutes / 60);
+      let days = Math.trunc(hours / 24);
 
       seconds = seconds % 60;
       minutes = minutes % 60;
