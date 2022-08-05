@@ -47,7 +47,8 @@
 
       <button
         type="submit"
-        class="h-16 w-full font-medium uppercase rounded-md active:-translate-y-0.5 bg-cyan-600 text-slate-50 active:bg-cyan-500 active:shadow-lg dark:hover:text-cyan-50 dark:bg-cyan-500 dark:active:bg-cyan-500/70 transition select-none"
+        :disabled="!validInputs"
+        class="h-16 w-full font-medium uppercase rounded-md disabled:translate-y-0 disabled:shadow-none disabled:bg-cyan-500/30 disabled:cursor-not-allowed active:-translate-y-0.5 bg-cyan-500 text-white active:bg-cyan-600 active:shadow-lg dark:hover:text-cyan-50 dark:bg-cyan-500 dark:active:bg-cyan-500/70 transition select-none"
       >
         View Results
       </button>
@@ -125,6 +126,12 @@ export default {
     };
   },
   computed: {
+    validInputs() {
+      return (
+        this.selectedDistance &&
+        this.movingTime.replaceAll(":", "").replaceAll("0", "")
+      );
+    },
     activityData() {
       return {
         id: this.getId(),
