@@ -3,22 +3,29 @@
     class="w-full z-10 flex justify-between backdrop-blur-md md:px-4 items-center h-24 border-b border-cyan-500 dark:border-cyan-300 dark:bg-slate-900/50"
   >
     <div class="flex items-center">
-      <!--      Back button-->
-      <button
-        class="nav-icon md:mr-2"
-        @click="this.$router.push({ name: 'CalculateView' })"
-      >
-        <ChevronLeftIcon
-          id="bookmark-alt-icon"
-          class="h-6 w-6 mx-auto"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-        />
-      </button>
+      <!--      Back button & location title-->
       <div
-        class="font-normal text-xl text-cyan-900 dark:text-cyan-50 select-none"
+        v-if="$route.path !== '/'"
+        class="flex items-center font-normal text-xl text-cyan-900 dark:text-cyan-50 select-none"
+      >
+        <button
+          class="nav-icon md:mr-2 text-sm flex items-center"
+          @click="this.$router.push({ name: 'CalculateView' })"
+        >
+          <ChevronLeftIcon
+            id="bookmark-alt-icon"
+            class="h-6 w-6 mx-auto"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          />
+        </button>
+        Results
+      </div>
+      <div
+        v-else
+        class="font-normal text-xl text-cyan-900 dark:text-cyan-50 select-none ml-4"
       >
         Pace Calculator
       </div>

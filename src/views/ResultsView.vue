@@ -1,8 +1,5 @@
 <template>
   <section class="mt-4 md:mt-8 p-0 sm:px-8 sm:py-2 md:w-1/2">
-    <!--    <div>{{ this.State.activity }}</div>-->
-    <!--    id: {{ id }}-->
-
     <div
       v-if="this.State.activity.id"
       class="grid grid-cols-4 pb-2 border-b border-cyan-500 dark:border-cyan-300 text-slate-700 dark:text-slate-400 select-none"
