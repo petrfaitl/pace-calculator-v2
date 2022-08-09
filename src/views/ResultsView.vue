@@ -5,25 +5,33 @@
 
     <div
       v-if="this.State.activity.id"
-      class="grid grid-cols-3 pb-2 border-b border-cyan-500 dark:border-cyan-300 text-slate-700 dark:text-slate-400 select-none"
+      class="grid grid-cols-4 pb-2 border-b border-cyan-500 dark:border-cyan-300 text-slate-700 dark:text-slate-400 select-none"
     >
       <HeaderField
         id="distance"
         label="Distance"
         :msg="this.distance"
         :units="`${this.pluralStr(this.distance, this.distanceUnits)}`"
+        class="border-r border-cyan-500 dark:border-cyan-300"
       />
       <HeaderField
         id="moving-time"
         label="Time"
         :msg="movingTime"
-        class="border-l border-r border-cyan-500 dark:border-cyan-300"
+        class="border-r border-cyan-500 dark:border-cyan-300"
       />
       <HeaderField
         id="pace"
         label="Pace"
         :msg="`${pace}`"
         :units="`/${distanceUnits}`"
+        class="border-r border-cyan-500 dark:border-cyan-300"
+      />
+      <HeaderField
+        id="speed"
+        label="Speed"
+        :msg="`${speed}`"
+        :units="`${this.pluralStr(this.speed, this.distanceUnits)}/h`"
       />
     </div>
     <div class="">
@@ -39,12 +47,6 @@
       v-if="this.State.activity.id"
       class="hidden grid grid-cols-2 mt-4 pb-2 border-b border-cyan-500 dark:border-cyan-300 text-slate-700 dark:text-slate-400 select-none"
     >
-      <HeaderField
-        id="speed"
-        label="Speed"
-        :msg="this.distance"
-        :units="`${this.pluralStr(this.distance, this.distanceUnits)}`"
-      />
       <HeaderField
         id="moving-time"
         label="Time"
@@ -92,6 +94,9 @@ export default {
       //   this.convertFactor === 1 ? this.getPace() : this.getPace();
       return this.getHumanTime(this.paceInMilli);
     },
+    speed() {
+      return this.getSpeed();
+    },
     results() {
       return this.distances.map((dist) => {
         return {
@@ -104,6 +109,9 @@ export default {
     },
   },
   methods: {
+    getSpeed() {
+      return (this.distance / (this.movingTimeMs / 1000 / 60 / 60)).toFixed(1);
+    },
     getPace() {
       return Math.round(this.movingTimeMs / this.distance);
     },
