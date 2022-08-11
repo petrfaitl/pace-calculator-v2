@@ -12,31 +12,31 @@
           </th>
         </tr>
       </thead>
-      <tbody>
-        <tr
-          class="bg-white border-b dark:bg-slate-800 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600 select-none"
-          v-for="result in results"
-          :key="result.name"
-        >
-          <th
-            scope="row"
-            class="py-4 px-6 font-medium dark:text-slate-200 text-slate-700 whitespace-nowrap"
+      <TransitionGroup tag="tbody" name="slide-up" appear>
+        <template v-for="result in results" v-bind:key="result.name">
+          <tr
+            class="bg-white border-b dark:bg-slate-800 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600 select-none"
           >
-            {{ result.name }}
-          </th>
-
-          <td class="py-4 px-6 dark:text-slate-200 text-slate-700 text-right">
-            {{ result.pace }}
-          </td>
-          <td class="py-4 px-6 text-right hidden">
-            <a
-              href="#"
-              class="font-medium text-cyan-600 dark:text-cyan-500 hover:underline"
-              >Edit</a
+            <th
+              scope="row"
+              class="py-4 px-6 font-medium dark:text-slate-200 text-slate-700 whitespace-nowrap"
             >
-          </td>
-        </tr>
-      </tbody>
+              {{ result.name }}
+            </th>
+
+            <td class="py-4 px-6 dark:text-slate-200 text-slate-700 text-right">
+              {{ result.pace }}
+            </td>
+            <td class="py-4 px-6 text-right hidden">
+              <a
+                href="#"
+                class="font-medium text-cyan-600 dark:text-cyan-500 hover:underline"
+                >Edit</a
+              >
+            </td>
+          </tr>
+        </template>
+      </TransitionGroup>
     </table>
   </div>
 </template>
@@ -51,5 +51,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

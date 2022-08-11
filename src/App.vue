@@ -29,4 +29,46 @@ export default {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+
+/* Slide Left Transition */
+.slide-left-move,
+.slide-left-enter-active,
+.slide-left-leave-active {
+  @apply transition-all duration-500;
+}
+.slide-left-enter-from {
+  @apply opacity-0;
+  @apply translate-x-1;
+}
+
+.slide-left-leave-to {
+  @apply opacity-0;
+  @apply -translate-x-1;
+}
+/* Slide Up Transition */
+.slide-up-move,
+.slide-up-enter-active,
+.slide-up-leave-active {
+  @apply transition-all duration-500;
+}
+.slide-up-enter-from {
+  @apply opacity-0;
+  @apply translate-y-1;
+}
+
+.slide-up-leave-to {
+  @apply opacity-0;
+  @apply -translate-y-1;
+}
+
+/* Fade Transition */
+.fade-enter-from,
+.fade-leave-to {
+  @apply opacity-0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  @apply transition-opacity;
+}
 </style>

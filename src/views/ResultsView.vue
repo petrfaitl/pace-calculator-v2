@@ -1,8 +1,38 @@
 <template>
-  <section class="mt-4 md:mt-8 p-0 sm:px-8 sm:py-2 md:w-1/2">
+  <section class="mt-8 md:mt-8 p-0 sm:px-8 sm:py-2 md:w-1/2">
+    <!-- Icon Bookmark -->
+    <div
+      class="absolute right-8 md:right-14 top-24 z-0 overflow-hidden"
+      v-if="$route.path === '/results'"
+    >
+      <button class="relative h-8 w-8" @click="toggleBookmark">
+        <Transition name="slide-in" mode="out-in">
+          <BookmarkIcon
+            id="bookmarks-icon"
+            class="h-8 w-8 mx-auto nav-icon -top-4 absolute"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="1"
+            v-show="!bookmarked"
+          />
+        </Transition>
+        <Transition name="slide-out" mode="out-in">
+          <BookmarkIconFilled
+            id="bookmarks-icon-filled"
+            class="h-8 w-8 mx-auto nav-icon -top-1.5 absolute"
+            fill="none"
+            viewBox="0 0 20 20"
+            stroke="currentColor"
+            stroke-width="1"
+            v-show="bookmarked"
+          />
+        </Transition>
+      </button>
+    </div>
     <div
       v-if="this.State.activity.id"
-      class="grid grid-cols-4 pb-2 border-b border-cyan-500 dark:border-cyan-300 text-slate-700 dark:text-slate-400 select-none"
+      class="grid grid-cols-4 pb-2 border-b-0 border-cyan-500 dark:border-cyan-300 text-slate-700 dark:text-slate-400 select-none"
     >
       <HeaderField
         id="distance"
@@ -28,7 +58,7 @@
         id="speed"
         label="Speed"
         :msg="`${speed}`"
-        :units="`${this.pluralStr(this.speed, this.distanceUnits)}/h`"
+        :units="`${this.distanceUnits}/h`"
       />
     </div>
     <div class="">
@@ -40,28 +70,21 @@
         class="mt-4"
       />
     </div>
-    <div
-      v-if="this.State.activity.id"
-      class="hidden grid grid-cols-2 mt-4 pb-2 border-b border-cyan-500 dark:border-cyan-300 text-slate-700 dark:text-slate-400 select-none"
-    >
-      <HeaderField
-        id="moving-time"
-        label="Time"
-        :msg="movingTime"
-        class="border-l border-cyan-500 dark:border-cyan-300"
-      />
-    </div>
   </section>
 </template>
 
 <script>
 import HeaderField from "@/components/results/HeaderField";
 import TableResults from "@/components/results/TableResults";
+import CalculateService from "@/services/CalculateService";
+import { BookmarkIcon } from "@heroicons/vue/outline";
+import { BookmarkIcon as BookmarkIconFilled } from "@heroicons/vue/solid";
 import { watchEffect } from "vue";
 
 export default {
   name: "ResultsView",
-  components: { HeaderField, TableResults },
+  // eslint-disable-next-line vue/no-unused-components
+  components: { HeaderField, TableResults, BookmarkIcon, BookmarkIconFilled },
   inject: ["State"],
   data() {
     return {
@@ -77,73 +100,46 @@ export default {
     };
   },
   computed: {
-    movingTimeMs() {
-      return this.milliseconds(this.time);
+    bookmarkPayload() {
+      return {
+        id: this.id,
+        time: this.time,
+        distance: this.distance,
+        distanceUnits: this.distanceUnits,
+        convertFactor: this.convertFactor,
+        bookmarked: this.bookmarked,
+        movingTime: this.movingTime,
+        pace: `${this.pace}/${this.distanceUnits}`,
+        speed: `${this.speed}${this.distanceUnits}/h`,
+      };
     },
     movingTime() {
-      return this.getHumanTime(this.movingTimeMs);
-    },
-    paceInMilli() {
-      return this.getPace();
+      return CalculateService.getMovingTime(this.time);
     },
     pace() {
-      // const paceMillis =
-      //   this.convertFactor === 1 ? this.getPace() : this.getPace();
-      return this.getHumanTime(this.paceInMilli);
+      return CalculateService.getPace(this.time, this.distance);
     },
     speed() {
-      return this.getSpeed();
+      return CalculateService.getSpeed(this.time, this.distance);
     },
     results() {
       return this.distances.map((dist) => {
         return {
           name: dist.name,
           value: dist.value,
-          pace: this.distanceTimeCalc(dist.value / this.convertFactor),
+          pace: CalculateService.distanceTimeCalc(
+            this.time,
+            this.distance,
+            dist.value,
+            this.convertFactor
+          ),
         };
-        // return this.distanceTimeCalc(dist.value);
       });
     },
   },
   methods: {
-    getSpeed() {
-      return (this.distance / (this.movingTimeMs / 1000 / 60 / 60)).toFixed(1);
-    },
-    getPace() {
-      return Math.round(this.movingTimeMs / this.distance);
-    },
     pluralStr(value, str) {
       return value > 1 ? `${str}s` : str;
-    },
-    getHumanTime(millis) {
-      let seconds = Math.round(millis / 1000);
-      let minutes = Math.trunc(seconds / 60);
-      let hours = Math.trunc(minutes / 60);
-      let days = Math.trunc(hours / 24);
-
-      seconds = seconds % 60;
-      minutes = minutes % 60;
-      hours = hours % 24;
-
-      // console.log(hours, minutes, seconds);
-      let str =
-        minutes || hours
-          ? `${String(seconds).padStart(2, "0")}`
-          : `${String(seconds).padStart(2, "0")}s`;
-      str =
-        minutes || hours ? `${String(minutes).padStart(2, "0")}:` + str : str;
-      str = hours || days ? `${String(hours).padStart(2, "0")}:` + str : str;
-      str = days ? `${String(days)}${this.pluralStr(days, "day")} ` + str : str;
-
-      return str;
-    },
-    milliseconds() {
-      // const paddedTime = time.padStart(8, "00:");
-      const [hours, minutes, seconds] = this.time.split(":");
-      return hours * 60 * 60 * 1000 + minutes * 60 * 1000 + seconds * 1000;
-    },
-    distanceTimeCalc(distance) {
-      return this.getHumanTime(this.paceInMilli * distance);
     },
     updateData(activity) {
       this.id = activity.id;
@@ -152,16 +148,66 @@ export default {
       this.distanceUnits = activity.distanceUnits;
       this.convertFactor = activity.convertFactor;
       this.customDistance = activity.customDistance;
+      this.bookmarked = activity.bookmarked;
+    },
+    toggleBookmark() {
+      this.bookmarked = !this.bookmarked;
+      this.State.activity.bookmarked = this.bookmarked;
+      this.State.toggleBookmarkItem(this.bookmarkPayload);
     },
   },
-  mounted() {
+  created() {
     watchEffect(() => {
-      this.updateData(this.State.activity);
-      this.bookmarked = this.State.bookmarked;
       !this.State.activity.id ? this.$router.replace("/") : "";
+      this.updateData(this.State.activity);
     });
+  },
+  mounted() {
+    try {
+      this.State.activity.movingTime = this.movingTime;
+      this.State.activity.pace = this.pace;
+      this.State.activity.speed = this.speed;
+    } catch (e) {
+      console.log(e);
+      !this.time ? this.$router.replace("/") : "";
+    }
+  },
+  updated() {
+    this.State.activity.bookmarked = this.bookmarked;
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.slide-out-enter-from {
+  @apply -translate-y-4 opacity-0;
+}
+.slide-out-enter-to,
+.slide-out-leave-from {
+  @apply opacity-100;
+}
+
+.slide-out-leave-to {
+  @apply opacity-0;
+}
+.slide-out-move,
+.slide-out-enter-active,
+.slide-out-leave-active {
+  @apply transition duration-500;
+}
+.slide-in-enter-from {
+  @apply translate-y-2 opacity-0;
+}
+.slide-in-enter-to {
+  @apply opacity-100;
+}
+
+.slide-in-leave-to {
+  @apply opacity-0;
+}
+.slide-in-move,
+.slide-in-enter-active,
+.slide-in-leave-active {
+  @apply transition duration-500;
+}
+</style>
