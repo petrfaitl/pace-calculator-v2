@@ -39,7 +39,7 @@
           <router-link
             :to="{ name: 'ResultsView' }"
             @click="bookmarkToActivity(bookmark)"
-            class="flex flex-1 p-4 gap-8 justify-between"
+            class="flex flex-1 p-4 gap-4 md:gap-8 justify-between"
           >
             <HeaderField
               id="distance"
