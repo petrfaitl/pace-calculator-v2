@@ -179,5 +179,8 @@ export default {
       }
     });
   },
+  mounted() {
+    this.State.loadBookmarks();
+  },
 };
 </script>

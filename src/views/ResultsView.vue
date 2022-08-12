@@ -168,7 +168,6 @@ export default {
       this.State.activity.pace = this.pace;
       this.State.activity.speed = this.speed;
     } catch (e) {
-      console.log(e);
       !this.time ? this.$router.replace("/") : "";
     }
   },
@@ -179,6 +178,7 @@ export default {
 </script>
 
 <style scoped>
+/* Bookmark Icon transition */
 .slide-out-enter-from {
   @apply -translate-y-4 opacity-0;
 }
@@ -195,6 +195,8 @@ export default {
 .slide-out-leave-active {
   @apply transition duration-500;
 }
+
+/* Unbookmark Icon transition */
 .slide-in-enter-from {
   @apply translate-y-2 opacity-0;
 }
