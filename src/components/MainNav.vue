@@ -1,6 +1,7 @@
 <template>
   <nav
-    class="relative w-full z-10 flex justify-between md:px-4 items-center h-24 border-b border-cyan-500 dark:border-cyan-300 bg-white dark:bg-slate-900/50"
+    class="relative w-full z-20 flex justify-between md:px-4 items-center h-24 border-b border-cyan-500 dark:border-cyan-300 bg-white dark:bg-slate-900/50"
+    @click.self="closeBookmarks"
   >
     <div class="flex items-center">
       <!--      Back button & location title-->
@@ -76,11 +77,7 @@
       </button>
 
       <!-- Icon Bookmarks all -->
-      <button
-        class="nav-btn disabled:opacity-25"
-        @click="toggleBookmarks"
-        @keyup.esc="toggleBookmarks"
-      >
+      <button class="nav-btn disabled:opacity-25" @click="toggleBookmarks">
         <BookmarkAltIcon
           id="bookmark-alt-icon"
           class="h-6 w-6 mx-auto nav-icon"
@@ -109,6 +106,7 @@ import BookmarksView from "@/views/BookmarksView";
 export default {
   name: "MainNav",
   inject: ["State"],
+  expose: ["closeBookmarks"],
   components: {
     SunIcon,
     MoonIcon,
@@ -144,6 +142,9 @@ export default {
     },
     toggleBookmarks() {
       this.bookmarksVisible = !this.bookmarksVisible;
+    },
+    closeBookmarks() {
+      this.bookmarksVisible = false;
     },
   },
   mounted() {

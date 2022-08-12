@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
     <div
-      class="absolute border border-cyan-600/50 border-t-0 z-40 right-0 h-fit w-full sm:w-2/3 md:w-3/5 lg:w-2/5 xl:w-1/3 bg-slate-50 dark:bg-cyan-900 shadow-xl"
+      class="absolute border border-cyan-600/50 border-t-0 z-10 right-0 h-fit w-full sm:w-2/3 md:w-3/5 lg:w-2/5 xl:w-1/3 bg-slate-50 dark:bg-cyan-900 shadow-xl"
     >
       <!--      <ul class="relative">-->
       <TransitionGroup name="bookmarks" tag="ul" class="relative" mode="out-in">
@@ -111,6 +111,7 @@ export default {
     },
   },
   mounted() {
+    // Add bookmarks from store
     watchEffect(() => {
       this.bookmarksArray = this.State.bookmarks;
     });

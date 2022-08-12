@@ -1,8 +1,9 @@
 <template>
-  <MainNav />
+  <MainNav ref="nav" />
 
   <main
     class="flex flex-col md:flex-row justify-around container xl:w-9/12 mx-auto lg:gap-8"
+    @click.self="closeBookmarks"
   >
     <router-view v-slot="{ Component }">
       <transition name="fade" mode="out-in" appear>
@@ -23,6 +24,11 @@ export default {
   components: { MainNav },
   data() {
     return {};
+  },
+  methods: {
+    closeBookmarks() {
+      this.$refs.nav.closeBookmarks();
+    },
   },
 };
 </script>
