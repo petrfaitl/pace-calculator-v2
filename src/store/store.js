@@ -57,7 +57,10 @@ export const state = reactive({
     return false;
   },
   loadBookmarks() {
-    if (this.bookmarks.length === 0) {
+    if (
+      this.bookmarks.length === 0 &&
+      localStorage.getItem("bookmarks") !== null
+    ) {
       this.bookmarks = JSON.parse(localStorage.getItem("bookmarks"));
     }
   },
