@@ -36,7 +36,7 @@
         name="slide-left"
         appear
       >
-        <div>Pace Calculator</div>
+        <div>Pace Converter</div>
       </Transition>
     </div>
     <div class="flex justify-around items-center md:gap-2">
