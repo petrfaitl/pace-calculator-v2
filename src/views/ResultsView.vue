@@ -37,8 +37,8 @@
       <HeaderField
         id="distance"
         label="Distance"
-        :msg="this.distance"
-        :units="`${this.pluralStr(this.distance, this.distanceUnits)}`"
+        :msg="this.displayDistance"
+        :units="`${this.pluralStr(this.displayDistance, this.distanceUnits)}`"
         class="border-r border-cyan-500 dark:border-cyan-300"
       />
       <HeaderField
@@ -113,13 +113,35 @@ export default {
         speed: `${this.speed}${this.distanceUnits}/h`,
       };
     },
+    correctedDistance() {
+      return !this.customDistance && this.distance === "1.609"
+        ? this.distance / this.convertFactor
+        : this.distance;
+    },
+    displayDistance() {
+      if (this.customDistance && this.distanceUnits === "mile") {
+        return this.distance;
+      }
+      return (this.distance / this.convertFactor).toFixed(2);
+    },
     movingTime() {
       return CalculateService.getMovingTime(this.time);
     },
     pace() {
+      if (!this.customDistance && this.distance === "1.609") {
+        return CalculateService.getPace(
+          this.time,
+          this.distance / this.convertFactor
+        );
+      }
       return CalculateService.getPace(this.time, this.distance);
     },
     speed() {
+      if (!this.customDistance && this.distance === "1.609")
+        return CalculateService.getSpeed(
+          this.time,
+          this.distance / this.convertFactor
+        );
       return CalculateService.getSpeed(this.time, this.distance);
     },
     results() {
@@ -129,7 +151,7 @@ export default {
           value: dist.value,
           pace: CalculateService.distanceTimeCalc(
             this.time,
-            this.distance,
+            this.correctedDistance,
             dist.value,
             this.convertFactor
           ),

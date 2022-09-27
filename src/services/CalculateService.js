@@ -33,9 +33,10 @@ export default {
 
     return str;
   },
+  // eslint-disable-next-line no-unused-vars
   distanceTimeCalc(time, enteredDistance, newDistance, convertFactor) {
     return this.getHumanTime(
-      getPaceInMilli(time, enteredDistance / convertFactor) * newDistance
+      getPaceInMilli(time, enteredDistance * convertFactor) * newDistance
     );
   },
 };

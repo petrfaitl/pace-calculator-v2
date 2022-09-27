@@ -75,6 +75,7 @@ export default {
       movingTime: "00:00:00",
       selectedDistance: "",
       units: 1,
+      convertFactor: 1,
       customDistance: false,
       unitOptions: [
         { label: "kms", value: 1 },
@@ -133,9 +134,9 @@ export default {
         id: this.getId(),
         time: this.movingTime,
         distance: this.selectedDistance,
-        convertFactor: this.units,
-        distanceUnits: this.units === 1 ? "km" : "mile",
+        distanceUnits: this.convertFactor === 1 ? "km" : "mile",
         customDistance: this.customDistance,
+        convertFactor: this.convertFactor,
       };
     },
     distanceOptions() {
@@ -148,6 +149,14 @@ export default {
     },
   },
   methods: {
+    updateConvertFactor() {
+      if (this.customDistance) {
+        return (this.convertFactor = this.units);
+      }
+      return this.selectedDistance === "1.609"
+        ? (this.convertFactor = 1.609)
+        : (this.convertFactor = 1);
+    },
     getId() {
       return Date.now();
     },
@@ -161,6 +170,7 @@ export default {
       this.selectedDistance = activity.distance;
       this.units = activity.convertFactor;
       this.customDistance = activity.customDistance;
+      this.convertFactor = activity.convertFactor;
     },
     init() {
       this.movingTime = "00:00:00";
@@ -168,6 +178,9 @@ export default {
       this.units = 1;
       this.customDistance = false;
     },
+  },
+  updated() {
+    this.updateConvertFactor();
   },
   created() {
     this.State.distances = this.distanceOptions;
