@@ -5,49 +5,56 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint --fix"
   },
   "dependencies": {
-    "@heroicons/vue": "^1.0.6",
-    "autoprefixer": "^10",
-    "core-js": "^3.8.3",
-    "postcss": "^8",
+    "@heroicons/vue": "^2.0.11",
+    "autoprefixer": "^10.4.12",
+    "core-js": "^3.25.3",
+    "pinia": "^2.0.22",
+    "postcss": "^8.4.17",
     "register-service-worker": "^1.7.2",
-    "tailwindcss": "^3",
-    "vue": "^3.2.13",
-    "vue-router": "^4.0.3",
-    "vuex": "^4.0.0"
+    "tailwindcss": "^3.1.8",
+    "vue": "^3.2.40",
+    "vue-router": "^4.1.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.16",
-    "@babel/eslint-parser": "^7.12.16",
+    "@babel/core": "^7.19.3",
+    "@babel/eslint-parser": "^7.19.1",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-pwa": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",
-    "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
-    "eslint": "^7.32.0",
+    "eslint": "^8.24.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-vue": "^8.0.3",
+    "eslint-plugin-vue": "^9.5.1",
+    "vue-eslint-parser": "^9.1.0",
     "prettier": "^2.4.1",
+    "vue-cli-plugin-pinia": "^0.1.5",
     "vue-cli-plugin-tailwind": "~3.0.0"
   },
   "eslintConfig": {
     "root": true,
     "env": {
-      "node": true
+      "node": true,
+      "vue/setup-compiler-macros": true
     },
     "extends": [
-      "plugin:vue/vue3-essential",
+      "plugin:vue/essential",
       "eslint:recommended",
       "plugin:prettier/recommended"
     ],
     "parserOptions": {
       "parser": "@babel/eslint-parser"
     },
-    "rules": {}
+    "rules": {
+      "vue/no-v-model-argument" : 0,
+      "vue/no-multiple-template-root": 0,
+      "vue/no-v-for-template-key": 0
+
+    }
   },
   "browserslist": [
     "> 1%",

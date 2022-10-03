@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import LayoutView from "../views/LayoutView.vue";
 import CalculateView from "@/views/CalculateView";
 import ResultsView from "@/views/ResultsView";
+import { useActivityStore } from "@/store/store";
 
 const routes = [
   {
@@ -18,6 +19,15 @@ const routes = [
         path: "results",
         name: "ResultsView",
         component: ResultsView,
+        beforeEnter: () => {
+          const store = useActivityStore();
+          if (!store.distanceVal) {
+            return { name: "CalculateView" };
+          }
+          store.activity.id = Date.now();
+          store.activity.bookmarked = false;
+          return true;
+        },
       },
     ],
   },

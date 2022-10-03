@@ -41,40 +41,21 @@
     </component>
   </div>
 </template>
+<script setup>
+import { ClockIcon, BackspaceIcon } from "@heroicons/vue/24/outline";
+import { ref } from "vue";
+
+defineProps(["label", "modelValue", "iconClasses"]);
+
+const msg = ref("");
+</script>
 
 <script>
-import { ClockIcon, BackspaceIcon } from "@heroicons/vue/outline";
+// import { ClockIcon, BackspaceIcon } from "@heroicons/vue/24/outline";
 
 export default {
   name: "TimeInput",
-  components: { ClockIcon, BackspaceIcon },
   inheritAttrs: false,
-  props: {
-    label: {
-      type: String,
-      default: "",
-    },
-    modelValue: {
-      type: [Date, String, Number],
-      default: "",
-    },
-    iconClasses: {
-      type: String,
-      default: "",
-    },
-  },
-  data() {
-    return {
-      msg: "",
-      valid: false,
-    };
-  },
-  methods: {
-    clear() {
-      this.$refs.input.value = "";
-      this.$refs.input.focus();
-    },
-  },
 };
 </script>
 

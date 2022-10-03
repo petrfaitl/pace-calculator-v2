@@ -3,7 +3,7 @@
     <input
       v-bind="$attrs"
       type="radio"
-      :checked="modelValue === parseFloat(value)"
+      :checked="modelValue === value"
       :value="value"
       @change="$emit('update:modelValue', value)"
       class="hidden peer"
@@ -16,26 +16,18 @@
   </div>
 </template>
 
+<script setup>
+import { toRefs } from "vue";
+
+const props = defineProps(["label", "modelValue", "value", "iconClasses"]);
+
+const { modelValue } = toRefs(props);
+</script>
+
 <script>
 export default {
   name: "RadioButton",
   inheritAttrs: false,
-
-  props: {
-    label: {
-      type: String,
-      default: "",
-    },
-    modelValue: {
-      type: [Number],
-    },
-    value: { type: [String, Number], required: true },
-    iconClasses: {
-      type: String,
-      default: "",
-    },
-  },
-  methods: {},
 };
 </script>
 

@@ -31,7 +31,7 @@
           <button
             class="mx-4"
             :data-bookmark-id="bookmark.id"
-            @click="unbookmarkItem(bookmark.id)"
+            @click="store.removeBookmarkItem(bookmark.id)"
           >
             <BookmarkIcon
               id="bookmark-icon"
@@ -50,17 +50,30 @@
             <HeaderField
               id="distance"
               label="Distance"
-              :msg="bookmark.distance"
-              :units="bookmark.distanceUnits"
+              :msg="bookmark.distanceVal"
+              :units="`${CalculateService.pluralStr(
+                bookmark.distanceVal,
+                bookmark.distanceUnits
+              )}`"
             />
             <HeaderField
               id="moving-time"
               label="Time"
-              :msg="this.getMovingTime(bookmark.time)"
+              :msg="bookmark.time"
               class=""
             />
-            <HeaderField id="pace" label="Pace" :msg="bookmark.pace" />
-            <HeaderField id="speed" label="Speed" :msg="bookmark.speed" />
+            <HeaderField
+              id="pace"
+              label="Pace"
+              :msg="bookmark.pace"
+              :units="`${bookmark.distanceUnits}/h`"
+            />
+            <HeaderField
+              id="speed"
+              label="Speed"
+              :msg="bookmark.speed"
+              :units="`${bookmark.distanceUnits}/h`"
+            />
             <!--            <div class="flex-auto w-8"></div>-->
           </router-link>
           <!--          <button-->
@@ -75,48 +88,24 @@
   </transition>
 </template>
 
-<script>
-import { watchEffect } from "vue";
+<script setup>
 import HeaderField from "@/components/results/HeaderField";
-import { BookmarkIcon } from "@heroicons/vue/solid";
+import { BookmarkIcon } from "@heroicons/vue/24/solid";
+import { useActivityStore } from "@/store/store";
 import CalculateService from "@/services/CalculateService";
+// eslint-disable-next-line no-unused-vars
+import { storeToRefs } from "pinia";
 
-export default {
-  name: "BookmarksView",
-  inject: ["State"],
-  props: ["bookmarksVisible"],
-  components: { HeaderField, BookmarkIcon },
-  data() {
-    return {
-      bookmarksArray: [],
-    };
-  },
-  computed: {
-    bookmarks() {
-      return this.bookmarksArray;
-    },
-  },
-  methods: {
-    bookmarkToActivity(bookmark) {
-      this.State.activity = bookmark;
-      if (this.bookmarksVisible) {
-        this.$emit("bookmarkClicked", true);
-      }
-    },
-    getMovingTime(time) {
-      return CalculateService.getMovingTime(time);
-    },
-    unbookmarkItem(id) {
-      this.State.toggleBookmarkItem({ id });
-    },
-  },
-  mounted() {
-    // Add bookmarks from store
-    watchEffect(() => {
-      this.bookmarksArray = this.State.bookmarks;
-    });
-  },
-};
+const store = useActivityStore();
+const { activity, bookmarks } = storeToRefs(store);
+
+defineProps(["bookmarksVisible"]);
+const emit = defineEmits(["bookmarkClicked"]);
+
+function bookmarkToActivity(bookmark) {
+  activity.value = bookmark;
+  emit("bookmarkClicked");
+}
 </script>
 
 <style scoped>

@@ -7,6 +7,7 @@
   </button>
 </template>
 <script>
+//TODO update to setup
 export default {
   name: "BasicButton",
   props: {

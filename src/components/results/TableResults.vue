@@ -42,6 +42,7 @@
 </template>
 
 <script>
+//TODO update to setup
 export default {
   name: "TableResults",
   props: {

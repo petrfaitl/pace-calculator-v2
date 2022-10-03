@@ -3,7 +3,7 @@
 
   <main
     class="flex flex-col md:flex-row justify-around container xl:w-9/12 mx-auto lg:gap-8"
-    @click.self="closeBookmarks"
+    @click.self="close()"
   >
     <router-view v-slot="{ Component }">
       <transition name="fade" mode="out-in" appear>
@@ -14,22 +14,14 @@
     <!--    <router-view />-->
   </main>
 </template>
-
-<script>
-// @ is an alias to /src
+<script setup>
 import MainNav from "@/components/MainNav";
+import { ref } from "vue";
 
-export default {
-  name: "LayoutView",
-  components: { MainNav },
-  data() {
-    return {};
-  },
-  methods: {
-    closeBookmarks() {
-      this.$refs.nav.closeBookmarks();
-    },
-  },
+const nav = ref(null);
+
+const close = () => {
+  nav.value.closeBookmarks();
 };
 </script>
 

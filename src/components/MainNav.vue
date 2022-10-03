@@ -1,7 +1,7 @@
 <template>
   <nav
     class="relative w-full z-20 flex justify-between md:px-4 items-center h-24 border-b border-cyan-500 dark:border-cyan-300 bg-white dark:bg-slate-900/50"
-    @click.self="closeBookmarks"
+    @click.self="closeBookmarks()"
   >
     <div class="flex items-center">
       <!--      Back button & location title-->
@@ -65,8 +65,8 @@
       </button>
 
       <!--      Reset Calculations-->
-      <button class="nav-btn group" @click="reset">
-        <RefreshIcon
+      <button class="nav-btn group" @click="reset()">
+        <ArrowPathIcon
           id="bookmark-alt-icon"
           class="h-6 w-6 mx-auto group-active:animate-spin nav-icon"
           fill="none"
@@ -77,8 +77,11 @@
       </button>
 
       <!-- Icon Bookmarks all -->
-      <button class="nav-btn disabled:opacity-25" @click="toggleBookmarks">
-        <BookmarkAltIcon
+      <button
+        class="nav-btn disabled:opacity-25"
+        @click="toggleBookmarksVisible()"
+      >
+        <BookmarkSquareIcon
           id="bookmark-alt-icon"
           class="h-6 w-6 mx-auto nav-icon"
           fill="none"
@@ -92,83 +95,86 @@
   <BookmarksView
     v-show="bookmarksVisible"
     :bookmarksVisible="bookmarksVisible"
-    @bookmarkClicked="toggleBookmarks"
+    @bookmarkClicked="toggleBookmarksVisible"
   />
 </template>
 
-<script>
-import { SunIcon } from "@heroicons/vue/outline";
-import { MoonIcon } from "@heroicons/vue/outline";
-import { BookmarkAltIcon } from "@heroicons/vue/outline";
-import { ChevronLeftIcon } from "@heroicons/vue/outline";
-import { RefreshIcon } from "@heroicons/vue/outline";
+<script setup>
+/* eslint-disable */
+import { useActivityStore } from "@/store/store";
+import { onBeforeMount, onMounted, ref } from "vue";
+import { SunIcon } from "@heroicons/vue/24/outline";
+import { MoonIcon } from "@heroicons/vue/24/outline";
+import { BookmarkSquareIcon } from "@heroicons/vue/24/outline";
+import { ChevronLeftIcon } from "@heroicons/vue/24/outline";
+import { ArrowPathIcon } from "@heroicons/vue/24/outline";
 import BookmarksView from "@/views/BookmarksView";
-export default {
-  name: "MainNav",
-  inject: ["State"],
-  expose: ["closeBookmarks"],
-  components: {
-    SunIcon,
-    MoonIcon,
-    BookmarkAltIcon,
 
-    ChevronLeftIcon,
-    RefreshIcon,
-    BookmarksView,
-  },
-  data() {
-    return {
-      darkMode: "light",
-      bookmarksVisible: false,
-    };
-  },
-  methods: {
-    toggleDarkMode: function () {
-      this.darkMode = this.darkMode === "light" ? "dark" : "light";
-      this.setTheme(this.darkMode);
-    },
-    setTheme(mode = "light") {
-      if (!mode || mode === "dark") {
-        document.documentElement.classList.add("dark");
-        this.darkMode = "dark";
-      } else {
-        document.documentElement.classList.remove("dark");
-        this.darkMode = "light";
-      }
-    },
-    reset() {
-      this.State.activity = {};
-      this.bookmarksVisible = false;
-    },
-    toggleBookmarks() {
-      this.bookmarksVisible = !this.bookmarksVisible;
-    },
-    closeBookmarks() {
-      this.bookmarksVisible = false;
-    },
-  },
-  mounted() {
-    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      this.setTheme("dark");
-      this.darkMode = "dark";
-    } else {
-      this.setTheme();
-    }
+// eslint-disable-next-line no-unused-vars
+const store = useActivityStore();
 
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener(
-      "change",
-      function (evt) {
-        if (!evt.matches) {
-          this.setTheme();
-        } else {
-          this.setTheme("dark");
-        }
-      }.bind(this)
-    );
-  },
+defineExpose({ closeBookmarks });
+
+const darkMode = ref("light");
+const bookmarksVisible = ref(false);
+
+const toggleDarkMode = () => {
+
+  darkMode.value = darkMode.value === "light" ? "dark" : "light";
+
+  setTheme(darkMode.value);
 };
+
+const setTheme = (mode = "light") => {
+  if (!mode || mode === "dark") {
+    document.documentElement.classList.add("dark");
+    darkMode.value = "dark";
+  } else {
+    document.documentElement.classList.remove("dark");
+    darkMode.value = "light";
+  }
+};
+
+const reset = () => {
+  store.initActivity();
+  bookmarksVisible.value = false;
+};
+
+const toggleBookmarksVisible = () => {
+  bookmarksVisible.value = !bookmarksVisible.value;
+};
+
+function closeBookmarks()  {
+  bookmarksVisible.value = false;
+}
+
+
+onBeforeMount(() => {
+  store.loadBookmarks();
+});
+
+onMounted(() => {
+  // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    setTheme("dark");
+    darkMode.value = "dark";
+  } else {
+    setTheme();
+  }
+
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener(
+    "change",
+    function (evt) {
+      if (!evt.matches) {
+        setTheme();
+      } else {
+        setTheme("dark");
+      }
+    }.bind(this)
+  );
+});
 </script>
+
 
 <style>
 .nav-btn {

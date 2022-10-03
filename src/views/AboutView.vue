@@ -8,3 +8,6 @@
     >
   </div>
 </template>
+<script setup>
+//TODO update content
+</script>
