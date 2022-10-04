@@ -34,7 +34,7 @@
       v-if="activity.id"
       class="grid grid-cols-4 pb-2 border-b-0 border-cyan-500 dark:border-cyan-300 text-slate-700 dark:text-slate-400 select-none"
     >
-      <Transition name="flash-color">
+      <Transition name="flash-color" appear>
         <HeaderField
           id="distance"
           label="Distance"
@@ -46,7 +46,7 @@
           :msg="distanceVal"
           class="border-r border-cyan-500 dark:border-cyan-300"
       /></Transition>
-      <Transition name="flash-color">
+      <Transition name="flash-color" appear>
         <HeaderField
           id="moving-time"
           label="Time"
@@ -55,7 +55,7 @@
           class="border-r border-cyan-500 dark:border-cyan-300"
         />
       </Transition>
-      <Transition name="flash-color">
+      <Transition name="flash-color" appear>
         <HeaderField
           id="pace"
           label="Pace"
@@ -64,7 +64,7 @@
           :msg="getPace"
           class="border-r border-cyan-500 dark:border-cyan-300"
       /></Transition>
-      <Transition name="flash-color">
+      <Transition name="flash-color" appear>
         <HeaderField
           id="speed"
           label="Speed"

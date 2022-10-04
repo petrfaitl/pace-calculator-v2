@@ -8,7 +8,7 @@
         <li
           v-if="bookmarks.length === 0"
           class="flex justify-center p-8"
-          key="0"
+          :key="0"
         >
           <BookmarkIcon
             id="bookmark-icon"
@@ -103,7 +103,7 @@ defineProps(["bookmarksVisible"]);
 const emit = defineEmits(["bookmarkClicked"]);
 
 function bookmarkToActivity(bookmark) {
-  activity.value = bookmark;
+  activity.value = { ...bookmark };
   emit("bookmarkClicked");
 }
 </script>

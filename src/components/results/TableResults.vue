@@ -23,7 +23,7 @@
             >
               {{ result.name }}
             </th>
-            <Transition name="flash-color-2">
+            <Transition name="flash-color-2" appear>
               <td class="py-4 px-6 text-right" :key="result.pace">
                 {{ result.pace }}
               </td>

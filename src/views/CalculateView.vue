@@ -67,7 +67,7 @@ import { useActivityStore } from "@/store/store";
 import { storeToRefs } from "pinia";
 
 import router from "@/router";
-import { onUpdated, ref } from "vue";
+import { onMounted, onUpdated, ref } from "vue";
 
 const store = useActivityStore();
 
@@ -80,6 +80,13 @@ const processForm = () => {
 };
 const validInputs = ref(false);
 onUpdated(() => {
-  validInputs.value = store.movingTimeMs && store.distanceVal ? true : false;
+  validInputs.value = validateInputs();
 });
+onMounted(() => {
+  validInputs.value = validateInputs();
+});
+
+const validateInputs = () => {
+  return store.movingTimeMs && store.distanceVal ? true : false;
+};
 </script>
