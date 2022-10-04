@@ -128,11 +128,17 @@ export const useActivityStore = defineStore("activityStore", {
     saveBookmarks() {
       localStorage.setItem("bookmarks", JSON.stringify(this.bookmarks));
     },
+    itemInBookmarks(id) {
+      return this.itemBookmarkIndex(id) === -1 ? false : true;
+    },
+    itemBookmarkIndex(id) {
+      return this.bookmarks.findIndex((el) => {
+        return el.id === id;
+      });
+    },
     toggleBookmarkItem() {
       this.activity.bookmarked = !this.activity.bookmarked;
-      const itemIndex = this.bookmarks.findIndex((el) => {
-        return el.id === this.activity.id;
-      });
+      const itemIndex = this.itemBookmarkIndex(this.activity.id);
       if (itemIndex !== -1) {
         this.bookmarks.splice(itemIndex, 1);
       } else {

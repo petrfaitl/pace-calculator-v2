@@ -34,35 +34,44 @@
       v-if="activity.id"
       class="grid grid-cols-4 pb-2 border-b-0 border-cyan-500 dark:border-cyan-300 text-slate-700 dark:text-slate-400 select-none"
     >
-      <HeaderField
-        id="distance"
-        label="Distance"
-        :msg="distanceVal"
-        :units="`${CalculateService.pluralStr(
-          distanceVal,
-          activity.distanceUnits
-        )}`"
-        class="border-r border-cyan-500 dark:border-cyan-300"
-      />
-      <HeaderField
-        id="moving-time"
-        label="Time"
-        :msg="getMovingTime"
-        class="border-r border-cyan-500 dark:border-cyan-300"
-      />
-      <HeaderField
-        id="pace"
-        label="Pace"
-        :msg="getPace"
-        :units="`/${activity.distanceUnits}`"
-        class="border-r border-cyan-500 dark:border-cyan-300"
-      />
-      <HeaderField
-        id="speed"
-        label="Speed"
-        :msg="getSpeed"
-        :units="`${activity.distanceUnits}/h`"
-      />
+      <Transition name="flash-color">
+        <HeaderField
+          id="distance"
+          label="Distance"
+          :key="distanceVal"
+          :units="`${CalculateService.pluralStr(
+            distanceVal,
+            activity.distanceUnits
+          )}`"
+          :msg="distanceVal"
+          class="border-r border-cyan-500 dark:border-cyan-300"
+      /></Transition>
+      <Transition name="flash-color">
+        <HeaderField
+          id="moving-time"
+          label="Time"
+          :key="getMovingTime"
+          :msg="getMovingTime"
+          class="border-r border-cyan-500 dark:border-cyan-300"
+        />
+      </Transition>
+      <Transition name="flash-color">
+        <HeaderField
+          id="pace"
+          label="Pace"
+          :key="getPace"
+          :units="`/${activity.distanceUnits}`"
+          :msg="getPace"
+          class="border-r border-cyan-500 dark:border-cyan-300"
+      /></Transition>
+      <Transition name="flash-color">
+        <HeaderField
+          id="speed"
+          label="Speed"
+          :key="getSpeed"
+          :msg="getSpeed"
+          :units="`${activity.distanceUnits}/h`"
+      /></Transition>
     </div>
     <div class="">
       <TableResults
@@ -128,5 +137,15 @@ function toggleBookmark() {
 .slide-in-enter-active,
 .slide-in-leave-active {
   @apply transition duration-500;
+}
+
+.flash-color-enter-from {
+  @apply dark:text-slate-200 text-slate-700;
+}
+.flash-color-enter-active {
+  @apply transition-colors text-cyan-500 dark:text-cyan-500 duration-1000;
+}
+.flash-color-enter-to {
+  @apply dark:text-slate-200 text-slate-700;
 }
 </style>

@@ -1,31 +1,41 @@
 import { createRouter, createWebHistory } from "vue-router";
-import LayoutView from "../views/LayoutView.vue";
-import CalculateView from "@/views/CalculateView";
-import ResultsView from "@/views/ResultsView";
+// import LayoutView from "../views/LayoutView.vue";
+// import CalculateView from "@/views/CalculateView";
+// import ResultsView from "@/views/ResultsView";
 import { useActivityStore } from "@/store/store";
 
 const routes = [
   {
     path: "/",
     name: "LayoutView",
-    component: LayoutView,
+    component: () =>
+      import(/* webpackChunkName: "layout" */ "../views/LayoutView.vue"),
     children: [
       {
         path: "",
         name: "CalculateView",
-        component: CalculateView,
+        component: () =>
+          import(
+            /* webpackChunkName: "calculate" */ "../views/CalculateView.vue"
+          ),
+        beforeEnter: () => {
+          const store = useActivityStore();
+          store.activity.id = Date.now();
+        },
       },
       {
         path: "results",
         name: "ResultsView",
-        component: ResultsView,
+        component: () =>
+          import(/* webpackChunkName: "results" */ "../views/ResultsView.vue"),
         beforeEnter: () => {
           const store = useActivityStore();
           if (!store.distanceVal) {
             return { name: "CalculateView" };
           }
-          store.activity.id = Date.now();
-          store.activity.bookmarked = false;
+          store.activity.bookmarked = store.itemInBookmarks(store.activity.id);
+          // store.bookmarks.forEach((el) => console.log("bookmark id", el.id));
+
           return true;
         },
       },

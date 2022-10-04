@@ -15,7 +15,7 @@
         <div>
           <button
             class="nav-icon md:mr-2 text-sm flex items-center"
-            @click="this.$router.push({ name: 'CalculateView' })"
+            @click="router.push({ name: 'CalculateView' })"
           >
             <ChevronLeftIcon
               id="bookmark-alt-icon"
@@ -109,6 +109,7 @@ import { BookmarkSquareIcon } from "@heroicons/vue/24/outline";
 import { ChevronLeftIcon } from "@heroicons/vue/24/outline";
 import { ArrowPathIcon } from "@heroicons/vue/24/outline";
 import BookmarksView from "@/views/BookmarksView";
+import router from "@/router";
 
 // eslint-disable-next-line no-unused-vars
 const store = useActivityStore();
@@ -138,6 +139,8 @@ const setTheme = (mode = "light") => {
 const reset = () => {
   store.initActivity();
   bookmarksVisible.value = false;
+  router.replace({ name: "CalculateView"});
+
 };
 
 const toggleBookmarksVisible = () => {

@@ -23,13 +23,15 @@
     >
   </div>
 </template>
+<script setup>
+defineProps(["label", "id", "modelValue", "name"]);
+</script>
 
 <script>
-//TODO update to setup
-export default {
-  name: "ToggleInput",
-  props: ["label", "id", "modelValue", "name"],
-};
+// export default {
+//   name: "ToggleInput",
+//   // props: ["label", "id", "modelValue", "name"],
+// };
 </script>
 
 <style scoped>

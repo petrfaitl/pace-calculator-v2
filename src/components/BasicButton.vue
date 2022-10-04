@@ -6,12 +6,15 @@
     {{ msg }}
   </button>
 </template>
-<script>
-//TODO update to setup
-export default {
-  name: "BasicButton",
-  props: {
-    msg: { type: String, default: "" },
-  },
-};
+<script setup>
+defineProps(["msg"]);
 </script>
+
+<!--<script>-->
+<!--export default {-->
+<!--  name: "BasicButton",-->
+<!--  props: {-->
+<!--    msg: { type: String, default: "" },-->
+<!--  },-->
+<!--};-->
+<!--</script>-->

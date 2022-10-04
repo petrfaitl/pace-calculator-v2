@@ -23,10 +23,11 @@
             >
               {{ result.name }}
             </th>
-
-            <td class="py-4 px-6 dark:text-slate-200 text-slate-700 text-right">
-              {{ result.pace }}
-            </td>
+            <Transition name="flash-color-2">
+              <td class="py-4 px-6 text-right" :key="result.pace">
+                {{ result.pace }}
+              </td>
+            </Transition>
             <td class="py-4 px-6 text-right hidden">
               <a
                 href="#"
@@ -40,15 +41,18 @@
     </table>
   </div>
 </template>
-
-<script>
-//TODO update to setup
-export default {
-  name: "TableResults",
-  props: {
-    results: {
-      type: Array,
-    },
-  },
-};
+<script setup>
+defineProps(["results"]);
 </script>
+
+<style scoped>
+.flash-color-2-enter-from {
+  @apply dark:text-slate-200 text-slate-700;
+}
+.flash-color-2-enter-active {
+  @apply transition-colors text-cyan-500 dark:text-cyan-500 duration-1000;
+}
+.flash-color-2-enter-to {
+  @apply dark:text-slate-200 text-slate-700;
+}
+</style>
