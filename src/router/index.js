@@ -5,10 +5,12 @@ const routes = [
   {
     path: "/",
     name: "LayoutView",
+    component: () => import("@/views/LayoutView.vue"),
     children: [
       {
         path: "",
         name: "CalculateView",
+        component: () => import("@/views/CalculateView.vue"),
         beforeEnter: () => {
           const store = useActivityStore();
           store.activity.id = Date.now();
@@ -17,6 +19,7 @@ const routes = [
       {
         path: "results",
         name: "ResultsView",
+        component: () => import("@/views/ResultsView.vue"),
         beforeEnter: () => {
           const store = useActivityStore();
           if (!store.distanceVal) {
@@ -33,6 +36,7 @@ const routes = [
   {
     path: "/about",
     name: "about",
+    component: () => import("@/views/AboutView.vue"),
   },
   {
     path: "/:catchAll(.*)",
