@@ -86,8 +86,8 @@
 </template>
 
 <script setup>
-import HeaderField from "@/components/results/HeaderField";
-import TableResults from "@/components/results/TableResults";
+import HeaderField from "@/components/results/HeaderField.vue";
+import TableResults from "@/components/results/TableResults.vue";
 import { BookmarkIcon } from "@heroicons/vue/24/outline";
 import { BookmarkIcon as BookmarkIconFilled } from "@heroicons/vue/24/solid";
 import { useActivityStore } from "@/store/store";

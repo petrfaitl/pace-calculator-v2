@@ -58,11 +58,11 @@
 <script setup>
 /* eslint-disable no-unused-vars */
 
-import BaseInput from "@/components/form/BaseInput";
-import SelectInput from "@/components/form/SelectInput";
-import ToggleInput from "@/components/form/ToggleInput";
-import BaseRadioGroup from "@/components/form/BaseRadioGroup";
-import BasicButton from "@/components/BasicButton";
+import BaseInput from "@/components/form/BaseInput.vue";
+import SelectInput from "@/components/form/SelectInput.vue";
+import ToggleInput from "@/components/form/ToggleInput.vue";
+import BaseRadioGroup from "@/components/form/BaseRadioGroup.vue";
+import BasicButton from "@/components/BasicButton.vue";
 import { useActivityStore } from "@/store/store";
 import { storeToRefs } from "pinia";
 

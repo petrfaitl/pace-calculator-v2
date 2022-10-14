@@ -108,7 +108,7 @@ import { MoonIcon } from "@heroicons/vue/24/outline";
 import { BookmarkSquareIcon } from "@heroicons/vue/24/outline";
 import { ChevronLeftIcon } from "@heroicons/vue/24/outline";
 import { ArrowPathIcon } from "@heroicons/vue/24/outline";
-import BookmarksView from "@/views/BookmarksView";
+import BookmarksView from "@/views/BookmarksView.vue";
 import router from "@/router";
 
 // eslint-disable-next-line no-unused-vars

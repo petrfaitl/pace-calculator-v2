@@ -9,12 +9,3 @@
 <script setup>
 defineProps(["msg"]);
 </script>
-
-<!--<script>-->
-<!--export default {-->
-<!--  name: "BasicButton",-->
-<!--  props: {-->
-<!--    msg: { type: String, default: "" },-->
-<!--  },-->
-<!--};-->
-<!--</script>-->

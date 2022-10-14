@@ -89,11 +89,10 @@
 </template>
 
 <script setup>
-import HeaderField from "@/components/results/HeaderField";
+import HeaderField from "@/components/results/HeaderField.vue";
 import { BookmarkIcon } from "@heroicons/vue/24/solid";
 import { useActivityStore } from "@/store/store";
 import CalculateService from "@/services/CalculateService";
-// eslint-disable-next-line no-unused-vars
 import { storeToRefs } from "pinia";
 
 const store = useActivityStore();

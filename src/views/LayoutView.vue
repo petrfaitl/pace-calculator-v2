@@ -15,7 +15,7 @@
   </main>
 </template>
 <script setup>
-import MainNav from "@/components/MainNav";
+import MainNav from "@/components/MainNav.vue";
 import { ref } from "vue";
 
 const nav = ref(null);
