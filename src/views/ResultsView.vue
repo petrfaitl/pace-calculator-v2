@@ -32,7 +32,7 @@
     </div>
     <div
       v-if="activity.id"
-      class="grid grid-cols-4 pb-2 border-b-0 border-cyan-500 dark:border-cyan-300 text-slate-700 dark:text-slate-400 select-none"
+      class="grid grid-cols-4 pb-2 border-b-0 border-cyan-500 dark:border-cyan-300 text-slate-700 dark:text-slate-200 select-none"
     >
       <Transition name="flash-color" appear>
         <HeaderField
