@@ -11,7 +11,7 @@ export default defineConfig({
       includeAssets: [
         "/favicon.ico",
         "/img/icons/apple-touch-icon.png",
-        "/img/icons/safari-pinned-tab.svg",
+        "/img/icons/masked-icon.svg",
       ],
       manifest: {
         name: "Pace Converter",
@@ -28,6 +28,7 @@ export default defineConfig({
             src: "/img/icons/android-chrome-512x512.png",
             sizes: "512x512",
             type: "image/png",
+            purpose: "any maskable",
           },
         ],
       },
