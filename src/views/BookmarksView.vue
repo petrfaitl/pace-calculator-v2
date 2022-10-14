@@ -48,7 +48,6 @@
             class="flex flex-1 p-4 gap-4 md:gap-8 justify-between"
           >
             <HeaderField
-              id="distance"
               label="Distance"
               :msg="bookmark.distanceVal"
               :units="`${CalculateService.pluralStr(
@@ -56,20 +55,13 @@
                 bookmark.distanceUnits
               )}`"
             />
+            <HeaderField label="Time" :msg="bookmark.time" class="" />
             <HeaderField
-              id="moving-time"
-              label="Time"
-              :msg="bookmark.time"
-              class=""
-            />
-            <HeaderField
-              id="pace"
               label="Pace"
               :msg="bookmark.pace"
               :units="`${bookmark.distanceUnits}/h`"
             />
             <HeaderField
-              id="speed"
               label="Speed"
               :msg="bookmark.speed"
               :units="`${bookmark.distanceUnits}/h`"

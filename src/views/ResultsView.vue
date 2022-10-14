@@ -36,7 +36,7 @@
     >
       <Transition name="flash-color" appear>
         <HeaderField
-          id="distance"
+          id="distanceResult"
           label="Distance"
           :key="distanceVal"
           :units="`${CalculateService.pluralStr(
@@ -48,7 +48,7 @@
       /></Transition>
       <Transition name="flash-color" appear>
         <HeaderField
-          id="moving-time"
+          id="movingTimeResult"
           label="Time"
           :key="getMovingTime"
           :msg="getMovingTime"
@@ -57,7 +57,7 @@
       </Transition>
       <Transition name="flash-color" appear>
         <HeaderField
-          id="pace"
+          id="paceResult"
           label="Pace"
           :key="getPace"
           :units="`/${activity.distanceUnits}`"
@@ -66,7 +66,7 @@
       /></Transition>
       <Transition name="flash-color" appear>
         <HeaderField
-          id="speed"
+          id="speedResult"
           label="Speed"
           :key="getSpeed"
           :msg="getSpeed"

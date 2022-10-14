@@ -40,7 +40,12 @@
       </Transition>
     </div>
     <div class="flex justify-around items-center md:gap-2">
-      <button class="nav-btn" id="dark-btn" @click="toggleDarkMode">
+      <button
+        class="nav-btn"
+        id="dark-btn"
+        @click="toggleDarkMode"
+        aria-label="Dark mode switcher"
+      >
         <!-- Icon Sun -->
         <SunIcon
           id="icon-sun"
@@ -65,7 +70,7 @@
       </button>
 
       <!--      Reset Calculations-->
-      <button class="nav-btn group" @click="reset()">
+      <button class="nav-btn group" @click="reset()" aria-label="Reset values">
         <ArrowPathIcon
           id="bookmark-alt-icon"
           class="h-6 w-6 mx-auto group-active:animate-spin nav-icon"
@@ -80,6 +85,7 @@
       <button
         class="nav-btn disabled:opacity-25"
         @click="toggleBookmarksVisible()"
+        aria-label="View bookmarks"
       >
         <BookmarkSquareIcon
           id="bookmark-alt-icon"

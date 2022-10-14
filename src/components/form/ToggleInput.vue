@@ -12,7 +12,6 @@
         class="toggle-checkbox absolute block w-6 h-6 rounded-full shadow-md border-4 border-slate-400 dark:border-slate-300 bg-slate-400 dark:bg-slate-300 appearance-none cursor-pointer transition duration-300 focus:outline-0"
       />
       <label
-        :for="id"
         class="toggle-label block overflow-hidden h-6 rounded-full bg-slate-200 dark:bg-slate-500 cursor-pointer transition duration-300"
       ></label>
     </div>
