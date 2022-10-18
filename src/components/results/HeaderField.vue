@@ -9,7 +9,7 @@
   </div>
 </template>
 <script setup>
-defineProps(["msg", "units", "label", "class"]);
+defineProps(["msg", "units", "label"]);
 </script>
 
 <script>
