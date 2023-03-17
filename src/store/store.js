@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
 import CalculateService from "@/services/CalculateService";
+import { version } from "../../package.json";
 
 // Pinia
 export const useActivityStore = defineStore("activityStore", {
   state: () => {
     return {
-      appVersion: "0.2.0",
+      appVersion: version,
       activity: {
         id: null,
         movingTime: "00:00:00",
