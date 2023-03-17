@@ -5,6 +5,7 @@ import CalculateService from "@/services/CalculateService";
 export const useActivityStore = defineStore("activityStore", {
   state: () => {
     return {
+      appVersion: "0.2.0",
       activity: {
         id: null,
         movingTime: "00:00:00",
@@ -39,6 +40,8 @@ export const useActivityStore = defineStore("activityStore", {
         {
           group: "By Distance",
           options: [
+            { name: "200m", value: 0.2, distanceUnit: "km" },
+            { name: "300m", value: 0.3, distanceUnit: "km" },
             { name: "400m", value: 0.4, distanceUnit: "km" },
             {
               name: "800m",
