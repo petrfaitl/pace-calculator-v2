@@ -28,7 +28,7 @@
       </div>
 
       <input
-        ref="input"
+        ref="baseInput"
         v-bind="$attrs"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
@@ -48,13 +48,17 @@ import { ref } from "vue";
 defineProps(["label", "modelValue", "iconClasses"]);
 
 const msg = ref("");
+const baseInput = ref(null);
+function clear() {
+  baseInput.value.value = "";
+}
 </script>
 
 <script>
 // import { ClockIcon, BackspaceIcon } from "@heroicons/vue/24/outline";
 
 export default {
-  name: "TimeInput",
+  name: "BaseInput",
   inheritAttrs: false,
 };
 </script>
