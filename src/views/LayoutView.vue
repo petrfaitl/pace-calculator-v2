@@ -13,10 +13,12 @@
 
     <!--    <router-view />-->
   </main>
+  <TheFooter />
 </template>
 <script setup>
 import MainNav from "@/components/MainNav.vue";
 import { ref } from "vue";
+import TheFooter from "@/components/TheFooter.vue";
 
 const nav = ref(null);
 
