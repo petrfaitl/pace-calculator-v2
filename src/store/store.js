@@ -69,6 +69,11 @@ export const useActivityStore = defineStore("activityStore", {
               value: 3,
               distanceUnit: "km",
             },
+            {
+              name: "3200m",
+              value: 3.2,
+              distanceUnit: "km",
+            },
             { name: "5k", value: 5, distanceUnit: "km" },
             { name: "6k", value: 6, distanceUnit: "km" },
             {
