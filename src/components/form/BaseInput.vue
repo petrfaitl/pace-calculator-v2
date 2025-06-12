@@ -50,7 +50,7 @@ defineProps(["label", "modelValue", "iconClasses"]);
 const msg = ref("");
 const baseInput = ref(null);
 function clear() {
-  baseInput.value.value = "";
+  baseInput.value.value = "0";
 }
 </script>
 

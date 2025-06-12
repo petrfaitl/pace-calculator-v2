@@ -28,7 +28,7 @@ export const useActivityStore = defineStore("activityStore", {
           hidden: true,
         },
         {
-          group: "ByPace",
+          group: "By Pace",
           options: [
             { name: "min/km", value: 1, distanceUnit: "km" },
             {
