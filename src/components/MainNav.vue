@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="relative w-full z-20 flex justify-between md:px-4 items-center h-24 border-b border-cyan-500 dark:border-cyan-300 bg-white dark:bg-slate-900/50"
+    class="relative w-full z-20 flex justify-around md:px-4 items-center h-24 border-b border-cyan-500 dark:border-cyan-300 bg-white dark:bg-slate-900/50"
     @click.self="closeBookmarks()"
   >
     <div class="flex items-center">
@@ -41,7 +41,7 @@
     </div>
 
     <div class="flex justify-around items-center md:gap-2">
-      <div class="mr-4">
+      <div class="">
         <button
           class="rounded-2xl transition"
           @click="store.toggleActivitySportsMode"
@@ -60,34 +60,6 @@
           >
         </button>
       </div>
-      <button
-        class="nav-btn"
-        id="dark-btn"
-        @click="toggleDarkMode"
-        aria-label="Dark mode switcher"
-      >
-        <!-- Icon Sun -->
-        <SunIcon
-          id="icon-sun"
-          class="h-6 w-6 mx-auto text-amber-500"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-          v-if="darkMode === 'dark'"
-        />
-
-        <!-- icon moon -->
-        <MoonIcon
-          id="icon-moon"
-          class="h-6 w-6 mx-auto nav-icon"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          stroke-width="2"
-          v-else-if="darkMode === 'light'"
-        />
-      </button>
 
       <!--      Reset Calculations-->
       <button class="nav-btn group" @click="reset()" aria-label="Reset values">
@@ -144,9 +116,7 @@
 <script setup>
 /* eslint-disable */
 import { useActivityStore } from "@/store/store";
-import { computed, onBeforeMount, onMounted, ref } from "vue";
-import { SunIcon } from "@heroicons/vue/24/outline";
-import { MoonIcon } from "@heroicons/vue/24/outline";
+import { computed, onBeforeMount, ref } from "vue";
 import { BookmarkSquareIcon } from "@heroicons/vue/24/outline";
 import { ChevronLeftIcon } from "@heroicons/vue/24/outline";
 import { ArrowPathIcon } from "@heroicons/vue/24/outline";
@@ -162,7 +132,6 @@ const route = useRoute();
 
 defineExpose({ closeBookmarks });
 
-const darkMode = ref("light");
 const bookmarksVisible = ref(false);
 const { activity, userPreferences } = storeToRefs(store);
 
@@ -179,22 +148,6 @@ const getActivitySportsMode = computed(() => {
 })
 
 
-const toggleDarkMode = () => {
-
-  darkMode.value = darkMode.value === "light" ? "dark" : "light";
-
-  setTheme(darkMode.value);
-};
-
-const setTheme = (mode = "light") => {
-  if (!mode || mode === "dark") {
-    document.documentElement.classList.add("dark");
-    darkMode.value = "dark";
-  } else {
-    document.documentElement.classList.remove("dark");
-    darkMode.value = "light";
-  }
-};
 
 const reset = () => {
   store.initActivity();
@@ -221,26 +174,6 @@ onBeforeMount(() => {
   store.loadBookmarks();
 });
 
-onMounted(() => {
-  // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    setTheme("dark");
-    darkMode.value = "dark";
-  } else {
-    setTheme();
-  }
-
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener(
-    "change",
-    function (evt) {
-      if (!evt.matches) {
-        setTheme();
-      } else {
-        setTheme("dark");
-      }
-    }.bind(this)
-  );
-});
 </script>
 
 

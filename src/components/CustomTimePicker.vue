@@ -7,38 +7,41 @@
       {{ label }}
     </label>
     <div class="flex items-center gap-2">
+      <!-- Hours Input -->
       <input
         ref="inputHours"
-        :value="time.hours"
+        v-model="time.hours"
         type="number"
         :id="id"
         placeholder="HH"
         class="time-input"
         min="0"
         max="23"
-        @input="updateTime"
+        @blur="handleBlur('hours')"
       />
       <span class="text-cyan-900 dark:text-cyan-50">:</span>
+      <!-- Minutes Input -->
       <input
         ref="inputMinutes"
-        :value="time.minutes"
+        v-model="time.minutes"
         type="number"
         placeholder="MM"
         class="time-input"
         min="0"
         max="59"
-        @input="updateTime"
+        @blur="handleBlur('minutes')"
       />
       <span class="text-cyan-900 dark:text-cyan-50">:</span>
+      <!-- Seconds Input -->
       <input
         ref="inputSeconds"
-        :value="time.seconds"
+        v-model="time.seconds"
         type="number"
         placeholder="SS"
         class="time-input"
         min="0"
         max="59"
-        @input="updateTime"
+        @blur="handleBlur('seconds')"
       />
     </div>
   </div>
@@ -48,56 +51,61 @@
 import { ref, toRefs, watch } from "vue";
 
 // Props for the component
-const props = defineProps(["label", "modelValue", "id"]);
+const props = defineProps({
+  label: String,
+  modelValue: String,
+  id: String,
+});
 const { modelValue } = toRefs(props);
 
 const emit = defineEmits(["update:modelValue"]);
 
 // Local state to manage time
 const time = ref({
-  hours: "00",
-  minutes: "00",
-  seconds: "00",
+  hours: "",
+  minutes: "",
+  seconds: "",
 });
 
-const inputHours = ref();
-const inputMinutes = ref();
-const inputSeconds = ref();
-
-// Update time from modelValue on load
-
-if (modelValue.value) {
-  const [hours, minutes, seconds] = modelValue.value
-    .split(":")
-    .map((val) => val.padStart(2, "0"));
-  time.value = { hours, minutes, seconds };
+// Initialize time values from modelValue
+if (modelValue.value && modelValue.value !== "00:00:00") {
+  const [hours, minutes, seconds] = modelValue.value.split(":");
+  time.value = {
+    hours: hours !== "00" ? hours : "",
+    minutes: minutes !== "00" ? minutes : "",
+    seconds: seconds !== "00" ? seconds : "",
+  };
 }
 
-// Step 2: Watch for changes to `modelValue` and update `time`
+// Watch for changes to `modelValue` and update local state accordingly
 watch(modelValue, (newValue) => {
   if (newValue) {
-    const [hours, minutes, seconds] = newValue
-      .split(":")
-      .map((val) => val.padStart(2, "0"));
-    time.value = { hours, minutes, seconds }; // Update local state
+    const [hours, minutes, seconds] = newValue.split(":");
+    time.value = {
+      hours: hours !== "00" ? hours : "",
+      minutes: minutes !== "00" ? minutes : "",
+      seconds: seconds !== "00" ? seconds : "",
+    };
   }
 });
 
-// Emit updated time upwards
-function updateTime() {
-  time.value.hours = inputHours.value.value;
-  time.value.minutes = inputMinutes.value.value;
-  time.value.seconds = inputSeconds.value.value;
-  const { hours, minutes, seconds } = time.value;
-
-  // Format: HH:MM:SS
-  const formattedTime = `${hours.padStart(2, "0")}:${minutes.padStart(
-    2,
-    "0"
-  )}:${seconds.padStart(2, "0")}`;
+// Emit the formatted time value upwards
+function emitFormattedTime() {
+  const formattedTime = `${time.value.hours.padStart(2, "0") || "00"}:${
+    time.value.minutes.padStart(2, "0") || "00"
+  }:${time.value.seconds.padStart(2, "0") || "00"}`;
   emit("update:modelValue", formattedTime);
-  // emit("update:movingTime", formattedTime);
-  // console.log(formattedTime);
+}
+
+// Handle formatting and emitting on blur
+function handleBlur(field) {
+  if (time.value[field]) {
+    // Format the field to ensure it has two digits
+    time.value[field] = String(time.value[field]).padStart(2, "0");
+  }
+
+  // Emit the formatted time after processing
+  emitFormattedTime();
 }
 </script>
 

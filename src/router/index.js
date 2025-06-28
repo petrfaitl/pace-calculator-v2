@@ -43,7 +43,7 @@ const routes = [
         name: "PreferencesView",
         component: () => import("@/views/PreferencesView.vue"),
         meta: {
-          title: "User Preferences",
+          title: "Preferences",
         },
         beforeEnter: () => {
           const store = useActivityStore();

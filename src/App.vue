@@ -3,11 +3,55 @@
 </template>
 
 <script>
+import { UserPreferencesService } from "@/services/UserPreferencesService";
+
 export default {
   mounted() {
     document.title = "Pace Converter";
     document.description =
-      "Pace calculator and conversion app. Get running pace for common running distances. 400m, 800m, 1500m, 5k, 10k, half marathon, marathon and others.";
+      "A must-have tool for runners and swimmers! Effortlessly calculate and convert paces for popular distances. Supports running and swimming paces for distances like 100m, 400m, 800m, 5k, marathon, and more. Choose between metric and imperial units, and customize pace calculations for min/km, min/mile, min/100m, and min/100yds.";
+
+    // Initialize theme based on user preferences
+    this.initializeTheme();
+  },
+  methods: {
+    initializeTheme() {
+      // Load user preferences
+      const userPreferences = UserPreferencesService.loadPreferences();
+      const themeMode = userPreferences.themeMode || "system";
+
+      // Apply theme based on preferences
+      this.applyTheme(themeMode);
+
+      // Add event listener for system theme changes if using system preference
+      if (themeMode === "system") {
+        window
+          .matchMedia("(prefers-color-scheme: dark)")
+          .addEventListener("change", (evt) => {
+            if (userPreferences.themeMode === "system") {
+              if (evt.matches) {
+                document.documentElement.classList.add("dark");
+              } else {
+                document.documentElement.classList.remove("dark");
+              }
+            }
+          });
+      }
+    },
+    applyTheme(mode) {
+      if (mode === "system") {
+        // Check system preference
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      } else if (mode === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    },
   },
 };
 </script>
