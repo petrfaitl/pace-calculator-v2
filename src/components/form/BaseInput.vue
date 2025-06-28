@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col flex-1">
     <label
-      class="uppercase text-left text-cyan-900 dark:text-cyan-50 pl-4 mb-3 select-none"
+      class="uppercase text-left text-cyan-900 dark:text-cyan-50 pl-4 mb-3 select-none font-medium"
       >{{ label }}</label
     >
     <div class="relative">

@@ -24,8 +24,8 @@
               {{ result.name }}
             </th>
             <Transition name="flash-color-2" appear>
-              <td class="py-4 px-6 text-right" :key="result.pace">
-                {{ result.pace }}
+              <td class="py-4 px-6 text-right" :key="result.time">
+                {{ result.time }}
               </td>
             </Transition>
             <td class="py-4 px-6 text-right hidden">

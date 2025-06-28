@@ -59,12 +59,12 @@
             <HeaderField
               label="Pace"
               :msg="bookmark.pace"
-              :units="`${bookmark.distanceUnits}/h`"
+              :units="`${bookmark.paceDisplayUnits}`"
             />
             <HeaderField
               label="Speed"
               :msg="bookmark.speed"
-              :units="`${bookmark.distanceUnits}/h`"
+              :units="`${bookmark.speedDisplayUnits}`"
             />
             <!--            <div class="flex-auto w-8"></div>-->
           </router-link>

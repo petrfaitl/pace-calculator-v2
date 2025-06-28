@@ -1,6 +1,13 @@
 import { defineStore } from "pinia";
-import CalculateService from "@/services/CalculateService";
+import { PaceSpeedService } from "@/services/PaceSpeedService";
+import { TimeFormatterService } from "@/services/TimeFormatterService";
 import { version } from "../../package.json";
+import distances from "@/data/distances.json";
+import { SportsConfiguration } from "@/services/SportsConfiguration";
+import { DistanceTimeService } from "@/services/DistanceTimeService";
+import { UserPreferencesService } from "@/services/UserPreferencesService";
+import { UnitConfiguration } from "@/services/UnitConfiguration";
+import router from "@/router";
 
 // Pinia
 export const useActivityStore = defineStore("activityStore", {
@@ -9,129 +16,44 @@ export const useActivityStore = defineStore("activityStore", {
       appVersion: version,
       activity: {
         id: null,
-        movingTime: "00:00:00",
+        selectedMovingTime: "00:00:00",
         selectedDistance: null,
         distanceUnits: "km",
+        paceDisplayUnits: "min/km",
+        speedDisplayUnits: "km/h",
         customDistance: false,
         bookmarked: false,
+        sportsMode: "run",
       },
-      unitOptions: [
-        { label: "kms", value: "km" },
-        { label: "miles", value: "mile" },
-      ],
-      distances: [
-        {
-          name: "Select Distance",
-          value: "",
-          disabled: true,
-          selected: true,
-          hidden: true,
-        },
-        {
-          group: "By Pace",
-          options: [
-            { name: "min/km", value: 1, distanceUnit: "km" },
-            {
-              name: "min/mile",
-              value: 1.609,
-              distanceUnit: "mile",
-            },
-          ],
-        },
-        {
-          group: "By Distance",
-          options: [
-            { name: "100m", value: 0.1, distanceUnit: "km" },
-            { name: "200m", value: 0.2, distanceUnit: "km" },
-            { name: "300m", value: 0.3, distanceUnit: "km" },
-            { name: "400m", value: 0.4, distanceUnit: "km" },
-            { name: "600m", value: 0.6, distanceUnit: "km" },
-            {
-              name: "800m",
-              value: 0.8,
-              distanceUnit: "km",
-            },
-            { name: "1km", value: 1, distanceUnit: "km" },
-            {
-              name: "1200m",
-              value: 1.2,
-              distanceUnit: "km",
-            },
-            { name: "1500m", value: 1.5, distanceUnit: "km" },
-            {
-              name: "1600m",
-              value: 1.6,
-              distanceUnit: "km",
-            },
-            { name: "1mile", value: 1.609, distanceUnit: "mile" },
-            {
-              name: "3k",
-              value: 3,
-              distanceUnit: "km",
-            },
-            {
-              name: "3200m",
-              value: 3.2,
-              distanceUnit: "km",
-            },
-            { name: "5k", value: 5, distanceUnit: "km" },
-            { name: "6k", value: 6, distanceUnit: "km" },
-            {
-              name: "7k",
-              value: 7,
-              distanceUnit: "km",
-            },
-            { name: "8k", value: 8, distanceUnit: "km" },
-            {
-              name: "10k",
-              value: 10,
-              distanceUnit: "km",
-            },
-            { name: "Half Marathon", value: 21.1, distanceUnit: "km" },
-            {
-              name: "Marathon",
-              value: 42.2,
-              distanceUnit: "km",
-            },
-            { name: "50k", value: 50, distanceUnit: "km" },
-            {
-              name: "100k",
-              value: 100,
-              distanceUnit: "km",
-            },
-            { name: "Miler", value: 160.934, distanceUnit: "mile" },
-          ],
-        },
-      ],
+      userPreferences: UserPreferencesService.loadPreferences(),
+      unitsOfMeasure: UnitConfiguration.unitsOfMeasure,
+      unitOptions: UnitConfiguration.distanceUnits,
+      distances,
       bookmarks: [],
     };
   },
   actions: {
-    getHumanTime(millis) {
-      let seconds = Math.round(millis / 1000);
-      let minutes = Math.trunc(seconds / 60);
-      let hours = Math.trunc(minutes / 60);
-      let days = Math.trunc(hours / 24);
+    /**
+     * Call the DistanceTimeService to calculate time for all distances.
+     *
+     * @returns {Array} Array of calculated times for distances.
+     */
+    calculateTimes() {
+      const {
+        selectedDistance,
+        selectedMovingTime,
+        distanceUnits,
+        paceDisplayUnits,
+        sportsMode,
+      } = this.activity;
 
-      seconds = seconds % 60;
-      minutes = minutes % 60;
-      hours = hours % 24;
-
-      let str =
-        minutes || hours
-          ? `${String(seconds).padStart(2, "0")}`
-          : `${String(seconds).padStart(2, "0")}s`;
-      str =
-        minutes || hours ? `${String(minutes).padStart(2, "0")}:` + str : str;
-      str = hours || days ? `${String(hours).padStart(2, "0")}:` + str : str;
-      str = days
-        ? `${String(days)}${CalculateService.pluralStr(days, "day")} ` + str
-        : str;
-
-      return str;
-    },
-    distanceTimeCalc(newDistance) {
-      return this.getHumanTime(this.paceInMilli * newDistance);
+      return DistanceTimeService.calculateTimeForDistances(
+        selectedDistance,
+        selectedMovingTime,
+        distanceUnits,
+        paceDisplayUnits,
+        sportsMode
+      );
     },
     loadBookmarks() {
       this.bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
@@ -139,8 +61,27 @@ export const useActivityStore = defineStore("activityStore", {
     saveBookmarks() {
       localStorage.setItem("bookmarks", JSON.stringify(this.bookmarks));
     },
+    loadUserPreferences() {
+      this.userPreferences = UserPreferencesService.loadPreferences();
+      // Get configuration for the current sports mode
+      const config = SportsConfiguration[this.activity.sportsMode];
+
+      // Set units based on user preferences or defaults
+      this.activity.paceDisplayUnits =
+        this.userPreferences.paceDisplayUnits || config.defaultPaceDisplayUnits;
+      this.activity.speedDisplayUnits =
+        this.userPreferences.speedDisplayUnits ||
+        config.speedDisplayUnits[0].value;
+    },
+    saveUserPreferences() {
+      UserPreferencesService.savePreferences(this.userPreferences);
+    },
+    updateUserPreferences(preferences) {
+      this.userPreferences = { ...this.userPreferences, ...preferences };
+      this.saveUserPreferences();
+    },
     itemInBookmarks(id) {
-      return this.itemBookmarkIndex(id) === -1 ? false : true;
+      return this.itemBookmarkIndex(id) !== -1;
     },
     itemBookmarkIndex(id) {
       return this.bookmarks.findIndex((el) => {
@@ -166,87 +107,174 @@ export const useActivityStore = defineStore("activityStore", {
       }
       this.saveBookmarks();
     },
+    toggleActivitySportsMode() {
+      // Toggle between run and swim
+      const newSportsMode = this.activity.sportsMode === "run" ? "swim" : "run";
+      this.activity.sportsMode = newSportsMode;
+
+      // Update user preferences with the new sports mode
+      this.userPreferences.sportsMode = newSportsMode;
+
+      // Update units based on the new sports mode and current units of measure
+      const updatedPreferences =
+        UserPreferencesService.updatePreferencesForSportsMode(
+          this.userPreferences,
+          newSportsMode,
+          this.userPreferences.unitsOfMeasure
+        );
+
+      // Update user preferences
+      this.userPreferences = updatedPreferences;
+      this.saveUserPreferences();
+
+      // Update activity with the new units
+      this.activity.distanceUnits = this.userPreferences.distanceUnits;
+      this.activity.paceDisplayUnits = this.userPreferences.paceDisplayUnits;
+      this.activity.speedDisplayUnits = this.userPreferences.speedDisplayUnits;
+
+      router.push({ name: "CalculateView" });
+    },
+    toggleUserPreferencesUnits(unitSystem) {
+      // Update user preferences with the new units of measure
+      this.userPreferences.unitsOfMeasure = unitSystem;
+
+      // Update activity with the new units configuration
+      const updatedPreferences =
+        UserPreferencesService.updatePreferencesForSportsMode(
+          this.userPreferences,
+          this.activity.sportsMode,
+          unitSystem
+        );
+
+      this.userPreferences = updatedPreferences;
+      this.saveUserPreferences();
+
+      // Update activity with the new units
+      this.activity.paceDisplayUnits = this.userPreferences.paceDisplayUnits;
+      this.activity.speedDisplayUnits = this.userPreferences.speedDisplayUnits;
+    },
+
     initActivity() {
+      // Load user preferences
+      this.loadUserPreferences();
+
+      // Initialize activity with user preferences
       this.activity.bookmarked = false;
-      this.activity.id = null;
-      this.activity.movingTime = "00:00:00";
+      this.activity.id = Date.now();
+      this.activity.selectedMovingTime = "00:00:00";
       this.activity.selectedDistance = null;
-      this.activity.distanceUnits = "km";
+      this.activity.sportsMode = this.userPreferences.sportsMode || "run";
+
+      // Get configuration for the current sports mode
+      // const config = SportsConfiguration[this.activity.sportsMode];
+
+      // Set units based on user preferences or defaults
+      // this.activity.distanceUnits =
+      //   this.userPreferences.distanceUnits || config.baseDistanceUnit;
+      // this.activity.paceDisplayUnits =
+      //   this.userPreferences.paceDisplayUnits || config.defaultPaceDisplayUnits;
+      // this.activity.speedDisplayUnits =
+      //   this.userPreferences.speedDisplayUnits ||
+      //   config.speedDisplayUnits[0].value;
+
       this.activity.customDistance = false;
       this.activity.bookmarked = false;
     },
   },
   getters: {
-    convertFactor: (state) => {
-      return state.activity.distanceUnits === "mile" ? 1.609 : 1;
+    getPace(state) {
+      const timeInMillis = PaceSpeedService.convertTimeToMillis(
+        state.activity.selectedMovingTime
+      );
+      return PaceSpeedService.calculatePace(state.activity, timeInMillis);
     },
-    distanceVal: (state) => {
-      if (!state.activity.selectedDistance) {
-        return 0;
-      } else if (
-        state.activity.customDistance &&
-        state.activity.distanceUnits === "mile"
-      ) {
-        return parseFloat(state.activity.selectedDistance);
-      }
-      return parseFloat(state.activity.selectedDistance) / state.convertFactor;
-    },
-    resultDistanceOptions: (state) => {
-      const { options } = state.distances[2];
-      return options;
-    },
-    movingTimeMs: (state) => {
-      const [hours, minutes, seconds] = state.activity.movingTime.split(":");
-      return hours * 60 * 60 * 1000 + minutes * 60 * 1000 + seconds * 1000;
-    },
-    paceInMilli: (state) => {
-      return (
-        Math.round(
-          state.movingTimeMs / (state.distanceVal * state.convertFactor)
-        ) || 0
+    getSpeed(state) {
+      const timeInMillis = PaceSpeedService.convertTimeToMillis(
+        state.activity.selectedMovingTime
+      );
+      return PaceSpeedService.calculateSpeed(
+        state.activity,
+        state.userPreferences.unitsOfMeasure,
+        timeInMillis
       );
     },
-    getSpeed: (state) => {
-      if (!state.distanceVal) return "0.00";
-      const speedVal =
-        state.distanceVal / (state.movingTimeMs / 1000 / 60 / 60);
-      return speedVal.toFixed(1);
-    },
-    getPace: (state) => {
-      if (!state.distanceVal) return "0:00";
-      const timePer = Math.round(state.movingTimeMs / state.distanceVal);
-      return state.getHumanTime(timePer);
-    },
-    getMovingTime: (state) => {
-      if (!state.distanceVal) return "0:00";
-      return state.getHumanTime(state.movingTimeMs);
+    getMovingTime(state) {
+      if (!state.activity.selectedDistance) return "0:00";
+      return TimeFormatterService.getHumanTime(
+        PaceSpeedService.convertTimeToMillis(state.activity.selectedMovingTime)
+      );
     },
     getBookmarks: (state) => {
       return state.bookmarks;
     },
+    resultDistanceOptions: (state) => {
+      const { options } = state.getDistances[2];
+      return options;
+    },
     results: (state) => {
-      return state.resultDistanceOptions.map((dist) => {
-        return {
-          name: dist.name,
-          value: dist.value,
-          pace: state.distanceTimeCalc(dist.value),
-        };
-      });
+      return state.calculateTimes();
     },
     bookmarkPayload: (state) => {
       return {
         id: state.activity.id,
-        movingTime: state.activity.movingTime,
+        selectedMovingTime: state.activity.selectedMovingTime,
         selectedDistance: state.activity.selectedDistance,
-        distanceVal: state.distanceVal,
+        distanceVal: state.activity.selectedDistance,
         distanceUnits: state.activity.distanceUnits,
-        convertFactor: state.convertFactor,
+        paceDisplayUnits: state.activity.paceDisplayUnits,
+        speedDisplayUnits: state.activity.speedDisplayUnits,
         bookmarked: state.activity.bookmarked,
         customDistance: state.activity.customDistance,
         time: state.getMovingTime,
         speed: state.getSpeed,
         pace: state.getPace,
       };
+    },
+    getDistances(state) {
+      // Always include the "Select Distance" element
+      const result = [
+        {
+          name: "Select Distance",
+          value: "",
+          disabled: true,
+          selected: true,
+          hidden: true,
+        },
+      ];
+
+      state.distances.forEach((distanceGroup) => {
+        if (distanceGroup.options) {
+          // Filter options based on the sportsMode in `activity`
+          const filteredOptions = distanceGroup.options.filter((option) =>
+            option.sportsModes.includes(state.activity.sportsMode)
+          );
+
+          // If there are remaining options, add the group to the result
+          if (filteredOptions.length > 0) {
+            result.push({
+              group: distanceGroup.group,
+              options: filteredOptions,
+            });
+          }
+        }
+      });
+
+      return result;
+    },
+    getUnitOptions(state) {
+      const result = [];
+
+      // Filter options based on the sportsMode in `activity`
+      const filteredOptions = state.unitOptions.filter((option) =>
+        option.sportsModes.includes(state.activity.sportsMode)
+      );
+
+      // If there are remaining options, add the group to the result
+      if (filteredOptions.length > 0) {
+        result.push(...filteredOptions);
+      }
+
+      return result;
     },
   },
 });

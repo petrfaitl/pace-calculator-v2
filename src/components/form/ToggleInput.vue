@@ -17,7 +17,7 @@
     </div>
     <label
       :for="id"
-      class="uppercase text-cyan-900 dark:text-cyan-50 pl-4 select-none"
+      class="uppercase text-cyan-900 dark:text-cyan-50 pl-4 select-none font-medium"
       >{{ label }}</label
     >
   </div>

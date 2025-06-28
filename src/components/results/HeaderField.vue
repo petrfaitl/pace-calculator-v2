@@ -4,7 +4,7 @@
 
     <div v-bind="$attrs">
       <span class="text-base inline-flex">{{ msg }}</span>
-      <span class="text-sm inline-flex"> {{ units }}</span>
+      <span class="text-sm block"> {{ units }}</span>
     </div>
   </div>
 </template>

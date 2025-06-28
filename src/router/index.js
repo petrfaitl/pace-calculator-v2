@@ -11,23 +11,44 @@ const routes = [
         path: "",
         name: "CalculateView",
         component: () => import("@/views/CalculateView.vue"),
+        meta: {
+          title: "Pace Converter",
+        },
         beforeEnter: () => {
           const store = useActivityStore();
           store.activity.id = Date.now();
+          store.loadUserPreferences();
         },
       },
       {
         path: "results",
         name: "ResultsView",
         component: () => import("@/views/ResultsView.vue"),
+        meta: {
+          title: "Results",
+        },
         beforeEnter: () => {
           const store = useActivityStore();
-          if (!store.distanceVal) {
+          if (!store.activity.id) {
             return { name: "CalculateView" };
           }
           store.activity.bookmarked = store.itemInBookmarks(store.activity.id);
           // store.bookmarks.forEach((el) => console.log("bookmark id", el.id));
 
+          return true;
+        },
+      },
+      {
+        path: "preferences",
+        name: "PreferencesView",
+        component: () => import("@/views/PreferencesView.vue"),
+        meta: {
+          title: "User Preferences",
+        },
+        beforeEnter: () => {
+          const store = useActivityStore();
+          // Ensure user preferences are loaded
+          store.loadUserPreferences();
           return true;
         },
       },

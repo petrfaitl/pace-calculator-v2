@@ -26,20 +26,40 @@
               stroke-width="2"
             />
           </button>
-          Results
+          <span class="px-2">{{ pageTitle }}</span>
         </div>
       </Transition>
       <Transition
         v-else
-        class="font-normal text-xl text-cyan-900 dark:text-cyan-50 select-none ml-4"
+        class="font-normal text-lg sm:text-xl text-cyan-900 dark:text-cyan-50 select-none pl-2 sm:pl-4"
         mode="out-in"
         name="slide-left"
         appear
       >
-        <div>Pace Converter</div>
+        <div>{{ pageTitle }}</div>
       </Transition>
     </div>
+
     <div class="flex justify-around items-center md:gap-2">
+      <div class="mr-4">
+        <button
+          class="rounded-2xl transition"
+          @click="store.toggleActivitySportsMode"
+        >
+          <span
+            class="sport-pill bg-sky-500/20 text-sky-900 dark:text-sky-50 rounded-md"
+            v-if="getActivitySportsMode === 'run'"
+          >
+            {{ getActivitySportsMode }}
+          </span>
+          <span
+            class="sport-pill bg-teal-500/20 text-teal-900 dark:text-teal-50 rounded-md"
+            v-else
+          >
+            {{ getActivitySportsMode }}</span
+          >
+        </button>
+      </div>
       <button
         class="nav-btn"
         id="dark-btn"
@@ -96,6 +116,22 @@
           stroke-width="2"
         />
       </button>
+
+      <!-- Icon Preferences -->
+      <button
+        class="nav-btn"
+        @click="navigateToPreferences()"
+        aria-label="User preferences"
+      >
+        <Cog6ToothIcon
+          id="preferences-icon"
+          class="h-6 w-6 mx-auto nav-icon"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        />
+      </button>
     </div>
   </nav>
   <BookmarksView
@@ -108,22 +144,40 @@
 <script setup>
 /* eslint-disable */
 import { useActivityStore } from "@/store/store";
-import { onBeforeMount, onMounted, ref } from "vue";
+import { computed, onBeforeMount, onMounted, ref } from "vue";
 import { SunIcon } from "@heroicons/vue/24/outline";
 import { MoonIcon } from "@heroicons/vue/24/outline";
 import { BookmarkSquareIcon } from "@heroicons/vue/24/outline";
 import { ChevronLeftIcon } from "@heroicons/vue/24/outline";
 import { ArrowPathIcon } from "@heroicons/vue/24/outline";
+import { Cog6ToothIcon } from "@heroicons/vue/24/outline";
 import BookmarksView from "@/views/BookmarksView.vue";
 import router from "@/router";
+import { storeToRefs } from "pinia";
+import { useRoute } from "vue-router";
 
-// eslint-disable-next-line no-unused-vars
+
 const store = useActivityStore();
+const route = useRoute();
 
 defineExpose({ closeBookmarks });
 
 const darkMode = ref("light");
 const bookmarksVisible = ref(false);
+const { activity, userPreferences } = storeToRefs(store);
+
+const pageTitle = computed(() => {
+  return route.meta.title || "Pace Converter";
+});
+
+const getActivitySportsMode = computed(() => {
+  // If user preferences has a different sports mode than activity, update activity
+  if (userPreferences.value.sportsMode !== activity.value.sportsMode) {
+    activity.value.sportsMode = userPreferences.value.sportsMode;
+  }
+  return activity.value.sportsMode;
+})
+
 
 const toggleDarkMode = () => {
 
@@ -151,6 +205,11 @@ const reset = () => {
 
 const toggleBookmarksVisible = () => {
   bookmarksVisible.value = !bookmarksVisible.value;
+};
+
+const navigateToPreferences = () => {
+  bookmarksVisible.value = false;
+  router.push({ name: "PreferencesView" });
 };
 
 function closeBookmarks()  {
@@ -188,6 +247,9 @@ onMounted(() => {
 <style>
 .nav-btn {
   @apply h-12 w-12 rounded-full active:bg-cyan-50 dark:active:bg-cyan-50/20  transition focus:outline-0;
+}
+.sport-pill{
+  @apply px-4 py-1 rounded-2xl;
 }
 
 .nav-icon {

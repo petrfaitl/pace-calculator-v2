@@ -52,6 +52,7 @@
           label="Time"
           :key="getMovingTime"
           :msg="getMovingTime"
+          units="&nbsp;"
           class="border-r border-cyan-500 dark:border-cyan-300"
         />
       </Transition>
@@ -60,7 +61,7 @@
           id="paceResult"
           label="Pace"
           :key="getPace"
-          :units="`/${activity.distanceUnits}`"
+          :units="`${activity.paceDisplayUnits}`"
           :msg="getPace"
           class="border-r border-cyan-500 dark:border-cyan-300"
       /></Transition>
@@ -70,7 +71,7 @@
           label="Speed"
           :key="getSpeed"
           :msg="getSpeed"
-          :units="`${activity.distanceUnits}/h`"
+          :units="`${activity.speedDisplayUnits}`"
       /></Transition>
     </div>
     <div class="">
@@ -95,8 +96,10 @@ import CalculateService from "@/services/CalculateService";
 import { storeToRefs } from "pinia";
 
 const store = useActivityStore();
-const { activity, results, getSpeed, getPace, distanceVal, getMovingTime } =
+const { activity, results, getSpeed, getPace, getMovingTime } =
   storeToRefs(store);
+
+const distanceVal = store.activity.selectedDistance;
 
 function toggleBookmark() {
   store.toggleBookmarkItem();
