@@ -30,7 +30,7 @@
       },
       {
         "name": "min/100yds",
-        "value": 91.44,
+        "value": 100,
         "distanceUnits": "yard",
         "sportsModes": ["swim"]
       }
