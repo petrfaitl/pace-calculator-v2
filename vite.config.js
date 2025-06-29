@@ -15,7 +15,7 @@ export default defineConfig({
       ],
       manifest: {
         name: "Pace Converter",
-        short_name: "PaceConvert",
+        short_name: "PaceConverter",
         description: "Convert time and pace for runners and swimmers",
         theme_color: "#06b6d4",
         background_color: "#06b6d4", // Suggested addition
