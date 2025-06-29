@@ -18,10 +18,10 @@ export default defineConfig({
         short_name: "PaceConverter",
         description: "Convert time and pace for runners and swimmers",
         theme_color: "#06b6d4",
-        background_color: "#06b6d4", // Suggested addition
+        start_url: "/",
         scope: "/",
-        display: "standalone", // Suggested addition
-        lang: "en", // Suggested addition
+        display: "standalone",
+        lang: "en",
         categories: ["sports", "health", "tools"], // Optional categories
         icons: [
           {

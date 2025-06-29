@@ -44,6 +44,37 @@
       </div>
     </div>
 
+    <!-- Units of Measure -->
+    <div class="mb-6">
+      <h2 class="text-xl font-medium mb-2 dark:text-slate-50 text-left">
+        Units of Measure
+      </h2>
+      <div class="flex gap-4">
+        <button
+          @click="setUnitsOfMeasure('metric')"
+          :class="[
+            'px-4 py-2 rounded-md',
+            userPreferences.unitsOfMeasure === 'metric'
+              ? 'bg-cyan-600 text-white'
+              : 'bg-slate-200 dark:bg-slate-700 dark:text-slate-200',
+          ]"
+        >
+          Metric
+        </button>
+        <button
+          @click="setUnitsOfMeasure('imperial')"
+          :class="[
+            'px-4 py-2 rounded-md',
+            userPreferences.unitsOfMeasure === 'imperial'
+              ? 'bg-cyan-600 text-white'
+              : 'bg-slate-200 dark:bg-slate-700 dark:text-slate-200',
+          ]"
+        >
+          Imperial
+        </button>
+      </div>
+    </div>
+
     <!-- Sports Mode -->
     <div class="mb-6">
       <h2 class="text-xl font-medium mb-2 dark:text-slate-50 text-left">
@@ -75,33 +106,24 @@
       </div>
     </div>
 
-    <!-- Units of Measure -->
+    <!-- Sports Categories -->
     <div class="mb-6">
       <h2 class="text-xl font-medium mb-2 dark:text-slate-50 text-left">
-        Units of Measure
+        Sports Categories
       </h2>
-      <div class="flex gap-4">
+      <div class="flex flex-wrap gap-2">
         <button
-          @click="setUnitsOfMeasure('metric')"
+          v-for="category in sportsModeCategories"
+          :key="category"
+          @click="toggleSportsCategory(category)"
           :class="[
-            'px-4 py-2 rounded-md',
-            userPreferences.unitsOfMeasure === 'metric'
+            'px-3 py-1 rounded-md text-sm',
+            isCategorySelected(category)
               ? 'bg-cyan-600 text-white'
               : 'bg-slate-200 dark:bg-slate-700 dark:text-slate-200',
           ]"
         >
-          Metric
-        </button>
-        <button
-          @click="setUnitsOfMeasure('imperial')"
-          :class="[
-            'px-4 py-2 rounded-md',
-            userPreferences.unitsOfMeasure === 'imperial'
-              ? 'bg-cyan-600 text-white'
-              : 'bg-slate-200 dark:bg-slate-700 dark:text-slate-200',
-          ]"
-        >
-          Imperial
+          {{ formatCategoryName(category) }}
         </button>
       </div>
     </div>
@@ -141,6 +163,11 @@
         <div class="font-medium dark:text-slate-50">
           {{ userPreferences.speedDisplayUnits }}
         </div>
+
+        <div class="dark:text-slate-300">Sports Categories:</div>
+        <div class="font-medium dark:text-slate-50">
+          {{ getSelectedCategoriesDisplay }}
+        </div>
       </div>
     </div>
     <div class="text-xs text-cyan-900 dark:text-cyan-100">
@@ -160,14 +187,99 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useActivityStore } from "@/store/store";
 import { storeToRefs } from "pinia";
 import { UserPreferencesService } from "@/services/UserPreferencesService";
-import { SunIcon, MoonIcon } from "@heroicons/vue/24/outline";
 
 const store = useActivityStore();
-const { userPreferences, appVersion } = storeToRefs(store);
+const { userPreferences, appVersion, distances } = storeToRefs(store);
+
+// Extract unique sports categories from distances data
+const uniqueSportsCategories = computed(() => {
+  const categories = new Set();
+
+  // Loop through all distance groups and their options
+  distances.value.forEach((group) => {
+    if (group.options) {
+      group.options.forEach((option) => {
+        if (option.sportsCategories) {
+          // Add each category to the Set (this automatically removes duplicates)
+          option.sportsCategories.forEach((category) =>
+            categories.add(category)
+          );
+        }
+      });
+    }
+  });
+
+  // Convert Set to Array and sort alphabetically
+  return Array.from(categories).sort();
+});
+
+// Get sports categories for the current sports mode
+const sportsModeCategories = computed(() => {
+  const categories = new Set();
+  const currentSportsMode = userPreferences.value.sportsMode;
+
+  // Loop through all distance groups and their options
+  distances.value.forEach((group) => {
+    if (group.options) {
+      group.options.forEach((option) => {
+        // Only include categories for the current sports mode
+        if (
+          option.sportsModes &&
+          option.sportsModes.includes(currentSportsMode) &&
+          option.sportsCategories
+        ) {
+          option.sportsCategories.forEach((category) =>
+            categories.add(category)
+          );
+        }
+      });
+    }
+  });
+
+  // Convert Set to Array and sort alphabetically
+  return Array.from(categories).sort();
+});
+
+// Method to toggle a sports category
+const toggleSportsCategory = (category) => {
+  // Get current selected categories
+  const currentCategories = [...userPreferences.value.sportsCategories];
+
+  // Check if the category is already selected
+  const index = currentCategories.indexOf(category);
+
+  if (index === -1) {
+    // If not selected, add it
+    currentCategories.push(category);
+  } else {
+    // If already selected, remove it
+    currentCategories.splice(index, 1);
+  }
+
+  // Update user preferences with the new categories
+  store.updateUserPreferences({ sportsCategories: currentCategories });
+};
+
+// Check if a category is selected
+const isCategorySelected = (category) => {
+  return userPreferences.value.sportsCategories.includes(category);
+};
+
+// Format category name for display (capitalize first letter)
+const formatCategoryName = (category) => {
+  return category.charAt(0).toUpperCase() + category.slice(1);
+};
+
+// Get a comma-separated list of selected categories for display
+const getSelectedCategoriesDisplay = computed(() => {
+  return userPreferences.value.sportsCategories
+    .map((category) => formatCategoryName(category))
+    .join(", ");
+});
 
 // Computed properties for display values
 const getThemeModeDisplay = computed(() => {
@@ -262,9 +374,9 @@ onMounted(() => {
 
   // Add event listener for system theme changes if using system preference
   if (userPreferences.value.themeMode === "system") {
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener(
-      "change",
-      function (evt) {
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", function (evt) {
         if (userPreferences.value.themeMode === "system") {
           if (evt.matches) {
             document.documentElement.classList.add("dark");
@@ -272,8 +384,22 @@ onMounted(() => {
             document.documentElement.classList.remove("dark");
           }
         }
-      }
-    );
+      });
+  }
+
+  // Ensure "default" category is selected by default
+  if (
+    !userPreferences.value.sportsCategories ||
+    userPreferences.value.sportsCategories.length === 0
+  ) {
+    store.updateUserPreferences({ sportsCategories: ["default"] });
+  } else if (!userPreferences.value.sportsCategories.includes("default")) {
+    // If sportsCategories exists but doesn't include "default", add it
+    const updatedCategories = [
+      ...userPreferences.value.sportsCategories,
+      "default",
+    ];
+    store.updateUserPreferences({ sportsCategories: updatedCategories });
   }
 });
 </script>
