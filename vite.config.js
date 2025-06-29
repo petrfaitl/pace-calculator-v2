@@ -20,7 +20,7 @@ export default defineConfig({
         theme_color: "#06b6d4",
         background_color: "#06b6d4", // Suggested addition
         start_url: "/", // Suggested addition
-        display: "standalone", // Suggested addition
+        display: "fullscreen", // Suggested addition
         lang: "en", // Suggested addition
         categories: ["sports", "health", "tools"], // Optional categories
         icons: [
