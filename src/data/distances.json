@@ -14,25 +14,29 @@
         "name": "min/km",
         "value": 1.000,
         "distanceUnits": "km",
-        "sportsModes": ["run"]
+        "sportsModes": ["run"],
+        "sportsCategories": ["default", "pace"]
       },
       {
         "name": "min/mile",
         "value": 1.000,
         "distanceUnits": "mile",
-        "sportsModes": ["run"]
+        "sportsModes": ["run"],
+        "sportsCategories": ["default", "pace"]
       },
       {
         "name": "min/100m",
         "value": 100,
         "distanceUnits": "metre",
-        "sportsModes": ["swim"]
+        "sportsModes": ["swim"],
+        "sportsCategories": ["default", "pace", "short course", "long course"]
       },
       {
         "name": "min/100yds",
         "value": 100,
         "distanceUnits": "yard",
-        "sportsModes": ["swim"]
+        "sportsModes": ["swim"],
+        "sportsCategories": ["default", "pace", "short course"]
       }
     ]
   },
@@ -44,6 +48,7 @@
         "value": 25,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
+        "sportsCategories": ["default","popular","short course"],
         "hidden": false
       },
       {
@@ -51,6 +56,7 @@
         "value": 50,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
+        "sportsCategories": ["default", "popular", "short course", "long course"],
         "hidden": false
       },
       {
@@ -58,6 +64,7 @@
         "value": 0.100,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "popular", "sprint"],
         "hidden": false
       },
       {
@@ -65,6 +72,7 @@
         "value": 100,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
+        "sportsCategories": ["default", "popular", "short course", "long course"],
         "hidden": false
       },
       {
@@ -72,6 +80,7 @@
         "value": 0.200,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "popular", "sprint"],
         "hidden": false
       },
       {
@@ -79,6 +88,7 @@
         "value": 200,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
+        "sportsCategories": ["default", "popular", "short course", "long course"],
         "hidden": false
       },
       {
@@ -86,6 +96,15 @@
         "value": 0.3,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "sprint", "training"],
+        "hidden": false
+      },
+      {
+        "name": "300m",
+        "value": 300,
+        "distanceUnits": "m",
+        "sportsModes": ["swim"],
+        "sportsCategories": ["default", "training"],
         "hidden": false
       },
       {
@@ -93,6 +112,7 @@
         "value": 0.4,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "popular", "sprint"],
         "hidden": false
       },
       {
@@ -100,6 +120,7 @@
         "value": 400,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
+        "sportsCategories": ["default", "popular", "short course", "long course"],
         "hidden": false
       },
       {
@@ -107,6 +128,7 @@
         "value": 500,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
+        "sportsCategories": ["default", "training"],
         "hidden": false
       },
       {
@@ -114,6 +136,7 @@
         "value": 0.6,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "middle distance", "training"],
         "hidden": false
       },
       {
@@ -121,6 +144,7 @@
         "value": 750,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
+        "sportsCategories": ["default","popular","triathlon"],
         "hidden": false
       },
       {
@@ -128,6 +152,7 @@
         "value": 0.8,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "popular", "middle distance"],
         "hidden": false
       },
       {
@@ -135,6 +160,7 @@
         "value": 1.000,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "popular", "middle distance"],
         "hidden": false
       },
       {
@@ -142,6 +168,7 @@
         "value": 1000,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
+        "sportsCategories": ["default", "open water", "training"],
         "hidden": false
       },
       {
@@ -149,6 +176,7 @@
         "value": 1.200,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "middle distance", "training"],
         "hidden": false
       },
       {
@@ -156,6 +184,7 @@
         "value": 1.500,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "popular", "middle distance"],
         "hidden": false
       },
       {
@@ -163,6 +192,7 @@
         "value": 1500,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
+        "sportsCategories": ["default", "popular", "long course", "open water", "triathlon"],
         "hidden": false
       },
       {
@@ -170,6 +200,7 @@
         "value": 1.600,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "middle distance", "training"],
         "hidden": false
       },
       {
@@ -178,6 +209,7 @@
         "distanceUnits": "mile",
         "paceDisplayUnits": "min/mile",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "popular", "middle distance"],
         "hidden": false
       },
       {
@@ -185,6 +217,7 @@
         "value": 1900,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
+        "sportsCategories": ["default", "open water", "triathlon", "half ironman"],
         "hidden": false
       },
       {
@@ -192,6 +225,7 @@
         "value": 3.000,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "middle distance", "cross country"],
         "hidden": false
       },
       {
@@ -199,6 +233,7 @@
         "value": 3.200,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "middle distance", "2 mile"],
         "hidden": false
       },
       {
@@ -206,6 +241,7 @@
         "value": 3800,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
+        "sportsCategories": ["default", "open water", "triathlon", "ironman"],
         "hidden": false
       },
       {
@@ -213,6 +249,7 @@
         "value": 5.000,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "popular", "long distance", "cross country"],
         "hidden": false
       },
       {
@@ -220,6 +257,7 @@
         "value": 6.000,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "cross country", "women's collegiate"],
         "hidden": false
       },
       {
@@ -227,6 +265,7 @@
         "value": 7.000,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "cross country"],
         "hidden": false
       },
       {
@@ -234,6 +273,7 @@
         "value": 8.000,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "cross country", "men's collegiate"],
         "hidden": false
       },
       {
@@ -241,6 +281,7 @@
         "value": 10.000,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "popular", "long distance", "road race"],
         "hidden": false
       },
       {
@@ -248,6 +289,7 @@
         "value": 21.1000,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "popular", "long distance", "road race"],
         "hidden": false
       },
       {
@@ -255,6 +297,7 @@
         "value": 42.2000,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default","popular","long distance"],
         "hidden": false
       },
       {
@@ -262,6 +305,7 @@
         "value": 50.000,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "ultra", "trail running"],
         "hidden": false
       },
       {
@@ -269,12 +313,14 @@
         "value": 100.000,
         "distanceUnits": "km",
         "sportsModes": ["run"],
+        "sportsCategories": ["default", "ultra", "trail running"],
         "hidden": false
       },
       {
         "name": "Miler",
         "value": 100,
         "distanceUnits": "mile",
+        "sportsCategories": ["default","popular","ultra marathon"],
         "sportsModes": ["run"],
         "hidden": false
       }

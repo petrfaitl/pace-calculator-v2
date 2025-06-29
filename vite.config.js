@@ -11,21 +11,26 @@ export default defineConfig({
       includeAssets: [
         "/favicon.ico",
         "/img/icons/apple-touch-icon.png",
-        "/img/icons/masked-icon.svg",
+        "/img/icons/favicon.svg",
       ],
       manifest: {
         name: "Pace Converter",
-        short_name: "Pace Converter",
-        description: "Convert running time and pace",
+        short_name: "PaceConvert",
+        description: "Convert time and pace for runners and swimmers",
         theme_color: "#06b6d4",
+        background_color: "#06b6d4", // Suggested addition
+        start_url: "/", // Suggested addition
+        display: "standalone", // Suggested addition
+        lang: "en", // Suggested addition
+        categories: ["sports", "health", "tools"], // Optional categories
         icons: [
           {
-            src: "/img/icons/android-chrome-192x192.png",
+            src: "/img/icons/web-app-manifest-192x192.png",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "/img/icons/android-chrome-512x512.png",
+            src: "/img/icons/web-app-manifest-512x512.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",
