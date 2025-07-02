@@ -109,7 +109,7 @@
     <!-- Sports Categories -->
     <div class="mb-6">
       <h2 class="text-xl font-medium mb-2 dark:text-slate-50 text-left">
-        Sports Categories
+        Distance Categories
       </h2>
       <div class="flex flex-wrap gap-2">
         <button
@@ -164,7 +164,7 @@
           {{ userPreferences.speedDisplayUnits }}
         </div>
 
-        <div class="dark:text-slate-300">Sports Categories:</div>
+        <div class="dark:text-slate-300">Distance Categories:</div>
         <div class="font-medium dark:text-slate-50">
           {{ getSelectedCategoriesDisplay }}
         </div>
@@ -387,19 +387,12 @@ onMounted(() => {
       });
   }
 
-  // Ensure "default" category is selected by default
+  // Only ensure categories exist, but don't force "default" to be selected
   if (
     !userPreferences.value.sportsCategories ||
     userPreferences.value.sportsCategories.length === 0
   ) {
     store.updateUserPreferences({ sportsCategories: ["default"] });
-  } else if (!userPreferences.value.sportsCategories.includes("default")) {
-    // If sportsCategories exists but doesn't include "default", add it
-    const updatedCategories = [
-      ...userPreferences.value.sportsCategories,
-      "default",
-    ];
-    store.updateUserPreferences({ sportsCategories: updatedCategories });
   }
 });
 </script>

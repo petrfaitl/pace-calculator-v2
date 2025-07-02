@@ -15,7 +15,7 @@
         <div>
           <button
             class="nav-icon md:mr-2 text-sm flex items-center"
-            @click="router.push({ name: 'CalculateView' })"
+            @click="router.back()"
           >
             <ChevronLeftIcon
               id="bookmark-alt-icon"
@@ -26,7 +26,7 @@
               stroke-width="2"
             />
           </button>
-          <span class="px-2">{{ pageTitle }}</span>
+          <span class="px-2" @click="router.back()">{{ pageTitle }}</span>
         </div>
       </Transition>
       <Transition

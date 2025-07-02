@@ -15,7 +15,6 @@
         "value": 1.000,
         "distanceUnits": "km",
         "sportsModes": ["run"],
-        "sportsCategories": ["all", "default", "pace"],
         "hidden": false
       },
       {
@@ -23,7 +22,6 @@
         "value": 1.000,
         "distanceUnits": "mile",
         "sportsModes": ["run"],
-        "sportsCategories": ["all", "default", "pace"],
         "hidden": false
       },
       {
@@ -31,7 +29,6 @@
         "value": 100,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
-        "sportsCategories": ["all swim", "default", "pace", "short course", "long course"],
         "hidden": false
       },
       {
@@ -39,7 +36,6 @@
         "value": 100,
         "distanceUnits": "yard",
         "sportsModes": ["swim"],
-        "sportsCategories": ["all swim", "default", "pace", "short course"],
         "hidden": false
       }
     ]
@@ -52,7 +48,7 @@
         "value": 25,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
-        "sportsCategories": ["all swim","default","popular","short course","trim 33.3m to 25m"],
+        "sportsCategories": ["all swim","default swim","popular","short course","trim 33.3m to 25m"],
         "hidden": false
       },
       {
@@ -68,7 +64,7 @@
         "value": 50,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
-        "sportsCategories": ["all swim", "default", "popular", "short course", "long course","trim 33.3m to 25m"],
+        "sportsCategories": ["all swim", "default swim", "popular", "short course", "long course","trim 33.3m to 25m"],
         "hidden": false
       },
       {
@@ -92,7 +88,7 @@
         "value": 100,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
-        "sportsCategories": ["all swim", "default", "popular", "short course", "long course"],
+        "sportsCategories": ["all swim", "default swim", "popular", "short course", "long course"],
         "hidden": false
       },
       {
@@ -108,7 +104,7 @@
         "value": 200,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
-        "sportsCategories": ["all swim", "default", "popular", "short course", "long course"],
+        "sportsCategories": ["all swim", "default swim", "popular", "short course", "long course"],
         "hidden": false
       },
       {
@@ -124,7 +120,7 @@
         "value": 300,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
-        "sportsCategories": ["all swim", "default", "training"],
+        "sportsCategories": ["all swim", "default swim", "training"],
         "hidden": false
       },
       {
@@ -140,7 +136,7 @@
         "value": 400,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
-        "sportsCategories": ["all swim", "default", "popular", "short course", "long course"],
+        "sportsCategories": ["all swim", "default swim", "popular", "short course", "long course"],
         "hidden": false
       },
       {
@@ -148,7 +144,7 @@
         "value": 500,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
-        "sportsCategories": ["all swim", "default", "training"],
+        "sportsCategories": ["all swim", "default swim", "training"],
         "hidden": false
       },
       {
@@ -160,11 +156,19 @@
         "hidden": false
       },
       {
+        "name": "600m",
+        "value": 600,
+        "distanceUnits": "metre",
+        "sportsModes": ["swim"],
+        "sportsCategories": ["all swim", "training"],
+        "hidden": false
+      },
+      {
         "name": "750m",
         "value": 750,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
-        "sportsCategories": ["all swim","default","popular","triathlon"],
+        "sportsCategories": ["all swim","default swim","popular","triathlon"],
         "hidden": false
       },
       {
@@ -176,11 +180,19 @@
         "hidden": false
       },
       {
+        "name": "900m",
+        "value": 900,
+        "distanceUnits": "metre",
+        "sportsModes": ["swim"],
+        "sportsCategories": ["all swim", "training"],
+        "hidden": false
+      },
+      {
         "name": "1km",
         "value": 1.000,
         "distanceUnits": "km",
         "sportsModes": ["run"],
-        "sportsCategories": ["all", "default", "popular", "middle distance"],
+        "sportsCategories": ["all","pace", "default", "popular", "middle distance"],
         "hidden": false
       },
       {
@@ -188,7 +200,7 @@
         "value": 1000,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
-        "sportsCategories": ["all swim", "default", "open water", "training", "time trial"],
+        "sportsCategories": ["all swim", "default swim", "open water", "training", "time trial"],
         "hidden": false
       },
       {
@@ -212,7 +224,7 @@
         "value": 1500,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
-        "sportsCategories": ["all swim", "default", "popular", "long course", "open water", "triathlon"],
+        "sportsCategories": ["all swim", "default swim", "popular", "long course", "open water", "triathlon"],
         "hidden": false
       },
       {
@@ -229,7 +241,7 @@
         "distanceUnits": "mile",
         "paceDisplayUnits": "min/mile",
         "sportsModes": ["run"],
-        "sportsCategories": ["all", "default", "popular", "middle distance"],
+        "sportsCategories": ["all","pace", "default", "popular", "middle distance"],
         "hidden": false
       },
       {
@@ -237,7 +249,7 @@
         "value": 1900,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
-        "sportsCategories": ["all swim", "default", "open water", "triathlon", "half ironman"],
+        "sportsCategories": ["all swim", "open water", "triathlon", "half ironman"],
         "hidden": false
       },
       {
@@ -261,7 +273,7 @@
         "value": 3800,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
-        "sportsCategories": ["all swim", "default", "open water", "triathlon", "ironman"],
+        "sportsCategories": ["all swim", "open water", "triathlon", "ironman"],
         "hidden": false
       },
       {

@@ -52,7 +52,8 @@ export const useActivityStore = defineStore("activityStore", {
         selectedMovingTime,
         distanceUnits,
         paceDisplayUnits,
-        sportsMode
+        sportsMode,
+        this.userPreferences
       );
     },
     loadBookmarks() {
@@ -242,12 +243,26 @@ export const useActivityStore = defineStore("activityStore", {
         },
       ];
 
+      // Get user's selected sport categories or use default preferences
+      const userSportsCategories = state.userPreferences.sportsCategories ||
+        UserPreferencesService.defaultPreferences.sportsCategories;
+
       state.distances.forEach((distanceGroup) => {
         if (distanceGroup.options) {
           // Filter options based on the sportsMode in `activity`
-          const filteredOptions = distanceGroup.options.filter((option) =>
+          let filteredOptions = distanceGroup.options.filter((option) =>
             option.sportsModes.includes(state.activity.sportsMode)
           );
+
+          // If it's the "By Pace" group, don't filter by sportsCategories
+          if (distanceGroup.group !== "By Pace") {
+            // Further filter options based on user's selected sport categories
+            filteredOptions = filteredOptions.filter((option) => {
+              return option.sportsCategories.some(category =>
+                userSportsCategories.includes(category)
+              );
+            });
+          }
 
           // If there are remaining options, add the group to the result
           if (filteredOptions.length > 0) {

@@ -1,18 +1,17 @@
 <template>
   <div class="flex flex-col flex-1">
-    <label
-      :for="id"
-      class="uppercase text-left text-cyan-900 dark:text-cyan-50 pl-4 mb-3 select-none"
-    >
-      {{ label }}
-    </label>
-    <div class="flex items-center gap-2">
+    <!--    <label-->
+    <!--      class="uppercase text-left text-cyan-900 dark:text-cyan-50 pl-4 mb-3 select-none"-->
+    <!--    >-->
+    <!--      {{ label }}-->
+    <!--    </label>-->
+    <div class="flex items-center gap-2" :id="id">
       <!-- Hours Input -->
       <input
         ref="inputHours"
         v-model="time.hours"
+        id="inputHours"
         type="number"
-        :id="id"
         placeholder="HH"
         class="time-input"
         min="0"
@@ -23,6 +22,7 @@
       <!-- Minutes Input -->
       <input
         ref="inputMinutes"
+        id="inputMinutes"
         v-model="time.minutes"
         type="number"
         placeholder="MM"
@@ -35,6 +35,7 @@
       <!-- Seconds Input -->
       <input
         ref="inputSeconds"
+        id="inputSeconds"
         v-model="time.seconds"
         type="number"
         placeholder="SS"

@@ -1,6 +1,6 @@
 {
   "name": "pace-converter",
-  "version": "0.3.3",
+  "version": "3.3.3",
   "private": true,
   "scripts": {
     "dev": "vite",

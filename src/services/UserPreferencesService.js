@@ -16,7 +16,7 @@ export const UserPreferencesService = {
     paceDisplayUnits: SportsConfiguration.run.defaultPaceDisplayUnits,
     speedDisplayUnits: SportsConfiguration.run.speedDisplayUnits[0].value,
     themeMode: "system", // Can be "system", "light", or "dark"
-    sportsCategories: ["default"], // Default selected sports categories
+    sportsCategories: ["default", "pace", "default swim"], // Default selected sports categories
   },
 
   /**

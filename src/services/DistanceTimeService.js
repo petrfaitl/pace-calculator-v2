@@ -2,6 +2,7 @@ import distances from "@/data/distances.json";
 import { UnitConversionService } from "@/services/UnitConversionService";
 import { PaceSpeedService } from "@/services/PaceSpeedService";
 import { TimeFormatterService } from "@/services/TimeFormatterService";
+import { UserPreferencesService } from "@/services/UserPreferencesService";
 
 export const DistanceTimeService = {
   /**
@@ -19,7 +20,8 @@ export const DistanceTimeService = {
     movingTime,
     distanceUnits,
     paceDisplayUnits,
-    sportsMode
+    sportsMode,
+    userPreferences = null
   ) {
     // Step 1: Convert moving time to milliseconds
     const movingTimeMillis = PaceSpeedService.convertTimeToMillis(movingTime); // Reuse existing time conversion.
@@ -34,6 +36,11 @@ export const DistanceTimeService = {
     // Step 3: Calculate base pace in milliseconds per meter
     const paceInMilliPerMeter = movingTimeMillis / selectedDistanceMeters;
 
+    // Get user's selected sport categories or use default preferences
+    const preferences = userPreferences || UserPreferencesService.loadPreferences();
+    const userSportsCategories = preferences.sportsCategories ||
+      UserPreferencesService.defaultPreferences.sportsCategories;
+
     // Step 4: Iterate through distances.json and calculate time for each distance
     const results = [];
     distances.forEach((entry) => {
@@ -43,28 +50,36 @@ export const DistanceTimeService = {
       // Check if the entry is a group or an individual distance option
       if (entry.options) {
         entry.options.forEach((option) => {
+          // Filter by sportsMode
           if (option.sportsModes.includes(sportsMode)) {
-            // Convert the option's distance value to meters
-            const distanceInMeters = UnitConversionService.convertDistance(
-              option.value,
-              option.distanceUnits,
-              "metre"
+            // Filter by sportsCategories
+            const matchesUserCategories = option.sportsCategories.some(category =>
+              userSportsCategories.includes(category)
             );
 
-            // Calculate time for this distance
-            const calculatedTimeMillis = paceInMilliPerMeter * distanceInMeters;
+            if (matchesUserCategories) {
+              // Convert the option's distance value to meters
+              const distanceInMeters = UnitConversionService.convertDistance(
+                option.value,
+                option.distanceUnits,
+                "metre"
+              );
 
-            // Format the calculated time as a human-readable string
-            const formattedTime =
-              TimeFormatterService.getHumanTime(calculatedTimeMillis);
+              // Calculate time for this distance
+              const calculatedTimeMillis = paceInMilliPerMeter * distanceInMeters;
 
-            // Add the result to the array
-            results.push({
-              name: option.name,
-              value: formattedTime,
-              distance: option.value,
-              time: formattedTime,
-            });
+              // Format the calculated time as a human-readable string
+              const formattedTime =
+                TimeFormatterService.getHumanTime(calculatedTimeMillis);
+
+              // Add the result to the array
+              results.push({
+                name: option.name,
+                value: formattedTime,
+                distance: option.value,
+                time: formattedTime,
+              });
+            }
           }
         });
       }
