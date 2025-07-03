@@ -44,11 +44,19 @@
     "group": "By Distance",
     "options": [
       {
+        "name": "25yds",
+        "value": 25,
+        "distanceUnits": "yds",
+        "sportsModes": ["swim"],
+        "sportsCategories": ["all swim","short course","SCY"],
+        "hidden": false
+      },
+      {
         "name": "25m",
         "value": 25,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
-        "sportsCategories": ["all swim","default swim","popular","short course","trim 33.3m to 25m"],
+        "sportsCategories": ["all swim","default swim","popular","short course","trim 33.3m to 25m", "SCM"],
         "hidden": false
       },
       {
@@ -342,7 +350,7 @@
       },
       {
         "name": "Cook Strait",
-        "value": 22000,
+        "value": 22500,
         "distanceUnits": "metre",
         "sportsModes": ["swim"],
         "sportsCategories": ["all swim", "long distance swim" , "open water", "location swim"],

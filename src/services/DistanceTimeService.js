@@ -3,6 +3,7 @@ import { UnitConversionService } from "@/services/UnitConversionService";
 import { PaceSpeedService } from "@/services/PaceSpeedService";
 import { TimeFormatterService } from "@/services/TimeFormatterService";
 import { UserPreferencesService } from "@/services/UserPreferencesService";
+import { CustomDistanceService } from "@/services/CustomDistanceService";
 
 export const DistanceTimeService = {
   /**
@@ -43,6 +44,8 @@ export const DistanceTimeService = {
 
     // Step 4: Iterate through distances.json and calculate time for each distance
     const results = [];
+
+    // Process built-in distances
     distances.forEach((entry) => {
       // Ignore the "Select Distance" placeholder entry
       if (entry.hidden || entry.disabled || entry["hiddenInResults"]) return;
@@ -84,6 +87,40 @@ export const DistanceTimeService = {
         });
       }
     });
+
+    // Process custom distances
+    const customCategory = sportsMode === 'swim' ? 'custom swim' : 'custom';
+
+    // Only include custom distances if the custom category is selected in user preferences
+    if (userSportsCategories.includes(customCategory)) {
+      // Get custom distances for the current sports mode
+      const customDistances = CustomDistanceService.getCustomDistancesForSportsMode(sportsMode);
+
+      // Process each custom distance
+      customDistances.forEach((option) => {
+        // Convert the option's distance value to meters
+        const distanceInMeters = UnitConversionService.convertDistance(
+          option.value,
+          option.distanceUnits,
+          "metre"
+        );
+
+        // Calculate time for this distance
+        const calculatedTimeMillis = paceInMilliPerMeter * distanceInMeters;
+
+        // Format the calculated time as a human-readable string
+        const formattedTime =
+          TimeFormatterService.getHumanTime(calculatedTimeMillis);
+
+        // Add the result to the array
+        results.push({
+          name: option.name,
+          value: formattedTime,
+          distance: option.value,
+          time: formattedTime,
+        });
+      });
+    }
 
     return results;
   },

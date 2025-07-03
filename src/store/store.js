@@ -7,12 +7,14 @@ import { SportsConfiguration } from "@/services/SportsConfiguration";
 import { DistanceTimeService } from "@/services/DistanceTimeService";
 import { UserPreferencesService } from "@/services/UserPreferencesService";
 import { UnitConfiguration } from "@/services/UnitConfiguration";
+import { CustomDistanceService } from "@/services/CustomDistanceService";
 import router from "@/router";
 
 // Pinia
 export const useActivityStore = defineStore("activityStore", {
   state: () => {
-    return {
+    // Initialize state
+    const state = {
       appVersion: version,
       activity: {
         id: null,
@@ -29,8 +31,17 @@ export const useActivityStore = defineStore("activityStore", {
       unitsOfMeasure: UnitConfiguration.unitsOfMeasure,
       unitOptions: UnitConfiguration.distanceUnits,
       distances,
+      customDistances: [],
       bookmarks: [],
     };
+
+    // Load custom distances
+    const formattedCustomDistances = CustomDistanceService.getFormattedCustomDistances();
+    if (formattedCustomDistances.options && formattedCustomDistances.options.length > 0) {
+      state.customDistances = formattedCustomDistances;
+    }
+
+    return state;
   },
   actions: {
     /**
@@ -180,6 +191,24 @@ export const useActivityStore = defineStore("activityStore", {
 
       this.activity.customDistance = false;
       this.activity.bookmarked = false;
+
+      // Load custom distances
+      this.refreshCustomDistances();
+    },
+
+    /**
+     * Refresh custom distances from localStorage
+     */
+    refreshCustomDistances() {
+      // Get formatted custom distances for the current sports mode
+      const formattedCustomDistances = CustomDistanceService.getFormattedCustomDistances();
+
+      // Update the customDistances array in the store
+      if (formattedCustomDistances.options.length > 0) {
+        this.customDistances = formattedCustomDistances;
+      } else {
+        this.customDistances = [];
+      }
     },
   },
   getters: {
@@ -247,6 +276,7 @@ export const useActivityStore = defineStore("activityStore", {
       const userSportsCategories = state.userPreferences.sportsCategories ||
         UserPreferencesService.defaultPreferences.sportsCategories;
 
+      // Process built-in distances
       state.distances.forEach((distanceGroup) => {
         if (distanceGroup.options) {
           // Filter options based on the sportsMode in `activity`
@@ -273,6 +303,25 @@ export const useActivityStore = defineStore("activityStore", {
           }
         }
       });
+
+      // Add custom distances if available and if custom category is selected
+      if (state.customDistances && state.customDistances.options && state.customDistances.options.length > 0) {
+        // Filter custom distances based on the current sports mode
+        const filteredCustomOptions = state.customDistances.options.filter((option) =>
+          option.sportsModes.includes(state.activity.sportsMode)
+        );
+
+        // Filter by selected categories (custom or custom swim)
+        const customCategory = state.activity.sportsMode === 'swim' ? 'custom swim' : 'custom';
+
+        // Only include if the custom category is selected in user preferences
+        if (userSportsCategories.includes(customCategory) && filteredCustomOptions.length > 0) {
+          result.push({
+            group: "Custom Distances",
+            options: filteredCustomOptions,
+          });
+        }
+      }
 
       return result;
     },

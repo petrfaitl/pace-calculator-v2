@@ -2,9 +2,9 @@ export const UnitConversionService = {
   // Conversion factors
   DISTANCE_CONVERSIONS: {
     km: { mile: 0.621371, metre: 1000 },
-    mile: { km: 1.60934, yard: 1760, metre: 1609.34 },
-    metre: { km: 0.001, yard: 1.09361 },
-    yard: { metre: 0.9144, mile: 0.000568182 },
+    mile: { km: 1.60934, yd: 1760, metre: 1609.34 },
+    metre: { km: 0.001, yd: 1.09361 },
+    yd: { metre: 0.9144, mile: 0.000568182 },
   },
   SPEED_CONVERSIONS: {
     "metre/second": { "km/h": 3.6, "mile/h": 2.23694 },

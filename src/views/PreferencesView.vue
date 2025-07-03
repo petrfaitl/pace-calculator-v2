@@ -106,7 +106,7 @@
       </div>
     </div>
 
-    <!-- Sports Categories -->
+    <!-- Distance Categories -->
     <div class="mb-6">
       <h2 class="text-xl font-medium mb-2 dark:text-slate-50 text-left">
         Distance Categories
@@ -125,6 +125,19 @@
         >
           {{ formatCategoryName(category) }}
         </button>
+      </div>
+    </div>
+
+    <!-- Custom Distances -->
+    <div class="mb-6">
+      <h2 class="text-xl font-medium mb-2 dark:text-slate-50 text-left">
+        Manage Custom Distances
+      </h2>
+      <div class="bg-white dark:bg-slate-900 pt-2 rounded-md shadow">
+        <CustomDistanceTable
+          :sports-mode="userPreferences.sportsMode"
+          @distances-updated="handleCustomDistancesUpdated"
+        />
       </div>
     </div>
 
@@ -187,10 +200,12 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { useActivityStore } from "@/store/store";
 import { storeToRefs } from "pinia";
 import { UserPreferencesService } from "@/services/UserPreferencesService";
+import CustomDistanceTable from "@/components/preferences/CustomDistanceTable.vue";
+import { CustomDistanceService } from "@/services/CustomDistanceService";
 
 const store = useActivityStore();
 const { userPreferences, appVersion, distances } = storeToRefs(store);
@@ -239,6 +254,16 @@ const sportsModeCategories = computed(() => {
       });
     }
   });
+
+  // Add custom category only if there are custom distances for the current sports mode
+  const customDistances = CustomDistanceService.getCustomDistancesForSportsMode(currentSportsMode);
+  if (customDistances && customDistances.length > 0) {
+    if (currentSportsMode === "swim") {
+      categories.add("custom swim");
+    } else {
+      categories.add("custom");
+    }
+  }
 
   // Convert Set to Array and sort alphabetically
   return Array.from(categories).sort();
@@ -319,6 +344,9 @@ const setSportsMode = (sportsMode) => {
     );
 
   store.updateUserPreferences(updatedPreferences);
+
+  // Update sportsCategories based on the presence of custom distances for the new sports mode
+  handleCustomDistancesUpdated();
 };
 
 const setUnitsOfMeasure = (unitsOfMeasure) => {
@@ -367,6 +395,35 @@ const resetToDefaults = () => {
   applyTheme(UserPreferencesService.defaultPreferences.themeMode);
 };
 
+// Handle custom distances updated event
+const handleCustomDistancesUpdated = () => {
+  // Refresh the store to include the updated custom distances
+  store.refreshCustomDistances();
+
+  // Update sportsCategories based on the presence of custom distances
+  const currentSportsMode = userPreferences.value.sportsMode;
+  const customDistances = CustomDistanceService.getCustomDistancesForSportsMode(currentSportsMode);
+  const customCategory = currentSportsMode === "swim" ? "custom swim" : "custom";
+
+  // Get current selected categories
+  const currentCategories = [...userPreferences.value.sportsCategories];
+  const hasCustomCategory = currentCategories.includes(customCategory);
+
+  // If there are custom distances but the category is not selected, add it
+  if (customDistances && customDistances.length > 0 && !hasCustomCategory) {
+    currentCategories.push(customCategory);
+    store.updateUserPreferences({ sportsCategories: currentCategories });
+  }
+  // If there are no custom distances but the category is selected, remove it
+  else if ((!customDistances || customDistances.length === 0) && hasCustomCategory) {
+    const index = currentCategories.indexOf(customCategory);
+    if (index !== -1) {
+      currentCategories.splice(index, 1);
+      store.updateUserPreferences({ sportsCategories: currentCategories });
+    }
+  }
+};
+
 // Initialize theme based on user preferences when component mounts
 onMounted(() => {
   // Apply the theme from user preferences
@@ -394,5 +451,8 @@ onMounted(() => {
   ) {
     store.updateUserPreferences({ sportsCategories: ["default"] });
   }
+
+  // Update sportsCategories based on the presence of custom distances
+  handleCustomDistancesUpdated();
 });
 </script>

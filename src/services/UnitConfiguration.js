@@ -18,7 +18,7 @@ export const UnitConfiguration = {
       {
         name: "Imperial",
         value: "imperial",
-        units: "mile/h"
+        units: "mile/h",
       },
     ],
   },
@@ -28,7 +28,7 @@ export const UnitConfiguration = {
     { label: "kms", value: "km", sportsModes: ["run"] },
     { label: "miles", value: "mile", sportsModes: ["run"] },
     { label: "metres", value: "metre", sportsModes: ["swim"] },
-    { label: "yards", value: "yard", sportsModes: ["swim"] },
+    { label: "yards", value: "yd", sportsModes: ["swim"] },
   ],
 
   // Speed display units
