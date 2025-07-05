@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Table Header -->
-    <div class="flex justify-between items-center mb-4">
+    <div class="flex justify-between items-center px-2 mb-4">
       <h3 class="text-lg font-medium dark:text-slate-50">
         Custom Distances for {{ sportsModeTitle }}
       </h3>
@@ -183,7 +183,7 @@ const addCustomDistance = () => {
     name: "",
     value: "",
     distanceUnits: "",
-    sportsModes: [props.sportsMode],
+    sportsMode: props.sportsMode,
     sportsCategories:
       props.sportsMode === "swim" ? ["custom swim"] : ["custom"],
   };

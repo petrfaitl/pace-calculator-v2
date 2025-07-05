@@ -54,7 +54,7 @@ export const DistanceTimeService = {
       if (entry.options) {
         entry.options.forEach((option) => {
           // Filter by sportsMode
-          if (option.sportsModes.includes(sportsMode)) {
+          if (option.sportsMode === sportsMode) {
             // Filter by sportsCategories
             const matchesUserCategories = option.sportsCategories.some(category =>
               userSportsCategories.includes(category)

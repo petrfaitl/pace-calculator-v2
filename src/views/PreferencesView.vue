@@ -243,8 +243,8 @@ const sportsModeCategories = computed(() => {
       group.options.forEach((option) => {
         // Only include categories for the current sports mode
         if (
-          option.sportsModes &&
-          option.sportsModes.includes(currentSportsMode) &&
+          option.sportsMode &&
+          option.sportsMode === currentSportsMode &&
           option.sportsCategories
         ) {
           option.sportsCategories.forEach((category) =>

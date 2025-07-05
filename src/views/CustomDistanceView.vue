@@ -117,7 +117,7 @@ const props = defineProps({
       name: "",
       value: "",
       distanceUnits: "",
-      sportsModes: ["run"],
+      sportsMode: "run",
       sportsCategories: ["custom"],
     }),
   },
@@ -138,20 +138,18 @@ const customDistance = ref({
   name: props.initialDistance.name || "",
   value: props.initialDistance.value || "",
   distanceUnits: props.initialDistance.distanceUnits || "",
-  sportsModes: [
-    ...(props.initialDistance.sportsModes || [props.currentSportsMode]),
-  ],
+  sportsMode: props.initialDistance.sportsMode || props.currentSportsMode,
   sportsCategories: [...(props.initialDistance.sportsCategories || [])],
 });
 
-// Track the selected sports mode separately to update sportsModes array
+// Track the selected sports mode separately
 const selectedSportsMode = ref(
-  props.initialDistance.sportsModes?.[0] || props.currentSportsMode
+  props.initialDistance.sportsMode || props.currentSportsMode
 );
 
-// Watch for changes in selectedSportsMode and update customDistance.sportsModes
+// Watch for changes in selectedSportsMode and update customDistance.sportsMode
 const updateSportsModes = () => {
-  customDistance.value.sportsModes = [selectedSportsMode.value];
+  customDistance.value.sportsMode = selectedSportsMode.value;
 
   // Update sportsCategories based on sports mode
   if (selectedSportsMode.value === "swim") {

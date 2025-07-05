@@ -38,7 +38,7 @@ export const CustomDistanceService = {
    */
   addCustomDistance(customDistance) {
     const customDistances = this.loadCustomDistances();
-    const sportsMode = customDistance.sportsModes[0];
+    const sportsMode = customDistance.sportsMode;
 
     if (!customDistances[sportsMode]) {
       customDistances[sportsMode] = [];
@@ -66,8 +66,8 @@ export const CustomDistanceService = {
 
     if (customDistances[sportsMode] && customDistances[sportsMode][index]) {
       // If the sports mode has changed, remove from old and add to new
-      if (updatedCustomDistance.sportsModes[0] !== sportsMode) {
-        const newSportsMode = updatedCustomDistance.sportsModes[0];
+      if (updatedCustomDistance.sportsMode !== sportsMode) {
+        const newSportsMode = updatedCustomDistance.sportsMode;
 
         // Remove from old sports mode
         customDistances[sportsMode].splice(index, 1);

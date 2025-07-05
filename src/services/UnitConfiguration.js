@@ -25,10 +25,10 @@ export const UnitConfiguration = {
 
   // Distance unit options
   distanceUnits: [
-    { label: "kms", value: "km", sportsModes: ["run"] },
-    { label: "miles", value: "mile", sportsModes: ["run"] },
-    { label: "metres", value: "metre", sportsModes: ["swim"] },
-    { label: "yards", value: "yd", sportsModes: ["swim"] },
+    { label: "kms", value: "km", sportsMode: "run" },
+    { label: "miles", value: "mile", sportsMode: "run" },
+    { label: "metres", value: "metre", sportsMode: "swim" },
+    { label: "yards", value: "yd", sportsMode: "swim" },
   ],
 
   // Speed display units

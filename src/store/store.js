@@ -36,8 +36,12 @@ export const useActivityStore = defineStore("activityStore", {
     };
 
     // Load custom distances
-    const formattedCustomDistances = CustomDistanceService.getFormattedCustomDistances();
-    if (formattedCustomDistances.options && formattedCustomDistances.options.length > 0) {
+    const formattedCustomDistances =
+      CustomDistanceService.getFormattedCustomDistances();
+    if (
+      formattedCustomDistances.options &&
+      formattedCustomDistances.options.length > 0
+    ) {
       state.customDistances = formattedCustomDistances;
     }
 
@@ -201,7 +205,8 @@ export const useActivityStore = defineStore("activityStore", {
      */
     refreshCustomDistances() {
       // Get formatted custom distances for the current sports mode
-      const formattedCustomDistances = CustomDistanceService.getFormattedCustomDistances();
+      const formattedCustomDistances =
+        CustomDistanceService.getFormattedCustomDistances();
 
       // Update the customDistances array in the store
       if (formattedCustomDistances.options.length > 0) {
@@ -273,22 +278,23 @@ export const useActivityStore = defineStore("activityStore", {
       ];
 
       // Get user's selected sport categories or use default preferences
-      const userSportsCategories = state.userPreferences.sportsCategories ||
+      const userSportsCategories =
+        state.userPreferences.sportsCategories ||
         UserPreferencesService.defaultPreferences.sportsCategories;
 
       // Process built-in distances
       state.distances.forEach((distanceGroup) => {
         if (distanceGroup.options) {
           // Filter options based on the sportsMode in `activity`
-          let filteredOptions = distanceGroup.options.filter((option) =>
-            option.sportsModes.includes(state.activity.sportsMode)
+          let filteredOptions = distanceGroup.options.filter(
+            (option) => option.sportsMode === state.activity.sportsMode
           );
 
           // If it's the "By Pace" group, don't filter by sportsCategories
           if (distanceGroup.group !== "By Pace") {
             // Further filter options based on user's selected sport categories
             filteredOptions = filteredOptions.filter((option) => {
-              return option.sportsCategories.some(category =>
+              return option.sportsCategories.some((category) =>
                 userSportsCategories.includes(category)
               );
             });
@@ -305,17 +311,25 @@ export const useActivityStore = defineStore("activityStore", {
       });
 
       // Add custom distances if available and if custom category is selected
-      if (state.customDistances && state.customDistances.options && state.customDistances.options.length > 0) {
+      if (
+        state.customDistances &&
+        state.customDistances.options &&
+        state.customDistances.options.length > 0
+      ) {
         // Filter custom distances based on the current sports mode
-        const filteredCustomOptions = state.customDistances.options.filter((option) =>
-          option.sportsModes.includes(state.activity.sportsMode)
+        const filteredCustomOptions = state.customDistances.options.filter(
+          (option) => option.sportsMode === state.activity.sportsMode
         );
 
         // Filter by selected categories (custom or custom swim)
-        const customCategory = state.activity.sportsMode === 'swim' ? 'custom swim' : 'custom';
+        const customCategory =
+          state.activity.sportsMode === "swim" ? "custom swim" : "custom";
 
         // Only include if the custom category is selected in user preferences
-        if (userSportsCategories.includes(customCategory) && filteredCustomOptions.length > 0) {
+        if (
+          userSportsCategories.includes(customCategory) &&
+          filteredCustomOptions.length > 0
+        ) {
           result.push({
             group: "Custom Distances",
             options: filteredCustomOptions,
@@ -329,8 +343,8 @@ export const useActivityStore = defineStore("activityStore", {
       const result = [];
 
       // Filter options based on the sportsMode in `activity`
-      const filteredOptions = state.unitOptions.filter((option) =>
-        option.sportsModes.includes(state.activity.sportsMode)
+      const filteredOptions = state.unitOptions.filter(
+        (option) => option.sportsMode === state.activity.sportsMode
       );
 
       // If there are remaining options, add the group to the result
