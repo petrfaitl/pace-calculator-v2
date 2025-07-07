@@ -337,7 +337,7 @@
         "value": 300,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "default swim", "training", "triathlon"],
+        "sportsCategories": ["all swim", "default swim", "training"],
         "hidden": false
       },
       {
@@ -345,7 +345,7 @@
         "value": 400,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "default swim", "popular", "short course", "long course", "olympic", "youth/junior", "masters", "collegiate"],
+        "sportsCategories": ["all swim", "default swim", "popular", "short course", "long course", "olympic", "youth/junior", "masters", "collegiate","triathlon"],
         "hidden": false
       },
       {
