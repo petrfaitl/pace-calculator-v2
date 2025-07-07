@@ -45,7 +45,7 @@ export const SportsConfiguration = {
       {
         unitsOfMeasure: "metric",
         name: "metre",
-        value: "m",
+        value: "metre",
       },
       {
         unitsOfMeasure: "imperial",

@@ -34,7 +34,7 @@
       {
         "name": "min/100yds",
         "value": 100,
-        "distanceUnits": "yard",
+        "distanceUnits": "yd",
         "sportsMode": "swim",
         "hidden": false
       }
@@ -279,7 +279,7 @@
       {
         "name": "25yds",
         "value": 25,
-        "distanceUnits": "yds",
+        "distanceUnits": "yd",
         "sportsMode": "swim",
         "sportsCategories": ["all swim", "short course", "sCY", "youth/junior", "collegiate"],
         "hidden": false
@@ -413,9 +413,9 @@
         "hidden": false
       },
       {
-        "name": "1000yd",
+        "name": "1000yds",
         "value": 1000,
-        "distanceUnits": "yds",
+        "distanceUnits": "yd",
         "sportsMode": "swim",
         "sportsCategories": ["all swim", "sCY", "collegiate"],
         "hidden": false
@@ -437,9 +437,9 @@
         "hidden": false
       },
       {
-        "name": "1650yd",
+        "name": "1650yds",
         "value": 1650,
-        "distanceUnits": "yds",
+        "distanceUnits": "yd",
         "sportsMode": "swim",
         "sportsCategories": ["all swim", "sCY", "collegiate"],
         "hidden": false
