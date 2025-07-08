@@ -12,31 +12,35 @@
     "options": [
       {
         "name": "min/km",
-        "value": 1.000,
+        "value": 1,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "hidden": false
+        "hidden": false,
+        "id": "run-minkm"
       },
       {
         "name": "min/mile",
-        "value": 1.000,
+        "value": 1,
         "distanceUnits": "mile",
         "sportsMode": "run",
-        "hidden": false
+        "hidden": false,
+        "id": "run-minmile"
       },
       {
         "name": "min/100m",
         "value": 100,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "hidden": false
+        "hidden": false,
+        "id": "swim-min100m"
       },
       {
         "name": "min/100yds",
         "value": 100,
         "distanceUnits": "yd",
         "sportsMode": "swim",
-        "hidden": false
+        "hidden": false,
+        "id": "swim-min100yds"
       }
     ]
   },
@@ -45,107 +49,209 @@
     "options": [
       {
         "name": "100m",
-        "value": 0.100,
+        "value": 0.1,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all",  "popular", "sprint", "olympic", "youth/junior", "masters", "collegiate", "time trial"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "popular",
+          "sprint",
+          "olympic",
+          "youth/junior",
+          "masters",
+          "collegiate",
+          "time trial"
+        ],
+        "hidden": false,
+        "id": "run-100m"
       },
       {
         "name": "200m",
-        "value": 0.200,
+        "value": 0.2,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "default", "popular", "sprint", "training", "olympic", "youth/junior", "masters", "collegiate", "time trial"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "default",
+          "popular",
+          "sprint",
+          "training",
+          "olympic",
+          "youth/junior",
+          "masters",
+          "collegiate",
+          "time trial"
+        ],
+        "hidden": false,
+        "id": "run-200m"
       },
       {
         "name": "300m",
         "value": 0.3,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "default", "sprint", "training", "youth/junior"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "default",
+          "sprint",
+          "training",
+          "youth/junior"
+        ],
+        "hidden": false,
+        "id": "run-300m"
       },
       {
         "name": "400m",
         "value": 0.4,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "default", "popular", "sprint", "training", "olympic", "youth/junior", "masters", "collegiate", "time trial"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "default",
+          "popular",
+          "sprint",
+          "training",
+          "olympic",
+          "youth/junior",
+          "masters",
+          "collegiate",
+          "time trial"
+        ],
+        "hidden": false,
+        "id": "run-400m"
       },
       {
         "name": "4x100m",
         "value": 0.4,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "relay"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "relay"
+        ],
+        "hidden": false,
+        "id": "run-4x100m"
       },
       {
         "name": "600m",
         "value": 0.6,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "middle distance", "training", "youth/junior"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "middle distance",
+          "training",
+          "youth/junior"
+        ],
+        "hidden": false,
+        "id": "run-600m"
       },
       {
         "name": "800m",
         "value": 0.8,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "default", "popular", "middle distance", "olympic", "youth/junior", "masters", "collegiate"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "default",
+          "popular",
+          "middle distance",
+          "olympic",
+          "youth/junior",
+          "masters",
+          "collegiate"
+        ],
+        "hidden": false,
+        "id": "run-800m"
       },
       {
         "name": "1000m",
-        "value": 1.000,
+        "value": 1,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "youth/junior", "time trial"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "youth/junior",
+          "time trial"
+        ],
+        "hidden": false,
+        "id": "run-1000m"
       },
       {
         "name": "1km",
-        "value": 1.000,
+        "value": 1,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "pace", "default", "popular", "middle distance"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "pace",
+          "default",
+          "popular",
+          "middle distance"
+        ],
+        "hidden": false,
+        "id": "run-1km"
       },
       {
         "name": "1200m",
-        "value": 1.200,
+        "value": 1.2,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "default", "middle distance", "training", "youth/junior"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "default",
+          "middle distance",
+          "training",
+          "youth/junior"
+        ],
+        "hidden": false,
+        "id": "run-1200m"
       },
       {
         "name": "1500m",
-        "value": 1.500,
+        "value": 1.5,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "default", "popular", "middle distance", "olympic", "youth/junior", "masters", "collegiate"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "default",
+          "popular",
+          "middle distance",
+          "olympic",
+          "youth/junior",
+          "masters",
+          "collegiate"
+        ],
+        "hidden": false,
+        "id": "run-1500m"
       },
       {
         "name": "1600m",
-        "value": 1.600,
+        "value": 1.6,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "default", "middle distance", "training", "youth/junior", "collegiate"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "default",
+          "middle distance",
+          "training",
+          "youth/junior",
+          "collegiate"
+        ],
+        "hidden": false,
+        "id": "run-1600m"
       },
       {
         "name": "4x400m",
         "value": 1.6,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "relay"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "relay"
+        ],
+        "hidden": false,
+        "id": "run-4x400m"
       },
       {
         "name": "1mile",
@@ -153,368 +259,697 @@
         "distanceUnits": "mile",
         "paceDisplayUnits": "min/mile",
         "sportsMode": "run",
-        "sportsCategories": ["all", "pace", "default", "popular", "middle distance", "collegiate"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "pace",
+          "default",
+          "popular",
+          "middle distance",
+          "collegiate"
+        ],
+        "hidden": false,
+        "id": "run-1mile"
       },
       {
         "name": "2000m",
-        "value": 2.000,
+        "value": 2,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "middle distance", "youth/junior"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "middle distance",
+          "youth/junior"
+        ],
+        "hidden": false,
+        "id": "run-2000m"
       },
       {
         "name": "3k",
-        "value": 3.000,
+        "value": 3,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "default", "cross country", "youth/junior", "collegiate"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "default",
+          "cross country",
+          "youth/junior",
+          "collegiate"
+        ],
+        "hidden": false,
+        "id": "run-3k"
       },
       {
         "name": "3000m",
-        "value": 3.000,
+        "value": 3,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "middle distance", "collegiate", "youth/junior"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "middle distance",
+          "collegiate",
+          "youth/junior"
+        ],
+        "hidden": false,
+        "id": "run-3000m"
       },
       {
         "name": "3200m",
-        "value": 3.200,
+        "value": 3.2,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "middle distance", "men's collegiate", "youth/junior"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "middle distance",
+          "men's collegiate",
+          "youth/junior"
+        ],
+        "hidden": false,
+        "id": "run-3200m"
       },
       {
         "name": "5k",
-        "value": 5.000,
+        "value": 5,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "default", "popular", "long distance", "cross country", "triathlon", "olympic", "youth/junior", "masters", "collegiate"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "default",
+          "popular",
+          "long distance",
+          "cross country",
+          "triathlon",
+          "olympic",
+          "youth/junior",
+          "masters",
+          "collegiate"
+        ],
+        "hidden": false,
+        "id": "run-5k"
       },
       {
         "name": "6k",
-        "value": 6.000,
+        "value": 6,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "default", "cross country", "women's collegiate", "youth/junior"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "default",
+          "cross country",
+          "women's collegiate",
+          "youth/junior"
+        ],
+        "hidden": false,
+        "id": "run-6k"
       },
       {
         "name": "7k",
-        "value": 7.000,
+        "value": 7,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "cross country"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "cross country"
+        ],
+        "hidden": false,
+        "id": "run-7k"
       },
       {
         "name": "8k",
-        "value": 8.000,
+        "value": 8,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "cross country", "men's collegiate"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "cross country",
+          "men's collegiate"
+        ],
+        "hidden": false,
+        "id": "run-8k"
       },
       {
         "name": "10k",
-        "value": 10.000,
+        "value": 10,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "default", "popular", "long distance", "road race", "triathlon", "olympic", "masters", "collegiate"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "default",
+          "popular",
+          "long distance",
+          "road race",
+          "triathlon",
+          "olympic",
+          "masters",
+          "collegiate"
+        ],
+        "hidden": false,
+        "id": "run-10k"
       },
       {
         "name": "Half Marathon",
-        "value": 21.1000,
+        "value": 21.1,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "default", "popular", "long distance", "road race", "triathlon","half ironman", "masters"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "default",
+          "popular",
+          "long distance",
+          "road race",
+          "triathlon",
+          "half ironman",
+          "masters"
+        ],
+        "hidden": false,
+        "id": "run-half-marathon"
       },
       {
         "name": "Marathon",
-        "value": 42.2000,
+        "value": 42.2,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "default", "popular", "long distance", "olympic",  "triathlon","ironman","masters"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "default",
+          "popular",
+          "long distance",
+          "olympic",
+          "triathlon",
+          "ironman",
+          "masters"
+        ],
+        "hidden": false,
+        "id": "run-marathon"
       },
       {
         "name": "50k",
-        "value": 50.000,
+        "value": 50,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all", "ultra", "trail running", "masters"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "ultra",
+          "trail running",
+          "masters"
+        ],
+        "hidden": false,
+        "id": "run-50k"
       },
       {
-        "name": "50 miles",
+        "name": "50miles",
         "value": 50,
         "distanceUnits": "mile",
         "sportsMode": "run",
-        "sportsCategories": ["all", "ultra", "trail running", "masters"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "ultra",
+          "trail running",
+          "masters"
+        ],
+        "hidden": false,
+        "id": "run-50miles"
       },
       {
         "name": "100k",
-        "value": 100.000,
+        "value": 100,
         "distanceUnits": "km",
         "sportsMode": "run",
-        "sportsCategories": ["all","default", "ultra", "trail running", "masters"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "default",
+          "ultra",
+          "trail running",
+          "masters"
+        ],
+        "hidden": false,
+        "id": "run-100k"
       },
       {
         "name": "Miler",
         "value": 100,
         "distanceUnits": "mile",
         "sportsMode": "run",
-        "sportsCategories": ["all","default", "popular", "ultra", "trail running", "masters"],
-        "hidden": false
+        "sportsCategories": [
+          "all",
+          "default",
+          "popular",
+          "ultra",
+          "trail running",
+          "masters"
+        ],
+        "hidden": false,
+        "id": "run-miler"
       },
       {
         "name": "25yds",
         "value": 25,
         "distanceUnits": "yd",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "short course", "sCY", "youth/junior", "collegiate"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "short course",
+          "sCY",
+          "youth/junior",
+          "collegiate"
+        ],
+        "hidden": false,
+        "id": "swim-25yds"
       },
       {
         "name": "25m",
         "value": 25,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "default swim", "popular", "short course", "school pools", "sCM", "youth/junior"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "default swim",
+          "popular",
+          "short course",
+          "school pools",
+          "sCM",
+          "youth/junior"
+        ],
+        "hidden": false,
+        "id": "swim-25m"
       },
       {
         "name": "33m",
         "value": 33.3,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "school pools", "youth/junior"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "school pools",
+          "youth/junior"
+        ],
+        "hidden": false,
+        "id": "swim-33m"
       },
       {
         "name": "50m",
         "value": 50,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "default swim", "popular", "short course", "long course", "school pools", "olympic", "sprint", "youth/junior", "masters", "collegiate"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "default swim",
+          "popular",
+          "short course",
+          "long course",
+          "school pools",
+          "olympic",
+          "sprint",
+          "youth/junior",
+          "masters",
+          "collegiate"
+        ],
+        "hidden": false,
+        "id": "swim-50m"
       },
       {
         "name": "66m",
         "value": 66.6,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "school pools", "youth/junior"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "school pools",
+          "youth/junior"
+        ],
+        "hidden": false,
+        "id": "swim-66m"
       },
       {
         "name": "100m",
         "value": 100,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "default swim", "popular", "short course", "long course", "olympic", "sprint", "youth/junior", "masters", "collegiate", "time trial"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "default swim",
+          "popular",
+          "short course",
+          "long course",
+          "olympic",
+          "sprint",
+          "youth/junior",
+          "masters",
+          "collegiate",
+          "time trial"
+        ],
+        "hidden": false,
+        "id": "swim-100m"
       },
       {
         "name": "200m",
         "value": 200,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "default swim", "popular", "short course", "long course", "olympic", "sprint", "youth/junior", "masters", "collegiate", "time trial"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "default swim",
+          "popular",
+          "short course",
+          "long course",
+          "olympic",
+          "sprint",
+          "youth/junior",
+          "masters",
+          "collegiate",
+          "time trial"
+        ],
+        "hidden": false,
+        "id": "swim-200m"
       },
       {
         "name": "300m",
         "value": 300,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "default swim", "training"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "default swim",
+          "training"
+        ],
+        "hidden": false,
+        "id": "swim-300m"
       },
       {
         "name": "400m",
         "value": 400,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "default swim", "popular", "short course", "long course", "olympic", "youth/junior", "masters", "collegiate","triathlon"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "default swim",
+          "popular",
+          "short course",
+          "long course",
+          "olympic",
+          "youth/junior",
+          "masters",
+          "collegiate",
+          "triathlon"
+        ],
+        "hidden": false,
+        "id": "swim-400m"
       },
       {
         "name": "4x50m",
         "value": 200,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "relay"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "relay"
+        ],
+        "hidden": false,
+        "id": "swim-4x50m"
       },
       {
         "name": "4x100m",
         "value": 400,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim",  "relay"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "relay"
+        ],
+        "hidden": false,
+        "id": "swim-4x100m"
       },
       {
         "name": "500m",
         "value": 500,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "default swim", "training", "collegiate"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "default swim",
+          "training",
+          "collegiate"
+        ],
+        "hidden": false,
+        "id": "swim-500m"
       },
       {
         "name": "600m",
         "value": 600,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "training"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "training"
+        ],
+        "hidden": false,
+        "id": "swim-600m"
       },
       {
         "name": "750m",
         "value": 750,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "default swim", "popular", "triathlon"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "default swim",
+          "popular",
+          "triathlon"
+        ],
+        "hidden": false,
+        "id": "swim-750m"
       },
       {
         "name": "4x200m",
         "value": 800,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim","relay"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "relay"
+        ],
+        "hidden": false,
+        "id": "swim-4x200m"
       },
       {
         "name": "800m",
         "value": 800,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "popular", "long course", "olympic", "youth/junior", "masters", "collegiate"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "popular",
+          "long course",
+          "olympic",
+          "youth/junior",
+          "masters",
+          "collegiate"
+        ],
+        "hidden": false,
+        "id": "swim-800m"
       },
       {
         "name": "900m",
         "value": 900,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "training"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "training"
+        ],
+        "hidden": false,
+        "id": "swim-900m"
       },
       {
         "name": "1000yds",
         "value": 1000,
         "distanceUnits": "yd",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "sCY", "collegiate"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "sCY",
+          "collegiate"
+        ],
+        "hidden": false,
+        "id": "swim-1000yds"
       },
       {
         "name": "1km",
         "value": 1000,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "default swim", "open water", "training", "time trial", "youth/junior"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "default swim",
+          "open water",
+          "training",
+          "time trial",
+          "youth/junior"
+        ],
+        "hidden": false,
+        "id": "swim-1km"
       },
       {
         "name": "1500m",
         "value": 1500,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "default swim", "popular", "long course", "open water", "triathlon", "olympic", "youth/junior", "masters", "collegiate"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "default swim",
+          "popular",
+          "long course",
+          "open water",
+          "triathlon",
+          "olympic",
+          "youth/junior",
+          "masters",
+          "collegiate"
+        ],
+        "hidden": false,
+        "id": "swim-1500m"
       },
       {
         "name": "1650yds",
         "value": 1650,
         "distanceUnits": "yd",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "sCY", "collegiate"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "sCY",
+          "collegiate"
+        ],
+        "hidden": false,
+        "id": "swim-1650yds"
       },
       {
         "name": "1900m",
         "value": 1900,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "open water", "triathlon", "half ironman"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "open water",
+          "triathlon",
+          "half ironman"
+        ],
+        "hidden": false,
+        "id": "swim-1900m"
       },
       {
         "name": "3800m",
         "value": 3800,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "open water", "triathlon", "ironman"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "open water",
+          "triathlon",
+          "ironman"
+        ],
+        "hidden": false,
+        "id": "swim-3800m"
       },
       {
         "name": "5000m",
         "value": 5000,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "open water", "long distance", "time trial"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "open water",
+          "long distance",
+          "time trial"
+        ],
+        "hidden": false,
+        "id": "swim-5000m"
       },
       {
         "name": "10,000m",
         "value": 10000,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "long distance", "open water", "olympic"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "long distance",
+          "open water",
+          "olympic"
+        ],
+        "hidden": false,
+        "id": "swim-10000m"
       },
       {
         "name": "Catalina",
-        "value": 20.100,
+        "value": 20.1,
         "distanceUnits": "mile",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "long distance", "open water", "location swim", "ultra"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "long distance",
+          "open water",
+          "location swim",
+          "ultra"
+        ],
+        "hidden": false,
+        "id": "swim-catalina"
       },
       {
         "name": "Cook Strait",
         "value": 22500,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "long distance", "open water", "location swim", "ultra"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "long distance",
+          "open water",
+          "location swim",
+          "ultra"
+        ],
+        "hidden": false,
+        "id": "swim-cook-strait"
       },
       {
         "name": "25km",
         "value": 25000,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "open water", "long distance", "ultra"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "open water",
+          "long distance",
+          "ultra"
+        ],
+        "hidden": false,
+        "id": "swim-25km"
       },
       {
         "name": "Manhattan",
-        "value": 30.100,
+        "value": 30.1,
         "distanceUnits": "mile",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "long distance", "open water", "location swim", "ultra"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "long distance",
+          "open water",
+          "location swim",
+          "ultra"
+        ],
+        "hidden": false,
+        "id": "swim-manhattan"
       },
       {
         "name": "English Channel",
         "value": 34000,
         "distanceUnits": "metre",
         "sportsMode": "swim",
-        "sportsCategories": ["all swim", "long distance", "open water", "location swim", "ultra"],
-        "hidden": false
+        "sportsCategories": [
+          "all swim",
+          "long distance",
+          "open water",
+          "location swim",
+          "ultra"
+        ],
+        "hidden": false,
+        "id": "swim-english-channel"
       }
     ]
   }

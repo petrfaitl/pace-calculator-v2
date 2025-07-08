@@ -38,8 +38,10 @@ export const DistanceTimeService = {
     const paceInMilliPerMeter = movingTimeMillis / selectedDistanceMeters;
 
     // Get user's selected sport categories or use default preferences
-    const preferences = userPreferences || UserPreferencesService.loadPreferences();
-    const userSportsCategories = preferences.sportsCategories ||
+    const preferences =
+      userPreferences || UserPreferencesService.loadPreferences();
+    const userSportsCategories =
+      preferences.sportsCategories ||
       UserPreferencesService.defaultPreferences.sportsCategories;
 
     // Step 4: Iterate through distances.json and calculate time for each distance
@@ -56,20 +58,24 @@ export const DistanceTimeService = {
           // Filter by sportsMode
           if (option.sportsMode === sportsMode) {
             // Filter by sportsCategories
-            const matchesUserCategories = option.sportsCategories.some(category =>
-              userSportsCategories.includes(category)
+            const matchesUserCategories = option.sportsCategories.some(
+              (category) => userSportsCategories.includes(category)
             );
 
             if (matchesUserCategories) {
+              const sportsCategories = [];
+              sportsCategories.push(...option.sportsCategories);
+              const optionId = option.id;
               // Convert the option's distance value to meters
               const distanceInMeters = UnitConversionService.convertDistance(
                 option.value,
                 option.distanceUnits,
                 "metre"
               );
-
+              // console.log(sportsCategories);
               // Calculate time for this distance
-              const calculatedTimeMillis = paceInMilliPerMeter * distanceInMeters;
+              const calculatedTimeMillis =
+                paceInMilliPerMeter * distanceInMeters;
 
               // Format the calculated time as a human-readable string
               const formattedTime =
@@ -81,6 +87,8 @@ export const DistanceTimeService = {
                 value: formattedTime,
                 distance: option.value,
                 time: formattedTime,
+                sportsCategories: sportsCategories,
+                id: optionId,
               });
             }
           }
@@ -89,12 +97,13 @@ export const DistanceTimeService = {
     });
 
     // Process custom distances
-    const customCategory = sportsMode === 'swim' ? 'custom swim' : 'custom';
+    const customCategory = sportsMode === "swim" ? "custom swim" : "custom";
 
     // Only include custom distances if the custom category is selected in user preferences
     if (userSportsCategories.includes(customCategory)) {
       // Get custom distances for the current sports mode
-      const customDistances = CustomDistanceService.getCustomDistancesForSportsMode(sportsMode);
+      const customDistances =
+        CustomDistanceService.getCustomDistancesForSportsMode(sportsMode);
 
       // Process each custom distance
       customDistances.forEach((option) => {
