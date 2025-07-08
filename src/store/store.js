@@ -53,7 +53,7 @@ export const useActivityStore = defineStore("activityStore", {
      *
      * @returns {Array} Array of calculated times for distances.
      */
-    calculateTimes() {
+    calculateTimes: function () {
       const {
         selectedDistance,
         selectedMovingTime,

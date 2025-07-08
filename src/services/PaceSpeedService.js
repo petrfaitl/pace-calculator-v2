@@ -57,12 +57,19 @@ export const PaceSpeedService = {
       speedMetersPerSecond,
       "metre/second",
       preferredUnit
-    ).toFixed(1);
+    ).toFixed(2);
   },
   convertTimeToMillis(humanTime) {
-    const [hours, minutes, seconds] = humanTime
-      .split(":")
-      .map((val) => parseInt(val, 10) || 0);
+    const parts = humanTime.split(":");
+    const hours = parseInt(parts[0], 10) || 0;
+    const minutes = parseInt(parts[1], 10) || 0;
+    const seconds = parseFloat(parts[2]) || 0;
     return hours * 3600000 + minutes * 60000 + seconds * 1000;
   },
+  // convertTimeToMillis(humanTime) {
+  //   const [hours, minutes, seconds] = humanTime
+  //     .split(":")
+  //     .map((val) => parseInt(val, 10) || 0);
+  //   return hours * 3600000 + minutes * 60000 + seconds * 1000;
+  // },
 };

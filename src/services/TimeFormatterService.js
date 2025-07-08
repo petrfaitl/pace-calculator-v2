@@ -13,22 +13,51 @@ export const TimeFormatterService = {
    * @param {number} millis - Time in milliseconds
    * @returns {string} - Formatted time as a human-readable string
    */
+  // getHumanTime(millis) {
+  //   // let seconds = Math.round(millis / 1000); // Get total seconds
+  //   let seconds = millis / 1000; // Get total seconds
+  //   let minutes = Math.trunc(seconds / 60); // Get total minutes
+  //   let hours = Math.trunc(minutes / 60); // Get total hours
+  //   let days = Math.trunc(hours / 24); // Get total days
+  //
+  //   // Remainders for each unit
+  //   seconds = (seconds % 60).toFixed(2);
+  //   minutes = minutes % 60;
+  //   hours = hours % 24;
+  //
+  //   // Human-readable string formatting
+  //   let str =
+  //     minutes || hours || days
+  //       ? `${String(seconds).padStart(2, "0")}`
+  //       : `${String(seconds).padStart(2, "0")}s`; // Display seconds only
+  //   str =
+  //     minutes || hours || days
+  //       ? `${String(minutes).padStart(2, "0")}:` + str
+  //       : str; // Add minutes
+  //   str = hours || days ? `${String(hours).padStart(2, "0")}:` + str : str; // Add hours
+  //   str = days
+  //     ? `${String(days)} ${this.pluralize(days, "day")} ` + str // Add days
+  //     : str;
+  //
+  //   return str;
+  // },
   getHumanTime(millis) {
-    let seconds = Math.round(millis / 1000); // Get total seconds
+    let seconds = millis / 1000; // Get total seconds
     let minutes = Math.trunc(seconds / 60); // Get total minutes
     let hours = Math.trunc(minutes / 60); // Get total hours
     let days = Math.trunc(hours / 24); // Get total days
 
     // Remainders for each unit
-    seconds = seconds % 60;
+    let secondsValue = seconds % 60;
+    let secondsInt = Math.floor(secondsValue);
+    let secondsDecimal = (secondsValue - secondsInt).toFixed(2).substring(1); // Get ".XX" part
+    seconds = String(secondsInt).padStart(2, "0") + secondsDecimal;
+
     minutes = minutes % 60;
     hours = hours % 24;
 
     // Human-readable string formatting
-    let str =
-      minutes || hours || days
-        ? `${String(seconds).padStart(2, "0")}`
-        : `${String(seconds).padStart(2, "0")}s`; // Display seconds only
+    let str = minutes || hours || days ? seconds : `${seconds}s`; // Display seconds only
     str =
       minutes || hours || days
         ? `${String(minutes).padStart(2, "0")}:` + str

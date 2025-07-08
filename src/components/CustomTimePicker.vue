@@ -42,6 +42,7 @@
         class="time-input"
         min="0"
         max="59"
+        step="0.01"
         @blur="handleBlur('seconds')"
       />
     </div>

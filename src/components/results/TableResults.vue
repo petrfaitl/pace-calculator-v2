@@ -36,6 +36,11 @@
               >
             </td>
           </tr>
+          <tr>
+            <span v-for="cat in result" v-bind:key="cat.sportsCategories">{{
+              cat.sportsCategories
+            }}</span>
+          </tr>
         </template>
       </TransitionGroup>
     </table>
