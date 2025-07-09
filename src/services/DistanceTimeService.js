@@ -125,6 +125,7 @@ export const DistanceTimeService = {
 
         // Add the result to the array
         results.push({
+          id: option.id,
           name: option.name,
           value: formattedTime,
           distance: option.value,
@@ -133,6 +134,7 @@ export const DistanceTimeService = {
         });
       });
     }
+    results.sort((a, b) => a.distance - b.distance);
 
     return results;
   },

@@ -114,6 +114,7 @@ const props = defineProps({
   initialDistance: {
     type: Object,
     default: () => ({
+      id: "",
       name: "",
       value: "",
       distanceUnits: "",
@@ -135,6 +136,7 @@ const emit = defineEmits(["save", "cancel"]);
 
 // Create a copy of the initial distance to avoid modifying the prop directly
 const customDistance = ref({
+  id: props.initialDistance.id || "",
   name: props.initialDistance.name || "",
   value: props.initialDistance.value || "",
   distanceUnits: props.initialDistance.distanceUnits || "",
@@ -178,6 +180,10 @@ const updateDefaultDistanceUnits = () => {
   }
 };
 
+const generateCustomId = (sport, distance, units) => {
+  return sport + "-" + distance + units;
+};
+
 // Watch for changes in selectedSportsMode
 const watchSportsMode = () => {
   updateSportsModes();
@@ -188,6 +194,11 @@ const watchSportsMode = () => {
 const saveCustomDistance = () => {
   // Ensure sportsModes and sportsCategories are updated
   updateSportsModes();
+  customDistance.value.id = generateCustomId(
+    customDistance.value.sportsMode,
+    customDistance.value.value,
+    customDistance.value.distanceUnits
+  );
 
   // Create a copy of the custom distance to emit
   const distanceToSave = { ...customDistance.value };

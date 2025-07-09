@@ -46,12 +46,7 @@
             >
               Distance
             </th>
-            <!--            <th-->
-            <!--              scope="col"-->
-            <!--              class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider"-->
-            <!--            >-->
-            <!--              Units-->
-            <!--            </th>-->
+
             <th
               scope="col"
               class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider"
@@ -74,11 +69,7 @@
             >
               {{ distance.value }}{{ distance.distanceUnits }}
             </td>
-            <!--            <td-->
-            <!--              class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-slate-400"-->
-            <!--            >-->
-            <!--              {{ distance.distanceUnits }}-->
-            <!--            </td>-->
+
             <td
               class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
             >
@@ -180,6 +171,7 @@ const loadCustomDistances = () => {
 
 const addCustomDistance = () => {
   currentDistance.value = {
+    id: "",
     name: "",
     value: "",
     distanceUnits: "",
