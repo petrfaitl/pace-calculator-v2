@@ -142,11 +142,11 @@
     </div>
 
     <!-- Current Preferences -->
-    <div class="mt-8 p-4 bg-slate-100 dark:bg-slate-800 rounded-md">
+    <div class="mt-8 p-6 bg-slate-100 dark:bg-slate-800 rounded-md">
       <h2 class="text-xl font-medium mb-4 dark:text-slate-50">
         Current Preferences
       </h2>
-      <div class="grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-2 gap-4 text-sm text-left">
         <div class="dark:text-slate-300">Theme Mode:</div>
         <div class="font-medium dark:text-slate-50">
           {{ getThemeModeDisplay }}
@@ -193,7 +193,7 @@
         Reset to Defaults
       </button>
     </div>
-    <div class="pt-10">
+    <div class="pt-20">
       <AboutView />
     </div>
   </section>

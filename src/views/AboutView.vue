@@ -1,7 +1,7 @@
 <template>
-  <div class="mt-8 p-4 bg-slate-100 dark:bg-slate-800 rounded-md">
+  <div class="mt-8 p-6 bg-slate-100 dark:bg-slate-800 rounded-md">
     <h2 class="text-xl font-medium mb-4 dark:text-slate-50">About</h2>
-    <div class="text-left grid grid-cols-2 gap-4">
+    <div class="text-left grid grid-cols-2 gap-4 text-sm">
       <div class="dark:text-slate-300">App version:</div>
       <div class="font-medium dark:text-slate-50">
         {{ appVersion }}
@@ -17,10 +17,10 @@
         <span v-if="emailCopied" class="copied">Copied!</span>
       </div>
 
-      <div class="dark:text-slate-300">Developer:</div>
-      <div class="font-medium dark:text-slate-50">
-        {{ developer }}
-      </div>
+      <!--      <div class="dark:text-slate-300">Developer:</div>-->
+      <!--      <div class="font-medium dark:text-slate-50">-->
+      <!--        {{ developer }}-->
+      <!--      </div>-->
     </div>
   </div>
 </template>
