@@ -49,7 +49,7 @@
               :id="'row-' + result.id"
               class="bg-white border-b dark:bg-slate-800 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600 select-none"
             >
-              <td class="px-2" colspan="3" v-show="hiddenRows[result.id]">
+              <td class="pl-4 pr-4" colspan="3" v-show="hiddenRows[result.id]">
                 <span class="pr-2 text-xs font-bold">Categories</span>
                 <span
                   v-for="cat in result.sportsCategories"

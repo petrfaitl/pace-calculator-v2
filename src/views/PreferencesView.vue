@@ -183,9 +183,6 @@
         </div>
       </div>
     </div>
-    <div class="text-xs text-cyan-900 dark:text-cyan-100">
-      App version: {{ appVersion }}
-    </div>
 
     <!-- Reset to Defaults Button -->
     <div class="mt-6">
@@ -195,6 +192,9 @@
       >
         Reset to Defaults
       </button>
+    </div>
+    <div class="pt-10">
+      <AboutView />
     </div>
   </section>
 </template>
@@ -206,6 +206,7 @@ import { storeToRefs } from "pinia";
 import { UserPreferencesService } from "@/services/UserPreferencesService";
 import CustomDistanceTable from "@/components/preferences/CustomDistanceTable.vue";
 import { CustomDistanceService } from "@/services/CustomDistanceService";
+import AboutView from "@/views/AboutView.vue";
 
 const store = useActivityStore();
 const { userPreferences, appVersion, distances } = storeToRefs(store);
@@ -256,7 +257,8 @@ const sportsModeCategories = computed(() => {
   });
 
   // Add custom category only if there are custom distances for the current sports mode
-  const customDistances = CustomDistanceService.getCustomDistancesForSportsMode(currentSportsMode);
+  const customDistances =
+    CustomDistanceService.getCustomDistancesForSportsMode(currentSportsMode);
   if (customDistances && customDistances.length > 0) {
     if (currentSportsMode === "swim") {
       categories.add("custom swim");
@@ -402,8 +404,10 @@ const handleCustomDistancesUpdated = () => {
 
   // Update sportsCategories based on the presence of custom distances
   const currentSportsMode = userPreferences.value.sportsMode;
-  const customDistances = CustomDistanceService.getCustomDistancesForSportsMode(currentSportsMode);
-  const customCategory = currentSportsMode === "swim" ? "custom swim" : "custom";
+  const customDistances =
+    CustomDistanceService.getCustomDistancesForSportsMode(currentSportsMode);
+  const customCategory =
+    currentSportsMode === "swim" ? "custom swim" : "custom";
 
   // Get current selected categories
   const currentCategories = [...userPreferences.value.sportsCategories];
@@ -415,7 +419,10 @@ const handleCustomDistancesUpdated = () => {
     store.updateUserPreferences({ sportsCategories: currentCategories });
   }
   // If there are no custom distances but the category is selected, remove it
-  else if ((!customDistances || customDistances.length === 0) && hasCustomCategory) {
+  else if (
+    (!customDistances || customDistances.length === 0) &&
+    hasCustomCategory
+  ) {
     const index = currentCategories.indexOf(customCategory);
     if (index !== -1) {
       currentCategories.splice(index, 1);

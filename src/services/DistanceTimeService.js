@@ -107,6 +107,8 @@ export const DistanceTimeService = {
 
       // Process each custom distance
       customDistances.forEach((option) => {
+        const sportsCategories = [];
+        sportsCategories.push(...option.sportsCategories);
         // Convert the option's distance value to meters
         const distanceInMeters = UnitConversionService.convertDistance(
           option.value,
@@ -127,6 +129,7 @@ export const DistanceTimeService = {
           value: formattedTime,
           distance: option.value,
           time: formattedTime,
+          sportsCategories: sportsCategories,
         });
       });
     }

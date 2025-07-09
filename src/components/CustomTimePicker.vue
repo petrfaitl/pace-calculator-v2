@@ -38,7 +38,7 @@
         id="inputSeconds"
         v-model="time.seconds"
         type="number"
-        placeholder="SS"
+        placeholder="SS.ss"
         class="time-input"
         min="0"
         max="59"

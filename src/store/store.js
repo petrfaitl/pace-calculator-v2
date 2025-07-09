@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { PaceSpeedService } from "@/services/PaceSpeedService";
 import { TimeFormatterService } from "@/services/TimeFormatterService";
-import { version } from "../../package.json";
+import pkg from "../../package.json";
 import distances from "@/data/distances.json";
 import { SportsConfiguration } from "@/services/SportsConfiguration";
 import { DistanceTimeService } from "@/services/DistanceTimeService";
@@ -9,6 +9,8 @@ import { UserPreferencesService } from "@/services/UserPreferencesService";
 import { UnitConfiguration } from "@/services/UnitConfiguration";
 import { CustomDistanceService } from "@/services/CustomDistanceService";
 import router from "@/router";
+
+const { version } = pkg;
 
 // Pinia
 export const useActivityStore = defineStore("activityStore", {

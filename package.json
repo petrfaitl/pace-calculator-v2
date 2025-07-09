@@ -1,6 +1,8 @@
 {
   "name": "pace-converter",
-  "version": "3.4.4",
+  "developer": "Petr Faitl",
+  "email": "contact@riveroaks.xyz",
+  "version": "3.4.5",
   "private": true,
   "scripts": {
     "dev": "vite",
