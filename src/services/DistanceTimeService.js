@@ -89,6 +89,7 @@ export const DistanceTimeService = {
                 time: formattedTime,
                 sportsCategories: sportsCategories,
                 id: optionId,
+                distanceUnits: option.distanceUnits,
               });
             }
           }
@@ -131,10 +132,24 @@ export const DistanceTimeService = {
           distance: option.value,
           time: formattedTime,
           sportsCategories: sportsCategories,
+          distanceUnits: option.distanceUnits,
         });
       });
     }
-    results.sort((a, b) => a.distance - b.distance);
+    results.sort((a, b) => {
+      return (
+        UnitConversionService.convertDistance(
+          a.distance,
+          a.distanceUnits,
+          "metre"
+        ) -
+        UnitConversionService.convertDistance(
+          b.distance,
+          b.distanceUnits,
+          "metre"
+        )
+      );
+    });
 
     return results;
   },
