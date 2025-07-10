@@ -28,20 +28,25 @@
           v-for="bookmark in bookmarks"
           :key="bookmark.id"
         >
-          <button
-            class="mx-4"
-            :data-bookmark-id="bookmark.id"
-            @click="store.removeBookmarkItem(bookmark.id)"
-          >
-            <BookmarkIcon
-              id="bookmark-icon"
-              class="h-6 w-6 mx-auto text-cyan-600 active:text-cyan-600 dark:group-hover:text-slate-50 dark:text-cyan-500"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            />
-          </button>
+          <div class="flex flex-col py-4 gap-1">
+            <span class="text-sm text-cyan-900 dark:text-cyan-100 capitalize">{{
+              bookmark.sportsMode
+            }}</span>
+            <button
+              class="mx-4"
+              :data-bookmark-id="bookmark.id"
+              @click="store.removeBookmarkItem(bookmark.id)"
+            >
+              <BookmarkIcon
+                id="bookmark-icon"
+                class="h-6 w-6 mx-auto text-cyan-600 active:text-cyan-600 dark:group-hover:text-slate-50 dark:text-cyan-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+            </button>
+          </div>
           <router-link
             :to="{ name: 'ResultsView' }"
             @click="bookmarkToActivity(bookmark)"
@@ -66,16 +71,9 @@
               :msg="bookmark.speed"
               :units="`${bookmark.speedDisplayUnits}`"
             />
-            <!--            <div class="flex-auto w-8"></div>-->
           </router-link>
-          <!--          <button-->
-          <!--            class="nav-icon inline-flex items-center ml-auto mr-4 hover:underline underline-offset-4 invisible group-hover:visible transition"-->
-          <!--          >-->
-          <!--            <span class="text-xs">remove</span>-->
-          <!--          </button>-->
         </li>
       </TransitionGroup>
-      <!--      </ul>-->
     </div>
   </transition>
 </template>

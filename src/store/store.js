@@ -261,6 +261,7 @@ export const useActivityStore = defineStore("activityStore", {
         paceDisplayUnits: state.activity.paceDisplayUnits,
         speedDisplayUnits: state.activity.speedDisplayUnits,
         bookmarked: state.activity.bookmarked,
+        sportsMode: state.activity.sportsMode,
         customDistance: state.activity.customDistance,
         time: state.getMovingTime,
         speed: state.getSpeed,
