@@ -2,7 +2,7 @@
   <MainNav ref="nav" />
 
   <main
-    class="flex flex-col md:flex-row justify-around container xl:w-9/12 mx-auto lg:gap-8"
+    class="flex flex-col md:flex-row justify-around container xl:w-9/12 mx-auto lg:gap-8 mt-24"
     @click.self="close()"
   >
     <router-view v-slot="{ Component }">
