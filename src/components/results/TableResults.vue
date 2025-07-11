@@ -42,7 +42,7 @@
               <td
                 class="py-4 px-6 text-right"
                 :key="result.time"
-                @click="copyResultToClipboard(result.id)"
+                @click="copyResultToClipboard(result.id, result.time)"
               >
                 <div class="flex justify-end"></div>
                 <transition name="fade" mode="out-in" appear>
@@ -87,10 +87,10 @@ function toggleCategoryRow(id) {
 
 const resultsCopied = reactive({});
 
-const copyResultToClipboard = (id) => {
+const copyResultToClipboard = (id, time) => {
   // console.log(id);
   navigator.clipboard
-    .writeText(id)
+    .writeText(time)
     .then(() => {
       resultsCopied[id] = true;
       setTimeout(() => {
