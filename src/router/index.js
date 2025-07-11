@@ -57,7 +57,7 @@ const routes = [
   {
     path: "/about",
     name: "about",
-    component: () => import("@/views/AboutView.vue"),
+    component: () => import("@/views/preferences/AboutView.vue"),
   },
   {
     path: "/:catchAll(.*)",

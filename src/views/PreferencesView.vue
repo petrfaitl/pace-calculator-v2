@@ -204,9 +204,9 @@ import { computed, onMounted, ref, watch } from "vue";
 import { useActivityStore } from "@/store/store";
 import { storeToRefs } from "pinia";
 import { UserPreferencesService } from "@/services/UserPreferencesService";
-import CustomDistanceTable from "@/components/preferences/CustomDistanceTable.vue";
+import CustomDistanceTable from "@/views/preferences/CustomDistanceTable.vue";
 import { CustomDistanceService } from "@/services/CustomDistanceService";
-import AboutView from "@/views/AboutView.vue";
+import AboutView from "@/views/preferences/AboutView.vue";
 
 const store = useActivityStore();
 const { userPreferences, appVersion, distances } = storeToRefs(store);

@@ -27,7 +27,7 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { useActivityStore } from "@/store/store";
-import pkg from "../../package.json";
+import pkg from "../../../package.json";
 import { ref } from "vue";
 
 const { developer, email } = pkg;

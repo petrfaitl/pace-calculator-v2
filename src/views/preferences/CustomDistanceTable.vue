@@ -138,7 +138,7 @@
 import { ref, computed, onMounted, watch } from "vue";
 import { SportsConfiguration } from "@/services/SportsConfiguration";
 import { CustomDistanceService } from "@/services/CustomDistanceService";
-import CustomDistanceView from "../../views/CustomDistanceView.vue";
+import CustomDistanceView from "./CustomDistanceView.vue";
 
 const props = defineProps({
   sportsMode: {
