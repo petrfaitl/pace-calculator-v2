@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="fixed top-0 left-0 w-full z-20 flex justify-around md:px-4 items-center h-24 border-b border-cyan-500 dark:border-cyan-300 bg-white dark:bg-slate-900/50"
+    class="fixed top-0 left-0 w-full z-20 flex justify-around md:px-4 items-center h-24 border-b border-cyan-500 dark:border-cyan-300 bg-white dark:bg-slate-900"
     @click.self="closeBookmarks()"
   >
     <div class="flex items-center">
