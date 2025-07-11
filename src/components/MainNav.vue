@@ -44,7 +44,7 @@
       <div class="">
         <button
           class="rounded-2xl transition"
-          @click="store.toggleActivitySportsMode"
+          @click="toggleActivityAndRedirect()"
         >
           <span
             class="sport-pill bg-sky-500/20 text-sky-900 dark:text-sky-50 rounded-md"
@@ -147,12 +147,17 @@ const getActivitySportsMode = computed(() => {
   return activity.value.sportsMode;
 })
 
-
+const toggleActivityAndRedirect= ()=>{
+  const sportsMode = getActivitySportsMode.value === "run"? "swim":"run";
+  store.toggleActivitySportsMode(sportsMode);
+  reset();
+  // router.push({ name: "CalculateView" });
+}
 
 const reset = () => {
   store.initActivity();
   bookmarksVisible.value = false;
-  router.replace({ name: "CalculateView"});
+  router.push({ name: "CalculateView"});
 
 };
 

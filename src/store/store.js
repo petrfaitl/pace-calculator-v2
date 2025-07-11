@@ -125,9 +125,9 @@ export const useActivityStore = defineStore("activityStore", {
       }
       this.saveBookmarks();
     },
-    toggleActivitySportsMode() {
+    toggleActivitySportsMode(newSport) {
       // Toggle between run and swim
-      const newSportsMode = this.activity.sportsMode === "run" ? "swim" : "run";
+      const newSportsMode = newSport; // || this.activity.sportsMode === "run" ? "swim" : "run";
       this.activity.sportsMode = newSportsMode;
 
       // Update user preferences with the new sports mode
@@ -150,7 +150,7 @@ export const useActivityStore = defineStore("activityStore", {
       this.activity.paceDisplayUnits = this.userPreferences.paceDisplayUnits;
       this.activity.speedDisplayUnits = this.userPreferences.speedDisplayUnits;
 
-      router.push({ name: "CalculateView" });
+      //
     },
     toggleUserPreferencesUnits(unitSystem) {
       // Update user preferences with the new units of measure

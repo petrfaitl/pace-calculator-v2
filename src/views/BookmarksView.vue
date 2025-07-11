@@ -93,6 +93,8 @@ const emit = defineEmits(["bookmarkClicked"]);
 
 function bookmarkToActivity(bookmark) {
   activity.value = { ...bookmark };
+  // console.log(bookmark.sportsMode);
+  store.toggleActivitySportsMode(bookmark.sportsMode);
   emit("bookmarkClicked");
 }
 </script>
