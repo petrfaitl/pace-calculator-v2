@@ -57,7 +57,7 @@ export const TimeFormatterService = {
     hours = hours % 24;
 
     // Human-readable string formatting
-    let str = minutes || hours || days ? seconds : `${seconds}s`; // Display seconds only
+    let str = minutes || hours || days ? seconds : `${seconds}`; // Display seconds only
     str =
       minutes || hours || days
         ? `${String(minutes).padStart(2, "0")}:` + str

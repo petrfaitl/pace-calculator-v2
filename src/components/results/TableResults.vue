@@ -39,8 +39,18 @@
               {{ result.name }}
             </td>
             <Transition name="flash-color-2" appear>
-              <td class="py-4 px-6 text-right" :key="result.time">
-                {{ result.time }}
+              <td
+                class="py-4 px-6 text-right"
+                :key="result.time"
+                @click="copyResultToClipboard(result.id)"
+              >
+                <div class="flex justify-end"></div>
+                <transition name="fade" mode="out-in" appear>
+                  <span class="copied" v-show="resultsCopied[result.id]"
+                    >Copied!</span
+                  >
+                </transition>
+                <span class="">{{ result.time }}</span>
               </td>
             </Transition>
           </tr>
@@ -75,6 +85,23 @@ function toggleCategoryRow(id) {
   hiddenRows[id] = !hiddenRows[id];
 }
 
+const resultsCopied = reactive({});
+
+const copyResultToClipboard = (id) => {
+  // console.log(id);
+  navigator.clipboard
+    .writeText(id)
+    .then(() => {
+      resultsCopied[id] = true;
+      setTimeout(() => {
+        resultsCopied[id] = false;
+      }, 2000);
+    })
+    .catch((err) => {
+      console.error("Could not copy text: ", err);
+    });
+};
+
 defineProps(["results"]);
 </script>
 
@@ -101,5 +128,20 @@ defineProps(["results"]);
 .slide-fade-enter-to,
 .slide-fade-leave-from {
   @apply transform opacity-100 max-h-6 overflow-hidden;
+}
+
+/* Fade Transition */
+.fade-enter-from,
+.fade-leave-to {
+  @apply opacity-0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  @apply transition-opacity;
+}
+
+.copied {
+  @apply ml-2 text-sm text-green-600 dark:text-green-400 mr-3;
 }
 </style>
